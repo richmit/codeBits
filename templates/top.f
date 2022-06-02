@@ -1,7 +1,7 @@
 C -*- Mode:Fortran; Coding:us-ascii-unix; fill-column:72 -*-
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
 C @file      FILENAME
-C @author    Mitch Richling <https://www.mitchr.me>
+C @author    Mitch Richling GIT-EMAIL
 C @date      YYYY-MM-DD
 C @version   VERSION
 C @brief     @EOL
@@ -10,7 +10,7 @@ C @std       F77 MIL-STD-1753 LongNames F90 F95
 C @see       
 C @copyright 
 C  @parblock
-C  Copyright (c) YYYY, Mitchell Jay Richling <https://www.mitchr.me> All
+C  Copyright (c) YYYY, Mitchell Jay Richling <GIT-EMAIL> All
 C  rights reserved.
 C
 C  Redistribution and use in source and binary forms, with or without

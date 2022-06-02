@@ -2,7 +2,7 @@
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
 ! @file      FILENAME
-! @author    Mitch Richling <https://www.mitchr.me>
+! @author    Mitch Richling GIT-EMAIL
 ! @date      YYYY-MM-DD
 ! @version   VERSION
 ! @brief     @EOL
@@ -11,7 +11,7 @@
 ! @see       
 ! @copyright 
 !  @parblock
-!  Copyright (c) YYYY, Mitchell Jay Richling <https://www.mitchr.me> All
+!  Copyright (c) YYYY, Mitchell Jay Richling <GIT-EMAIL> All
 !  rights reserved.
 !
 !  Redistribution and use in source and binary forms, with or without
