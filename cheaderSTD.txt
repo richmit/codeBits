@@ -1,0 +1,124 @@
+#include <tiffio.h>                                                      /* libTIFF                 libTIFF  */
+#include <FL/Fl.h>                                                       /* main                    FLTK     */
+#include <FL/Fl_Box.h>                                                   /* box                     FLTK     */
+#include <FL/Fl_Button.h>                                                /* button                  FLTK     */
+#include <FL/Fl_Double_Window.h>                                         /* dbl win                 FLTK     */
+#include <FL/Fl_Gl_Window.h>                                             /* OpenGL                  FLTK     */
+#include <FL/Fl_Return_Button.h>                                         /* Return button           FLTK     */
+#include <FL/Fl_Window.h>                                                /* window                  FLTK     */
+#include <FL/gl.h>                                                       /* FLTK OpenGL             FLTK     */
+#include <FL/glut.h>                                                     /* FLTK GLUT               FLTK     */
+#include <GL/glut.h>                                                     /* Open GL Util            OpenGL   */
+#include <GLUT/glut.h>                                                   /* Open GL Util            APPLE    */
+#include <Imlib2.h>                                                      /* imlib2                           */
+#include <OpenGL/glu.h>                                                  /* Open GL Stuff           APPLE    */
+#include <RInside.h>                                                     /* RInside                 R pkg    */
+#include <X11/Xlib.h>                                                    /* Xlib                    X11      */
+#include <algorithm>                                                     /* STL algorithm           C++11    */
+#include <arpa/inet.h>                                                   /* inet                    ????     */
+#include <boost/algorithm/string/classification.hpp>                     /* Char Classes            Boost    */
+#include <boost/algorithm/string/split.hpp>                              /* Split Strings           Boost    */
+#include <boost/bind.hpp>                                                /* Functors                Boost    */
+#include <boost/filesystem.hpp>                                          /* File System Tools       Boost    */
+#include <boost/format.hpp>                                              /* Print formatting        Boost    */
+#include <boost/numeric/interval.hpp>                                    /* Interval Arithmetic     Boost    */
+#include <boost/random/linear_congruential.hpp>                          /* PRNGs                   Boost    */
+#include <boost/random/uniform_int.hpp>                                  /* PRNGs                   Boost    */
+#include <boost/random/uniform_real.hpp>                                 /* PRNGs                   Boost    */
+#include <boost/random/variate_generator.hpp>                            /* PRNGs                   Boost    */
+#include <boost/regex.hpp>                                               /* RegEx                   Boost    */
+#include <boost/thread.hpp>                                              /* Threads                 Boost    */
+#include <boost/tokenizer.hpp>                                           /* Tokenizer               Boost    */
+#include <cblas.h>                                                       /* C BLAS                  BLAS     */
+#include <chrono>                                                        /* time                    C++11    */
+#include <complex>                                                       /* Complex Numbers         C++11    */
+#include <cstdarg>                                                       /* std:: C stdarg.h        C++11    */
+#include <cstdint>                                                       /* std:: C stdint.h        C++11    */
+#include <cstdio>                                                        /* std:: C stdio.h         C++11    */
+#include <cmath>                                                         /* std:: C math.h          C++11    */
+#include <cstdlib>                                                       /* std:: C stdlib.h        C++11    */
+#include <cstring>                                                       /* std:: C string.h        C++11    */
+#include <ctime>                                                         /* std:: C time.h          C++11    */
+#include <ctype.h>                                                       /* Char classes            C89      */
+#include <db.h>                                                          /* dbm header              ????     */
+#include <dirent.h>                                                      /* UNIX dirs               POSIX    */
+#include <errno.h>                                                       /* error stf               POSIX    */
+#include <fcntl.h>                                                       /* UNIX file ctrl          UNIX     */
+#include <fstream>                                                       /* C++ fstream             C++98    */
+#include <functional>                                                    /* STL funcs               C++98    */
+#include <gdbm.h>                                                        /* gdbm header             GNU      */
+#include <gmp.h>                                                         /* GNU GMP Library         GNU GMP  */
+#include <grp.h>                                                         /* UNIX groups             POSIX    */
+#include <hdf5.h>                                                        /* Low level API           HDF5     */
+#include <hdf5_hl.h>                                                     /* High level API          HDF5     */
+#include <iomanip>                                                       /* C++ stream formatting   C++11    */
+#include <iostream>                                                      /* C++ iostream            C++11    */
+#include <iostream.h>                                                    /* C++ iostream            C++98    */
+#include <iterator>                                                      /* STL Iterators           C++11    */
+#include <limits.h>                                                      /* uname                   POSIX    */
+#include <limits>                                                        /* C++ Numeric limits      C++11    */
+#include <list>                                                          /* STL list                C++11    */
+#include <map>                                                           /* STL map                 C++11    */
+#include <math.h>                                                        /* Math stuff              C89      */
+#include <mpi.h>                                                         /* MPI Std                 MPI      */
+#include <mutex>                                                         /* Mutexes                 C++11    */
+#include <ncurses.h>                                                     /* Popular Curses          ????     */
+#include <ndbm.h>                                                        /* ndbm header             BSD      */
+#include <netcdf.h>                                                      /* NetCDF Files            NetCDF   */
+#include <netdb.h>                                                       /* DNS lookup              ????     */
+#include <netinet/in.h>                                                  /* Inet socket             POSIX    */
+#include <new>                                                           /* C++ new                 C++11    */
+#include <numeric>                                                       /* C++ numeric             C++11    */
+#include <ostream>                                                       /* C++ ostream             C++11    */
+#include <paths.h>                                                       /* UNIX Paths              ????     */
+#include <pcre.h>                                                        /* PCRE lib                NONE     */
+#include <procfs.h>                                                      /* Solaris proc            SUN      */
+#include <pthread.h>                                                     /* threads                 POSIX    */
+#include <pwd.h>                                                         /* UNIX passwd             POSIX    */
+#include <queue>                                                         /* STL queue               C++11    */
+#include <random>                                                        /* C++ random numbers      C++11    */
+#include <readline/history.h>                                            /* readline history                 */
+#include <readline/readline.h>                                           /* readline                         */
+#include <regex.h>                                                       /* Regular Exp             POSIX    */
+#include <regex>                                                         /* C++ RegEx               C++11    */
+#include <rpc/rpc.h>                                                     /* SUN RPC (XDR)           POSIX    */
+#include <sched.h>                                                       /* threads                 POSIX    */
+#include <semaphore.h>                                                   /* Semaphores              POSIX    */
+#include <set>                                                           /* STL set                 C++98    */
+#include <shadow.h>                                                      /* UNIX shadow DB          SYSV     */
+#include <signal.h>                                                      /* UNIX signals            POSIX    */
+#include <sstream>                                                       /* C++ string stream       C++      */
+#include <stdarg.h>                                                      /* Variable args           C89      */
+#include <stdexcept>                                                     /* C++ Standard Exceptions C++11    */
+#include <stdint.h>                                                      /* Fixed Ints              C99      */
+#include <stdio.h>                                                       /* I/O lib                 C89      */
+#include <stdlib.h>                                                      /* Standard Lib            C89      */
+#include <string.h>                                                      /* Strings                 C89      */
+#include <string>                                                        /* C++ strings             C++11    */
+#include <sys/file.h>                                                    /* Locks                   UNIX     */
+#include <sys/ioctl.h>                                                   /* for ioctl()                      */
+#include <sys/ipc.h>                                                     /* Need for IPC            POSIX    */
+#include <sys/mman.h>                                                    /* mmap()                  POSIX    */
+#include <sys/param.h>                                                   /* UNIX Params             ????     */
+#include <sys/resource.h>                                                /* limits                  SUS      */
+#include <sys/sem.h>                                                     /* Semaphores              POSIX    */
+#include <sys/shm.h>                                                     /* Shared Mem              POSIX    */
+#include <sys/socket.h>                                                  /* UNIX sockets            POSIX    */
+#include <sys/stat.h>                                                    /* UNIX stat               POSIX    */
+#include <sys/time.h>                                                    /* UNIX time               ????     */
+#include <sys/types.h>                                                   /* UNIX types              POSIX    */
+#include <sys/uio.h>                                                     /* BSD  I/O                BSD      */
+#include <sys/un.h>                                                      /* UNIX address            UNIX     */
+#include <sys/utsname.h>                                                 /* uname                   POSIX    */
+#include <sys/wait.h>                                                    /* UNIX wait               POSIX    */
+#include <syslog.h>                                                      /* UNIX syslog             UNIX     */
+#include <termios.h>                                                     /* terminal I/O            POSIX    */
+#include <thread>                                                        /* threads                 C++11    */
+#include <time.h>                                                        /* time                    C89      */
+#include <unistd.h>                                                      /* UNIX std stf            POSIX    */
+#include <unordered_map>                                                 /* STL hash map            C++11    */
+#include <utime.h>                                                       /* utime                   POSIX    */
+#include <vecLib/cblas.h>                                                /* C BLAS                  APPLE    */
+#include <vecLib/clapack.h>                                              /* C LAPACK                APPLE    */
+#include <vector>                                                        /* STL vector              C++11    */ 
+#include <zlib.h>                                                        /* libz compression        libz     */

@@ -1,0 +1,710 @@
+
+* Math
+
+Here is some math $5+3^4$.
+
+Reminder: toggle inline preview of an expression with C-c C-x C-l
+
+Here is some display math $$\sum 4$$
+
+* Markup
+
+** Inline stuff
+
+Some *bold* text.
+
+Some /italics/ text.
+
+Some _underlined_ text.
+
+Some =verbatim= text.
+
+Some ~code~ text.
+
+Some +strike-through+ text.
+
+** Structural stuff 
+
+*** Special Paragraphs
+
+Here we have a quote:
+#+BEGIN_QUOTE
+A human being is a part of a whole, called by us _universe_, a part limited in time and space. He experiences himself, his thoughts and feelings as something
+separated from the rest... a kind of optical delusion of his consciousness. This delusion is a kind of prison for us, restricting us to our personal desires
+and to affection for a few persons nearest to us. Our task must be to free ourselves from this prison by widening our circle of compassion to embrace all
+living creatures and the whole of nature in its beauty. -- Albert Einstein
+#+END_QUOTE
+
+We can also keep newlines intact in an indented paragraph:
+ #+BEGIN_VERSE
+Whales Weep Not!
+
+They say the sea is cold, but the sea contains
+the hottest blood of all, and the wildest, the most urgent.
+...
+ 
+   -- D.H. Lawrence
+#+END_VERSE
+
+We can have a "verbatim" section with an "EXAMPLE" block.
+ #+BEGIN_EXAMPLE
+     Here is some text.
+Note that
+ everything is    just as typed.
+     #+END_EXAMPLE
+
+*** Tables
+
+**** With formatting
+
+|---------+-------+------------+------------|
+|         |       |      <r10> | <l10>      |
+| /       | <>    |            |            |
+| col 1   | col 2 |      col 3 | Col 4      |
+|---------+-------+------------+------------|
+| another | bit   |          1 | 2          |
+| a       | b     |          2 | 1          |
+|---------+-------+------------+------------|
+
+**** Tables used to hold data
+
+Notes:
+   - We have no "top line" on the table -- otherwise the row of titles is not recognized!! 
+   - Spaces in column titles are transformed into periods for data.frame column names.
+   - Empty data cells will be NA in the data.frame
+   - Non-numeric columns will be "characters" not "factors"
+
+#+TBLNAME:a-table-name
+| factor 1 | factor 2 | value 1 | value 2 |
+|----------+----------+---------+---------|
+| a        | z        |       1 |       5 |
+| a        | x        |       2 |       6 |
+| a        | y        |       3 |       7 |
+| b        | x        |       4 |         |
+
+*** Lists
+
+Here is itemized list:
+
+  - first
+  - second
+  - third
+
+Here is enumerated list:
+
+  1) First
+  2) Second
+  3) Third
+
+A bit of both:
+
+  1) First
+  2) Second
+     - first
+     - second
+     - third
+  3) Third
+
+** Todo/action items
+
+*** TODO:NEW This is a todo
+    :LOGBOOK:  
+    - State "TODO:NEW"   from ""           [2016-05-29 Sun 12:48]
+    :END:      
+
+*** ACTION:DONE This is an action item -- work speak. ;)
+     CLOSED: [2015-11-01 Sun 22:36] DEADLINE: <2015-11-01 Sun>
+     :LOGBOOK:  
+     - State "ACTION:DONE" from "ACTION:WORK" [2015-11-01 Sun 22:36]
+     - State "ACTION:WORK" from "ACTION:NEW" [2015-11-01 Sun 22:36]
+     - State "ACTION:WORK" from "ACTION:ASSIGNED" [2015-10-31 Sat 22:48]
+     - State "ACTION:NEW" from ""           [2015-10-31 Sat 22:23]
+     :END:      
+
+*** ACTION:NEW This is an item with sub-items [1/2]
+     :LOGBOOK:  
+     - State "ACTION:NEW" from ""           [2015-11-01 Sun 22:38]
+     :END:      
+**** ACTION:DONE A subitem
+      CLOSED: [2015-11-01 Sun 22:39]
+      :LOGBOOK:  
+      - State "ACTION:DONE" from "ACTION:NEW" [2015-11-01 Sun 22:39]
+      - State "ACTION:NEW" from "ACTION:DONE" [2015-11-01 Sun 22:39]
+      - State "ACTION:DONE" from "ACTION:NEW" [2015-11-01 Sun 22:38]
+      - State "ACTION:NEW" from ""           [2015-11-01 Sun 22:38]
+      :END:      
+**** ACTION:NEW Another subitem
+      :LOGBOOK:  
+      - State "ACTION:NEW" from ""           [2015-11-01 Sun 22:38]
+      :END:      
+      
+*** ACTION:NEW Here is an action item with list compoents [2/3]
+     DEADLINE: <2015-11-03 Tue> SCHEDULED: <2015-11-01 Sun>
+     :LOGBOOK:  
+     - State "ACTION:NEW" from ""           [2015-10-31 Sat 22:24]
+     :END:      
+     - [ ] Step 1
+     - [X] Step 2
+     - [X] Step 3
+
+* Images
+
+** PDFs in LaTeX and Raster Image in HTML
+
+In this Section you will see one image.  A PNG for HTML, and a PDF for LaTeX!
+
+ #+BEGIN_HTML
+<div class="figure">
+ <p>
+   <img src="example.png" alt="example.png" />
+ </p>
+</div>
+     #+END_HTML
+
+#+LATEX: \includegraphics[width=4in]{example.pdf}
+
+** Links to images and converting PDFs to high quality raster images
+
+Here we have a pretty graph (in a PNG file):
+
+[[file:example.png]]
+
+The above file was generated from a high quality PDF file: [[file:example.pdf][example.pdf]]. Note that the link in the previous sentence is a link in both HTML and LaTeX because
+the link has a 'display text' component.
+
+The conversion was done like so:
+
+#+BEGIN_SRC sh :exports code
+convert -density 600 -resize 1024 -background white -flatten example.pdf example.png
+#+END_SRC
+
+#+RESULTS:
+
+* Including external code
+
+Some Ruby code is the file file:example.rb.  It's contents are listed below:
+
+#+INCLUDE: "example.rb" src ruby
+
+* Inline Code
+
+Here is a number, src_elisp{(* 2 3)} {{{results(=6=)}}} =6=, that comes from a bit of elisp code.
+
+* Code Blocks
+
+** Text code blocks 
+
+Text code blocks can be used as a kind of verbatum environment instead of BEGIN_EXAMPLE.  This gives more control over formatting.  See the Email example next.
+
+#+BEGIN_SRC text :exports code :eval never :tangle no
+> Some Mail
+>> Some More
+>>> Even More
+>>>> Even more
+#+END_SRC
+
+** Email code blocks
+
+This is nice because we get some highlighting for quoted e-mails and threads.
+
+#+BEGIN_SRC mail :exports code :tangle no
+> Some Mail
+>> Some More
+>>> Even More
+>>>> Even more
+#+END_SRC
+
+** Emacs Lisp
+
+While you can use "=value=" insead of "=output=" for code blocks, it really is *very* usefull for Emacs Lisp.
+
+Note that if you leave off the =:wrap= header argument, the result will be =emacs-lisp=.  In this case the result will be an executable and eligible for
+tangle.  When evaluating an entire document this can be used to advantage to sequentially evaluate code that geneates new code and then evaluatg eth enew code
+-- you can even create an infinite loop with self printing code. ;)
+
+#+BEGIN_SRC emacs-lisp :results value code :exports both :wrap "src text :eval never :tangle no"
+(+ 1 2 3 5)
+#+END_SRC
+
+#+RESULTS:
+#+begin_src text :eval never :tangle no
+11
+#+end_src
+
+** Emacs Calc
+
+For more complex mathematical computations done with just Emacs (no outside tools) we can use calc.
+
+#+BEGIN_SRC calc :results output verbatum :exports both :wrap "src text :eval never :tangle no"
+deriv(3*x^2+log(x), x)
+#+END_SRC
+
+#+RESULTS:
+#+begin_src text :eval never :tangle no
+6 x + 1 / x
+#+end_src
+
+** Maxima
+
+For super complex math, we can use maxima.  
+
+Here we see a  pretty printed result
+
+#+BEGIN_SRC maxima :results output verbatim :exports both :wrap "src text :eval never :tangle no"
+programmode:false;
+d:diff(3*x^2+log(x), x);
+print(d);
+#+END_SRC
+
+#+RESULTS:
+#+begin_src text :eval never :tangle no
+      1
+6 x + - 
+      x
+#+end_src
+
+Same answer, but 2D printed
+
+#+BEGIN_SRC maxima :results output verbatim :exports both :wrap "src text :eval never :tangle no"
+programmode:false;
+display2d:false;
+d:diff(3*x^2+log(x), x);
+print(d);
+#+END_SRC
+
+#+RESULTS:
+#+begin_src text :eval never :tangle no
+6*x+1/x 
+#+end_src
+
+We can also output things in LaTeX so that the result is typeset on export!
+
+#+BEGIN_SRC maxima :results output verbatim raw :exports both
+programmode:false;
+d:diff(3*x^2+log(x), x);
+tex(d);
+#+END_SRC
+
+#+RESULTS:
+$$6\,x+{{1}\over{x}}$$
+
+Lastly we can use maxima to write code in other langauges for us.  How some LaTeX exported as a code block?
+
+#+BEGIN_SRC maxima :results output verbatim :exports both :wrap "src latex :eval never :tangle no"
+programmode:false;
+d:diff(3*x^2+log(x), x);
+tex(d);
+#+END_SRC
+
+#+RESULTS:
+#+begin_src latex :eval never :tangle no
+$$6\,x+{{1}\over{x}}$$
+#+end_src
+
+Or FORTRAN:
+
+#+BEGIN_SRC maxima :results output verbatim :exports both :wrap "src fortran :eval never :tangle no"
+programmode:false;
+d:diff(3*x^2+log(x), x);
+fortran(d);
+#+END_SRC
+
+#+RESULTS:
+#+begin_src fortran :eval never :tangle no
+      6*x+1/x
+#+end_src
+
+** Shells
+
+#+BEGIN_SRC sh :results output verbatim :exports both :wrap "src text :eval never :tangle no"
+date "+%Y-%m-%d %H:%M:%S"
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+2020-07-21 16:27:29
+#+end_example
+
+** Ruby
+
+#+BEGIN_SRC ruby :exports both :results output verbatim :wrap "src text :eval never :tangle no"
+puts("HI MOM")
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+HI MOM
+#+end_example
+
+* Fancy Code Block Stuff
+** Generateing code
+
+#+BEGIN_SRC elisp :results output verbatum :wrap src bash :wrap "src sh :eval never :tangle no"
+(cl-loop for f in '("foo" "bar")
+         do (princ (message "mv \"%s\" \"%s.bak\" # Rename %s\n" f f f)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_src sh :eval never :tangle no
+mv "foo" "foo.bak" # Rename foo
+mv "bar" "bar.bak" # Rename bar
+#+end_src
+
+** Code links
+
+You can link to a target inside a code block: [[(foo)][Visible Link Text]]
+
+#+BEGIN_SRC elisp :results silent :exports code
+(cl-loop for f in '("foo" "bar")                       ;; (ref:foo)
+         do (princ (message "mv %s %s.bak\n" f f)))
+#+END_SRC
+
+You can remove the visable refrences from the source listings with the -r option in the babel header.  Otherwise they will appear in the listing -- fontlocked
+white.
+
+** Line Numbers
+
+This will include line numbers in the block when exported
+
+#+BEGIN_SRC elisp :results output verbatum :wrap "src text -n :exports code :eval never :tangle no"
+(cl-loop for f in '("a" "b" "c")
+         do (princ (message "mv %s %s.bak\n" f f)))
+#+END_SRC
+
+#+RESULTS:
+#+begin_src text -n :exports code :eval never :tangle no
+mv a a.bak
+mv b b.bak
+mv c c.bak
+#+end_src
+
+* dot
+
+Here we do not export the code, just the results -- as an image.  This results in a nice rendering.
+
+#+begin_src dot :file dotResult.png :exports results
+graph {
+ A -- B;
+}
+#+end_src
+
+#+RESULTS:
+[[file:dotResult.png]]
+
+* R
+
+** Just run some R code in a new session
+
+#+BEGIN_SRC R :exports both :results output verbatim :wrap "src text :eval never :tangle no"
+print("HI MOM")
+#+END_SRC
+
+#+RESULTS:
+#+begin_example
+[1] "HI MOM"
+#+end_example
+
+** Access a table in this document as a data.frame
+
+#+begin_src R :exports both :results output verbatim :var someData=a-table-name :wrap "src text :eval never :tangle no"
+someData
+#+end_src
+
+#+RESULTS:
+#+begin_src text :eval never :tangle no
+  factor.1 factor.2 value.1 value.2
+1        a        z       1       5
+2        a        x       2       6
+3        a        y       3       7
+4        b        x       4      NA
+#+end_src
+
+** Output from R as a org-mode table
+
+#+begin_src R :exports both :results value :var someData=a-table-name
+someData
+#+end_src
+
+#+RESULTS:
+| a | z | 1 |   5 |
+| a | x | 2 |   6 |
+| a | y | 3 |   7 |
+| b | x | 4 | nil |
+
+** Run some code in a R persistent session (the someData variable is available for later blocks)
+#+begin_src R :session :results output verbatim :wrap "src text :eval never :tangle no"
+someData <- data.frame(a=1:10, b=rnorm(10))
+print(someData)
+#+end_src
+
+#+RESULTS:
+#+begin_src text :eval never :tangle no
+    a            b
+1   1  0.379789874
+2   2  1.998294645
+3   3  0.466352572
+4   4  0.001298143
+5   5 -1.656637383
+6   6 -1.037567358
+7   7 -1.107296046
+8   8 -1.653000457
+9   9 -0.889483086
+10 10 -0.387415308
+#+end_src
+
+** Use the someData variable in the session, and draw a graph.  
+
+No speical org-mode stuff for graphics.  Just saved the output in files via R.  Add link text later.
+
+#+begin_src R :session :results none :exports code
+g <- ggplot(someData, aes(x=a, y=b)) + geom_line()
+ggsave("rOut1.png", width=8, height=6, dpi=100, units='in', plot=g);
+ggsave("rOut1.pdf", width=8, height=6, dpi=600, units='in', plot=g);
+#+end_src
+
+The graph:
+
+[[file:rOut1.png]]
+
+A high quality PDF version is [[file:rOut1.pdf][here]] -- note the "here" is a link for both LaTeX and HTML.
+
+** We can use org-mode to make the file too.
+
+Note: :session is required for this to work -- otherwise we must "print" the graphic.
+
+#+begin_src R :session :file rOut2.png :width 800 :height 600 :results output graphics
+ggplot(someData, aes(x=a, y=b)) + geom_line()
+#+end_src
+
+#+RESULTS:
+
+[[file:rOut1.png]]
+
+** And plotly works too
+
+Note the silent output -- we don't need the result, so we just don't print it.
+
+#+begin_src R :session :results silent
+library(plotly)
+library(htmlwidgets)
+data(diamonds, package = "ggplot2")
+ggp <- ggplot(diamonds, aes(x = log(carat), y = log(price))) + geom_hex(bins = 100)
+plp <- ggplotly(ggp)
+saveWidget(plp, "examplePlotly.html", selfcontained=FALSE, libdir="examplePlotlyLib")
+#+end_src
+
+#+BEGIN_EXPORT html
+<br>
+<p align="center"><iframe id="igraph" scrolling="no" style="border:none;"seamless="seamless" src="examplePlotly.html" height="600" width="800"></iframe></p>
+<br>
+#+END_EXPORT
+
+* Reproduciblity
+
+This section is here to help anyone wishing to reproduce the results above, or to understand the mechanics of how the results were obtained..
+
+Reminder: All blocks in the entire tree can be evaluated with C-C C-V C-S
+
+** FILES
+
+Documented in this section are (for each file in this archive):
+
+  - SHA1
+  - Output from an 'ls -l' command
+  - Output from the 'wc' command -- byte, word, and line counts
+
+The use cases are two fold:
+
+  - Insure that the input data files being used are the same
+  - Check if reproduced results match
+
+Replace the =`find ./ -type f`= with a list of files and/or wildcards to explicitly select the desired files.
+
+#+BEGIN_SRC sh :results output verbatim :exports both :wrap "src text :eval never :tangle no"
+date
+for c in wc 'openssl sha1' 'ls -l' ; do
+    echo $c; $c `find ./ -type f`
+done
+#+END_SRC
+
+** ENVIRONMENT
+
+The input files are only part of the reproduciblity equation.  It is also important to understand the tools and computational environment used for the
+original analysis.  This section contains various bits of meta-data about the tools and system I used for this analysis.
+
+# Evaluate everything here: org-babel-execute-subtree
+
+*** Embedded Ruby Version
+
+#+BEGIN_SRC ruby :exports both :results output verbatim :wrap "src text :eval never :tangle no"
+puts(RUBY_VERSION)
+#+END_SRC
+
+*** Embedded Perl Version
+
+#+BEGIN_SRC perl :exports both :results output verbatim :wrap "src text :eval never :tangle no"
+print $]
+#+END_SRC
+
+*** Embedded R Information
+
+**** R version
+
+#+BEGIN_SRC R :exports both :results output verbatim :wrap "src text :eval never :tangle no"
+R.version
+#+END_SRC
+
+**** Session Information
+
+#+BEGIN_SRC R :exports both :results output verbatim :wrap "src text :eval never :tangle no"
+sessionInfo()
+#+END_SRC
+
+**** Loaded Package Versions
+
+#+BEGIN_SRC R :exports both :results output verbatim :wrap "src text :eval never :tangle no"
+installed.packages()[(loadedNamespaces()),c('Version', 'LibPath')]
+#+END_SRC
+
+*** Emacs Information
+
+**** Emacs Version
+
+#+BEGIN_SRC elisp :exports both :results results verbatim :wrap "src text :eval never :tangle no"
+(emacs-version)
+#+END_SRC
+
+**** org-mode Version
+
+#+BEGIN_SRC elisp :exports both :results results verbatim :wrap "src text :eval never :tangle no"
+org-version
+#+END_SRC
+
+**** ESS Version
+
+#+BEGIN_SRC elisp :exports both :results results verbatim :wrap "src text :eval never :tangle no"
+(ess-version)
+#+END_SRC
+
+**** Process Environment
+
+#+BEGIN_SRC elisp :exports both :results results verbatim :wrap "src text :eval never :tangle no"
+process-environment
+#+END_SRC
+
+**** System Type
+
+#+BEGIN_SRC elisp :exports both :results results verbatim :wrap "src text :eval never :tangle no"
+system-type
+#+END_SRC
+
+**** System Configuration
+
+#+BEGIN_SRC elisp :exports both :results results verbatim :wrap "src text :eval never :tangle no"
+system-configuration
+#+END_SRC
+
+*** System Information
+
+#+BEGIN_SRC sh :exports both :results output verbatim :wrap "src text :eval never :tangle no"
+for e in date whoami groups id hostname domainname dnsdomainname 'ifconfig -a' 'uname -a' 'openssl version' locale 'ldconfig -p' 'dpkg-query -l'; do
+  c=`echo $e | awk '{print $1}'`;
+  if hash $c 1>/dev/null 2>/dev/null; then 
+    ruby -e 'puts("="*90)'
+    echo $e
+    sh -c "$e"
+  fi
+done
+#+END_SRC
+
+*** Command Line Tool Information
+
+#+BEGIN_SRC sh :exports both :results output verbatim :wrap "src text :eval never :tangle no"
+for e in gcc g++ gfortran                               \
+         wc ls grep sed awk cut sort uniq               \
+         bash ksh tcsh dash csh sh zsh                  \
+         vi vim emacs em                                \
+         ruby ruby1.8 ruby2 python3 python2 perl        \
+         gnuplot maxima octave M2 gap julia R           \
+         qtiplot ggobi                                  \
+         povray                                         \
+         openscad xcircuit                              \
+         convert pqiv import display                    \
+         gs pdftex pdflatex tex latex dvips             \
+         sbcl clisp ecl ccl                             \
+         diff diff3 patch merge                         \
+         sqlite3 mysqld                                 \
+         paraview visit                                 \
+         grass                                          \
+         tar gzip bzip2 ; do
+  ruby -e 'puts("="*90)'
+  echo "Tool: $e"
+  if hash $e 1>/dev/null 2>/dev/null; then 
+    CPH=`which $e`
+    if [ -n "$CPH" -a -e "$CPH" ] ; then
+      echo $CPH    | sed 's/^/  Path: /'
+      ls -ld $CPH  | sed 's/^/  ls-l: /'
+      $e --version | sed 's/^/  Ver:  /'
+    else
+      echo "  Unable to locate (which): $e"
+    fi
+  else
+    echo "  Unable to locate (hash): $e"
+  fi
+done
+ruby -e 'puts("="*90)'
+#+END_SRC
+
+* Publishing 
+:PROPERTIES:
+:CUSTOM_ID: publishing
+:END:
+
+By "publishing" I mean simply copying stuff from the current directory tree to a new location -- usually one shared by a web/file server or to a staging area
+to be later uploaded to a web server.
+
+To control very precicely what gets published, put the files in the file file:files_to_publish.  One way to do that is like so:
+
+#+begin_src sh :exports both :results output verbatim :wrap "src text :eval never :tangle no"
+  EXT2PUB='.org .html .png .gif .jpeg .pdf .ps .sh .rb .R .c .cpp .h .hpp .csv .csv.gz'
+  if test -e files_to_publish; then cp files_to_publish files_to_publish_before; wc -l files_to_publish_before; fi
+  for e in $EXT2PUB; do
+    find ./ -name "*$e"
+  done | sed 's/^\.\///' | egrep -v '^(#|\.)' > files_to_publish
+  sort files_to_publish | uniq > files_to_publish~
+  mv files_to_publish~ files_to_publish
+  wc -l files_to_publish
+#+end_src
+
+# The following will copy the current directory tree to =$PUB_DIR= with the modes specified by =$PUB_MODES= (set it to an empty string to use the modes on the
+# source files).  Automatically will use =files_to_publish= and/or =.rsync-filter= if found.  This will not publish unless the file specified by =$HTML_NAME= is
+# the newest thing in the current directory tree -- set the variable to an empty string to suppress this behavior.
+ 
+#+begin_src sh :exports both :results output verbatim :wrap "src text :eval never :tangle no"
+  PUB_DIR=/tmp/foo
+  HTML_NAME=
+  PUB_MODES=a+rX
+  VERBOSE=-ii
+  if test -z "$HTML_NAME" -o 0 -eq `find ./ -cnewer "$HTML_NAME" -a -type f 2>/dev/null | wc -l `; then
+      RSYNC_OPTS='--delete -a'
+      if test -n "$VERBOSE";         then RSYNC_OPTS="$RSYNC_OPTS $VERBOSE"; fi
+      if test -e '.rsync-filter';    then RSYNC_OPTS="$RSYNC_OPTS -F"; fi
+      if test -e 'files_to_publish'; then RSYNC_OPTS="$RSYNC_OPTS --files-from=files_to_publish"; fi
+      date
+      rsync $RSYNC_OPTS ./ "$PUB_DIR"
+      date
+  else
+    echo "ERROR: $HTML_NAME is not the newest file here.  Please regenerate it (C-c C-e h h)!"
+  fi
+#+end_src
+
+* EOF
+
+# End of document.
+
+# The following adds some space at the bottom of exported HTML
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+#+HTML: <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
