@@ -1,4 +1,3 @@
-#include <tiffio.h>                                                      /* libTIFF                 libTIFF  */
 #include <FL/Fl.h>                                                       /* main                    FLTK     */
 #include <FL/Fl_Box.h>                                                   /* box                     FLTK     */
 #include <FL/Fl_Button.h>                                                /* button                  FLTK     */
@@ -30,12 +29,14 @@
 #include <boost/thread.hpp>                                              /* Threads                 Boost    */
 #include <boost/tokenizer.hpp>                                           /* Tokenizer               Boost    */
 #include <cblas.h>                                                       /* C BLAS                  BLAS     */
+#include <cfloat>                                                        /* std:: C float.h         C++11    */
 #include <chrono>                                                        /* time                    C++11    */
+#include <climits>                                                       /* std:: C limits.h        C++11    */
+#include <cmath>                                                         /* std:: C math.h          C++11    */
 #include <complex>                                                       /* Complex Numbers         C++11    */
 #include <cstdarg>                                                       /* std:: C stdarg.h        C++11    */
 #include <cstdint>                                                       /* std:: C stdint.h        C++11    */
 #include <cstdio>                                                        /* std:: C stdio.h         C++11    */
-#include <cmath>                                                         /* std:: C math.h          C++11    */
 #include <cstdlib>                                                       /* std:: C stdlib.h        C++11    */
 #include <cstring>                                                       /* std:: C string.h        C++11    */
 #include <ctime>                                                         /* std:: C time.h          C++11    */
@@ -52,8 +53,8 @@
 #include <hdf5.h>                                                        /* Low level API           HDF5     */
 #include <hdf5_hl.h>                                                     /* High level API          HDF5     */
 #include <iomanip>                                                       /* C++ stream formatting   C++11    */
-#include <iostream>                                                      /* C++ iostream            C++11    */
 #include <iostream.h>                                                    /* C++ iostream            C++98    */
+#include <iostream>                                                      /* C++ iostream            C++11    */
 #include <iterator>                                                      /* STL Iterators           C++11    */
 #include <limits.h>                                                      /* uname                   POSIX    */
 #include <limits>                                                        /* C++ Numeric limits      C++11    */
@@ -114,9 +115,13 @@
 #include <syslog.h>                                                      /* UNIX syslog             UNIX     */
 #include <termios.h>                                                     /* terminal I/O            POSIX    */
 #include <thread>                                                        /* threads                 C++11    */
+#include <tiffio.h>                                                      /* libTIFF                 libTIFF  */
 #include <time.h>                                                        /* time                    C89      */
+#include <tuple>                                                         /* STL tuples              C++11    */
+#include <type_traits>                                                   /* C++ metaprogramming     C++11    */
 #include <unistd.h>                                                      /* UNIX std stf            POSIX    */
 #include <unordered_map>                                                 /* STL hash map            C++11    */
+#include <utility>                                                       /* STL Misc Utilities      C++11    */
 #include <utime.h>                                                       /* utime                   POSIX    */
 #include <vecLib/cblas.h>                                                /* C BLAS                  APPLE    */
 #include <vecLib/clapack.h>                                              /* C LAPACK                APPLE    */
