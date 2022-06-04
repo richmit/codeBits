@@ -91,10 +91,10 @@ top.pde: top-template-cpp.txt makefile
 	sed 's/STDLANG/Processing/; s/EMODE/Java/' < top-template-cpp.txt > top.pde
 
 top.h: top-template-c.txt makefile
-	sed 's/STDLANG/C89 C99 C11 ISOC GCC K&RC/; s/EMODE/C/' < top-template-c.txt > top.h
+	sed 's/STDLANG/C89 C99 C11 ISOC GCC K\&RC/; s/EMODE/C/' < top-template-c.txt > top.h
 
 top.c: top-template-c.txt makefile
-	sed 's/STDLANG/C89 C99 C11 ISOC GCC K&RC/; s/EMODE/C/' < top-template-c.txt > top.c
+	sed 's/STDLANG/C89 C99 C11 ISOC GCC K\&RC/; s/EMODE/C/' < top-template-c.txt > top.c
 
 top.mac: top-template-c.txt makefile
 	sed 's/STDLANG/maxima/; s/EMODE/maxima/' < top-template-c.txt > top.mac

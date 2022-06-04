@@ -7,7 +7,7 @@
  @version   VERSION
  @brief     @EOL
  @keywords  
- @std       C89 C99 C11 ISOC GCC KSTDLANGRC
+ @std       C89 C99 C11 ISOC GCC K&RC
  @see       
  @copyright 
   @parblock
