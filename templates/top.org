@@ -1,4 +1,5 @@
 # -*- Mode:Org; Coding:utf-8; fill-column:158 -*-
+# ######################################################################################################################################################.H.S.##
 #+TITLE:       TITLE FIXME
 #+AUTHOR:      Mitch Richling
 #+EMAIL:       http://www.mitchr.me/
@@ -25,26 +26,4 @@
 #+HTML_HEAD: <style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
 #+HTML_LINK_HOME: https://www.mitchr.me/
 #+HTML_LINK_UP: https://www.mitchr.me/FIXME
-
-#+ATTR_HTML: :border 2 solid #ccc :frame hsides :align center
-|          <r> | <l>                                          |
-|    *Author:* | /{{{author}}}/                               |
-|   *Updated:* | /{{{modification-time(%Y-%m-%d %H:%M:%S)}}}/ |
-| *Generated:* | /{{{time(%Y-%m-%d %H:%M:%S)}}}/              |
-#+ATTR_HTML: :align center
-Copyright {{{time(%Y)}}} Mitch Richling. All rights reserved.
-
-#+TOC: headlines 5
-
-
-#         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
-#    010  #    020  #    030  #    040  #    050  #    060  #    070  #    080  #    090  #    100  #    110  #    120  #    130  #    140  #    150  #    160  #    170  #    180  #    190  #    200  #    210  #    220  #    230  #    240  #    250  #    260  #    270  #    280  #    290  #    300  #    310  #    320  #
-# 2345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890123456789012345678901234567890
-#         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
-#         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #         #
-
-# To get org to evaluate all code blocks on export, add the following to the Emacs header on the first line of this file:
-#     org-export-babel-evaluate:t; org-confirm-babel-evaluate:nil
-#
-# C-c C-x C-v (org-toggle-inline-images)
-#
+# ######################################################################################################################################################.H.E.##

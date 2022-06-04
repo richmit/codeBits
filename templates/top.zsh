@@ -1,5 +1,5 @@
-#!/bin/ruby
-# -*- Mode:ruby-mode; Coding:us-ascii-unix; fill-column:158 -*-
+#!/bin/zsh
+# -*- Mode:Shell-script; Coding:us-ascii-unix; fill-column:158 -*-
 #########################################################################################################################################################.H.S.##
 ##
 # @file      FILENAME
@@ -8,7 +8,7 @@
 # @version   VERSION
 # @brief     @EOL
 # @keywords  
-# @std       Ruby 1.8 1.9 2 3
+# @std       zsh
 # @see       
 # @copyright 
 #  @parblock

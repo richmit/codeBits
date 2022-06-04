@@ -1,4 +1,4 @@
-/* -*- Mode:C; Coding:us-ascii-unix; fill-column:158 -*- */
+/* -*- Mode:EMODE; Coding:us-ascii-unix; fill-column:158 -*- */
 /*******************************************************************************************************************************************************.H.S.**/
 /**
  @file      FILENAME
@@ -7,7 +7,7 @@
  @version   VERSION
  @brief     @EOL
  @keywords  
- @std       C89 C99 C11 ISOC GCC KSTDLANGRC
+ @std       STDLANG
  @see       
  @copyright 
   @parblock

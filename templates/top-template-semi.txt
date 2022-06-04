@@ -1,4 +1,4 @@
-;; -*- Mode:Lisp; Syntax:ANSI-Common-LISP; Coding:us-ascii-unix; fill-column:158 -*-
+;; -*- Mode:EMODE; Syntax:ANSI-Common-LISP; Coding:us-ascii-unix; fill-column:158 -*-
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;.H.S.;;
 ;;;
 ;; @file      FILENAME
@@ -7,7 +7,7 @@
 ;; @version   VERSION
 ;; @brief     @EOL
 ;; @keywords  
-;; @std       Common Lisp
+;; @std       STDLANG
 ;; @see       
 ;; @copyright 
 ;;  @parblock

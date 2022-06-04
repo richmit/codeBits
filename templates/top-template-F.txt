@@ -1,4 +1,4 @@
-! -*- Mode:F90; Coding:us-ascii-unix; fill-column:72 -*-
+! -*- Mode:EMODE; Coding:us-ascii-unix; fill-column:72 -*-
 !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 !!
 ! @file      FILENAME
@@ -7,7 +7,7 @@
 ! @version   VERSION
 ! @brief     @EOL
 ! @keywords  
-! @std       F18
+! @std       STDLANG
 ! @see       
 ! @copyright 
 !  @parblock

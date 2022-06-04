@@ -1,12 +1,12 @@
 C -*- Mode:Fortran; Coding:us-ascii-unix; fill-column:72 -*-
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC.H.S.CC
 C @file      FILENAME
 C @author    Mitch Richling GIT-EMAIL
 C @date      YYYY-MM-DD
 C @version   VERSION
 C @brief     @EOL
 C @keywords  
-C @std       F77 MIL-STD-1753 LongNames F90 F95 
+C @std       F77 MIL-STD-1753 LongNames
 C @see       
 C @copyright 
 C  @parblock
@@ -48,7 +48,7 @@ C @bug       @EOL@EOL
 C @filedetails   
 C
 C  File details go here.  Multiple paragraphs are fine....
-CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC
+CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC.H.E.CC
 
 
 C#######################################################################

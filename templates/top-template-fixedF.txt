@@ -1,4 +1,4 @@
-C -*- Mode:Fortran; Coding:us-ascii-unix; fill-column:72 -*-
+C -*- Mode:EMODE; Coding:us-ascii-unix; fill-column:72 -*-
 CCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCCC.H.S.CC
 C @file      FILENAME
 C @author    Mitch Richling GIT-EMAIL
@@ -6,7 +6,7 @@ C @date      YYYY-MM-DD
 C @version   VERSION
 C @brief     @EOL
 C @keywords  
-C @std       F77 MIL-STD-1753 LongNames
+C @std       STDLANG
 C @see       
 C @copyright 
 C  @parblock
