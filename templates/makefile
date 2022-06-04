@@ -1,10 +1,35 @@
 
-ALLTARG = template.org top.R top.bash top.c top.cc top.clisp top.cmake top.cpp top.el top.elisp top.f03 top.f08 top.f18 top.f77 top.f90 top.f95 top.f top.h top.hh top.hpp top.html top.java top.js top.lisp top.mac top.make top.md top.org top.pde top.perl top.pl top.pov top.rb top.sh top.tex top.texi top.xhtml top.zsh 
+ALLTARG = template.c template.cpp template.cc template.f03 template.f08 template.f18 template.f90 template.f95 template.org top.R top.bash top.c top.cc top.clisp top.cmake top.cpp top.el top.elisp top.f03 top.f08 top.f18 top.f77 top.f90 top.f95 top.f top.h top.hh top.hpp top.html top.java top.js top.lisp top.mac top.make top.md top.org top.pde top.perl top.pl top.pov top.rb top.sh top.tex top.texi top.xhtml top.zsh 
 
 all: $(ALLTARG)
 
 clean: 
 	rm -f $(ALLTARG)
+
+template.c: body-template-CnCPP.txt makefile
+	cp body-template-CnCPP.txt template.c
+
+template.cpp: body-template-CnCPP.txt makefile
+	cp body-template-CnCPP.txt template.cpp
+
+template.cc: body-template-CnCPP.txt makefile
+	cp body-template-CnCPP.txt template.cc
+
+
+template.f90: body-template-F.txt makefile
+	cp body-template-F.txt template.f90
+
+template.f95: body-template-F.txt makefile
+	cp body-template-F.txt template.f95
+
+template.f03: body-template-F.txt makefile
+	cp body-template-F.txt template.f03
+
+template.f08: body-template-F.txt makefile
+	cp body-template-F.txt template.f08
+
+template.f18: body-template-F.txt makefile
+	cp body-template-F.txt template.f18
 
 top.org: ../../org-mode/genericOrgTemplate.org makefile
 	grep -B 100 '#.H.E.##' ../../org-mode/genericOrgTemplate.org > top.org
