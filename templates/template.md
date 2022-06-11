@@ -2,7 +2,7 @@
 <!-- ******************************************************************************************************************************************************* -->
 <!-- --
  @file      template.md
- @author    Mitch Richling <https://www.mitchr.me>
+ @author    GIT-NAME GIT-EMAIL
  @date      2022-06-01
  @version   VERSION
  @brief     @EOL
@@ -11,7 +11,7 @@
  @see       
  @copyright 
   @parblock
-  Copyright (c) 2022, Mitchell Jay Richling <https://www.mitchr.me> All rights reserved.
+  Copyright (c) 2022, LEGAL-NAME <GIT-EMAIL> All rights reserved.
 
   Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
 

@@ -22,6 +22,13 @@ Copyright \copy {{{time(%Y)}}} Mitch Richling. All rights reserved.
 # C-c C-x C-v (org-toggle-inline-images)
 #
 
+* Introduction
+:PROPERTIES:
+:CUSTOM_ID: introduction
+:END:
+
+I use this files as a template & cut-n-paste source for org-mode documents.  As such, it demonstrates most of the stuff I do with org-mode.
+
 * Math
 
 Here is some math $5+3^4$.
@@ -418,7 +425,6 @@ mv b b.bak
 mv c c.bak
 #+end_src
 
-
 * dot
 
 Here we do not export the code, just the results -- as an image.  This results in a nice rendering.
@@ -433,7 +439,6 @@ graph {
 [[file:dotResult.png]]
 
 * R
-
 ** Just run some R code in a new session
 
 #+BEGIN_SRC R :exports both :results output verbatim :wrap "src text :eval never :tangle no"
@@ -520,25 +525,6 @@ ggplot(someData, aes(x=a, y=b)) + geom_line()
 #+RESULTS:
 
 [[file:rOut1.png]]
-
-** And plotly works too
-
-Note the silent output -- we don't need the result, so we just don't print it.
-
-#+begin_src R :session :results silent
-library(plotly)
-library(htmlwidgets)
-data(diamonds, package = "ggplot2")
-ggp <- ggplot(diamonds, aes(x = log(carat), y = log(price))) + geom_hex(bins = 100)
-plp <- ggplotly(ggp)
-saveWidget(plp, "examplePlotly.html", selfcontained=FALSE, libdir="examplePlotlyLib")
-#+end_src
-
-#+BEGIN_EXPORT html
-<br>
-<p align="center"><iframe id="igraph" scrolling="no" style="border:none;"seamless="seamless" src="examplePlotly.html" height="600" width="800"></iframe></p>
-<br>
-#+END_EXPORT
 
 * Under Construction                                               :noexport:
 
@@ -761,33 +747,11 @@ To control very precicely what gets published, put the files in the file file:fi
   fi
 #+end_src
 
-* Update my Templates
+* Meta
+:PROPERTIES:
+:CUSTOM_ID: meta
+:END:
 
-#+begin_src sh :exports both :results output verbatim
-if [ -e ~/core/org-mode/genericOrgTemplate.org -a -d ~/core/codeBits/templates ]; then
-  echo "BEFORE"
-  md5sum ~/core/org-mode/genericOrgTemplate.org
-  ls -l ~/core/codeBits/templates/*.org
-  md5sum ~/core/codeBits/templates/*.org
-  grep -E -m 1 -B 100 '^ *$' ~/core/org-mode/genericOrgTemplate.org | head -n -1 > ~/core/codeBits/templates/top.org
-  cp ~/core/org-mode/genericOrgTemplate.org ~/core/codeBits/templates/template.org
-  echo "AFTER"
-  ls -l ~/core/codeBits/templates/*.org
-  md5sum ~/core/codeBits/templates/*.org
-fi
-#+end_src
+Publication Site: https://www.mitchr.me/FIXME/
 
-#+RESULTS:
-#+begin_example
-BEFORE
-e644ceffdbd721e801a48969c5edf922 */home/richmit/core/org-mode/genericOrgTemplate.org
--rw-r--r-- 1 richmit None 27294 Jun  2 18:21 /home/richmit/core/codeBits/templates/template.org
--rw-r--r-- 1 richmit None  2580 Jun  2 18:25 /home/richmit/core/codeBits/templates/top.org
-24d2543427322e69f7d9f019adcebf81 */home/richmit/core/codeBits/templates/template.org
-08ea44e506e0d887c1ee9182e8a41ccf */home/richmit/core/codeBits/templates/top.org
-AFTER
--rw-r--r-- 1 richmit None 28756 Jun  2 18:26 /home/richmit/core/codeBits/templates/template.org
--rw-r--r-- 1 richmit None  2580 Jun  2 18:26 /home/richmit/core/codeBits/templates/top.org
-e644ceffdbd721e801a48969c5edf922 */home/richmit/core/codeBits/templates/template.org
-08ea44e506e0d887c1ee9182e8a41ccf */home/richmit/core/codeBits/templates/top.org
-#+end_example
+Publication URL: https://www.mitchr.me/FIXME/FIXME.html

@@ -2,8 +2,9 @@
 # ######################################################################################################################################################.H.S.##
 # FILE:        FILENAME
 #+TITLE:       TITLE FIXME
-#+AUTHOR:      Mitch Richling
-#+EMAIL:       http://www.mitchr.me/
+#+SUBTITLE:    SUBTITLE FIXME
+#+AUTHOR:      GIT-NAME
+#+EMAIL:       GIT-EMAIL
 #+DATE:        YYYY-MM-DD FIXME
 #+DESCRIPTION: DESCRIPTION FIXME
 #+KEYWORDS:    KEYWORDS FIXME
@@ -21,6 +22,7 @@
 #+HTML_HEAD: <style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
 #+HTML_HEAD: <style>h1,h2,h3 { line-height: 1.4em; }</style>
 #+HTML_HEAD: <style>h1.title { font-size: 3em; }</style>
+#+HTML_HEAD: <style>.subtitle { font-size: 0.6em; }</style>
 #+HTML_HEAD: <style>h4,h5,h6 { font-size: 1em; }</style>
 #+HTML_HEAD: <style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
 #+HTML_HEAD: <style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
