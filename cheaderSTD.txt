@@ -1,3 +1,5 @@
+// -*- Mode:C++; Coding:us-ascii-unix; fill-column:158 -*-
+
 #include <FL/Fl.h>                                                       /* main                    FLTK     */
 #include <FL/Fl_Box.h>                                                   /* box                     FLTK     */
 #include <FL/Fl_Button.h>                                                /* button                  FLTK     */
@@ -15,6 +17,7 @@
 #include <X11/Xlib.h>                                                    /* Xlib                    X11      */
 #include <algorithm>                                                     /* STL algorithm           C++11    */
 #include <arpa/inet.h>                                                   /* inet                    ????     */
+#include <array>                                                         /* array template          C++11    */
 #include <boost/algorithm/string/classification.hpp>                     /* Char Classes            Boost    */
 #include <boost/algorithm/string/split.hpp>                              /* Split Strings           Boost    */
 #include <boost/bind.hpp>                                                /* Functors                Boost    */
@@ -33,12 +36,15 @@
 #include <chrono>                                                        /* time                    C++11    */
 #include <climits>                                                       /* std:: C limits.h        C++11    */
 #include <cmath>                                                         /* std:: C math.h          C++11    */
+#include <cmath>                                                         /* std:: C math.h          C++11    */
 #include <complex>                                                       /* Complex Numbers         C++11    */
+#include <concepts>                                                      /* Concepts library        C++20    */
 #include <cstdarg>                                                       /* std:: C stdarg.h        C++11    */
 #include <cstdint>                                                       /* std:: C stdint.h        C++11    */
 #include <cstdio>                                                        /* std:: C stdio.h         C++11    */
 #include <cstdlib>                                                       /* std:: C stdlib.h        C++11    */
 #include <cstring>                                                       /* std:: C string.h        C++11    */
+#include <ctgmath>                                                       /* std:: C tgmath.h        C++11    */
 #include <ctime>                                                         /* std:: C time.h          C++11    */
 #include <ctype.h>                                                       /* Char classes            C89      */
 #include <db.h>                                                          /* dbm header              ????     */
@@ -69,6 +75,7 @@
 #include <netdb.h>                                                       /* DNS lookup              ????     */
 #include <netinet/in.h>                                                  /* Inet socket             POSIX    */
 #include <new>                                                           /* C++ new                 C++11    */
+#include <numbers>                                                       /* C++ math constants      C++20    */
 #include <numeric>                                                       /* C++ numeric             C++11    */
 #include <ostream>                                                       /* C++ ostream             C++11    */
 #include <paths.h>                                                       /* UNIX Paths              ????     */

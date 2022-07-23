@@ -230,6 +230,32 @@ Some Ruby code is the file file:example.rb.  It's contents are listed below:
 
 #+INCLUDE: "example.rb" src ruby
 
+We can include just the stuff after the top comment like this:
+
+#+begin_src sh :results output verbatum :exports results :wrap "src ruby :eval never :tangle no"
+sed -En '/(!|#|\*|=|_|-|%|;|C|\/){70,}\.H\.E\./,$p' example.rb | grep -vE '.(!|#|\*|=|_|-|%|;|C|/){70,}'
+#+end_src
+
+#+begin_src sh :results output verbatum :exports results :wrap "src ruby :eval never :tangle no"
+grep -EA 10000 '(!|#|\*|=|_|-|%|;|C|/){70,}\.H\.E\.' example.rb | grep -vE '(!|#|\*|=|_|-|%|;|C|/){70,}'
+#+end_src
+
+#+RESULTS:
+#+begin_src ruby :eval never :tangle no
+
+puts("Hello, World!")
+
+print("Hello, World!\n")
+
+printf("Hello, World!\n")
+
+STDOUT << "Hello, World!\n"
+
+STDOUT.write("Hello, World!\n")
+
+"Hello, World!\n".each_byte {|b| putc(b) }
+#+end_src
+
 * Inline Code
 
 Here is a number, src_elisp{(* 2 3)} {{{results(=6=)}}} =6=, that comes from a bit of elisp code.

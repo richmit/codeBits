@@ -92,7 +92,7 @@ top.cmake: top-template-pound.txt makefile
 	sed '/INTERP/d; s/STDLANG/cmake/; s/EMODE/cmake-mode/' < top-template-pound.txt > top.cmake
 
 top.cpp: top-template-cpp.txt makefile
-	sed 's/STDLANG/C++98 C++11 C++14 ATTC++ GCC++/; s/EMODE/C++/' < top-template-cpp.txt > top.cpp
+	sed 's/STDLANG/C++20 C++17 C++14 C++11 C++98 ATTC++ GCC++/; s/EMODE/C++/' < top-template-cpp.txt > top.cpp
 
 top.pov: top-template-cpp.txt makefile
 	sed 's/STDLANG/Povray_3.1 Povray_3.5 Povray_3.7/; s/EMODE/pov/' < top-template-cpp.txt > top.pov
