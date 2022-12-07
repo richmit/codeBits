@@ -1,5 +1,6 @@
 // -*- Mode:C++; Coding:us-ascii-unix; fill-column:158 -*-
 
+
 #include <FL/Fl.h>                                                       /* main                    FLTK     */
 #include <FL/Fl_Box.h>                                                   /* box                     FLTK     */
 #include <FL/Fl_Button.h>                                                /* button                  FLTK     */
@@ -77,6 +78,9 @@
 #include <new>                                                           /* C++ new                 C++11    */
 #include <numbers>                                                       /* C++ math constants      C++20    */
 #include <numeric>                                                       /* C++ numeric             C++11    */
+#include <opencv2/core/mat.hpp>                                          /* Mat                     OpenCV   */
+#include <opencv2/highgui.hpp>                                           /* imshow                  OpenCV   */
+#include <opencv2/imgcodecs.hpp>                                         /* imread                  OpenCV   */
 #include <ostream>                                                       /* C++ ostream             C++11    */
 #include <paths.h>                                                       /* UNIX Paths              ????     */
 #include <pcre.h>                                                        /* PCRE lib                NONE     */
@@ -95,9 +99,11 @@
 #include <set>                                                           /* STL set                 C++98    */
 #include <shadow.h>                                                      /* UNIX shadow DB          SYSV     */
 #include <signal.h>                                                      /* UNIX signals            POSIX    */
+#include <span>                                                          /* STL spans               C++20    */
 #include <sstream>                                                       /* C++ string stream       C++      */
 #include <stdarg.h>                                                      /* Variable args           C89      */
 #include <stdexcept>                                                     /* C++ Standard Exceptions C++11    */
+#include <stdexcept>                                                     /* Exceptions              C++11    */
 #include <stdint.h>                                                      /* Fixed Ints              C99      */
 #include <stdio.h>                                                       /* I/O lib                 C89      */
 #include <stdlib.h>                                                      /* Standard Lib            C89      */
