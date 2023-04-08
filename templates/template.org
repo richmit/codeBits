@@ -57,6 +57,12 @@ Some +strike-through+ text.
 
 *** Special Paragraphs
 
+Some centered stuff.  Text, graphics, whatever...
+#+BEGIN_CENTER
+HI HO \\
+Centered
+#+END_CENTER
+
 Here we have a quote:
 #+BEGIN_QUOTE
 A human being is a part of a whole, called by us _universe_, a part limited in time and space. He experiences himself, his thoughts and feelings as something

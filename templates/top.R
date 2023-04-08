@@ -1,5 +1,5 @@
 #!/usr/bin/env -S Rscript
-# -*- Mode:ess-r-mode; Coding:us-ascii-unix; fill-column:158 -*-
+# -*- Mode:ess-r; Coding:us-ascii-unix; fill-column:158 -*-
 #########################################################################################################################################################.H.S.##
 ##
 # @file      FILENAME

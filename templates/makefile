@@ -1,5 +1,5 @@
 
-ALLTARG = template.c template.cpp template.cc template.f03 template.f08 template.f18 template.f90 template.f95 template.org top.R top.bash top.c top.cc top.clisp top.cmake top.cpp top.el top.elisp top.f03 top.f08 top.f18 top.f77 top.f90 top.f95 top.f top.h top.hh top.hpp top.html top.java top.js top.lisp top.mac top.make top.md top.org top.pde top.perl top.pl top.pov top.rb top.sh top.tex top.texi top.xhtml top.zsh 
+ALLTARG = template.c template.cpp template.cc template.f03 template.f08 template.f18 template.f90 template.f95 template.org top.R top.bash top.c top.cc top.clisp top.cmake top.cpp top.el top.elisp top.f03 top.f08 top.f18 top.f77 top.f90 top.f95 top.f top.h top.hh top.hpp top.html top.java top.js top.lisp top.mac top.make top.md top.org top.pde top.perl top.pl top.pov top.rb top.sh top.tex top.texi top.xhtml top.zsh top.net top.cir top.sub top.m template.m top.ps
 
 all: $(ALLTARG)
 
@@ -14,7 +14,6 @@ template.cpp: body-template-CnCPP.txt makefile
 
 template.cc: body-template-CnCPP.txt makefile
 	cp body-template-CnCPP.txt template.cc
-
 
 template.f90: body-template-F.txt makefile
 	cp body-template-F.txt template.f90
@@ -31,17 +30,26 @@ template.f08: body-template-F.txt makefile
 template.f18: body-template-F.txt makefile
 	cp body-template-F.txt template.f18
 
+top.ps: top-template-perc.txt
+	sed 's/STDLANG/PostScript/; s/EMODE/PostScript/; 1i %!PS' < top-template-perc.txt > top.ps
+
 top.org: ../../org-mode/genericOrgTemplate.org makefile
 	grep -B 100 '#.H.E.##' ../../org-mode/genericOrgTemplate.org > top.org
 
 template.org: ../../org-mode/genericOrgTemplate.org makefile
 	grep -A 1000 '#.H.E.##' ../../org-mode/genericOrgTemplate.org | sed '1d' > template.org
 
-top.tex: top-template-tex.txt makefile
-	sed 's/STDLANG/LaTeX TeX/; s/EMODE/LaTeX/' < top-template-tex.txt > top.tex
+top.tex: top-template-perc.txt makefile
+	sed 's/STDLANG/LaTeX TeX/; s/EMODE/LaTeX/' < top-template-perc.txt > top.tex
 
-top.texi: top-template-tex.txt makefile
-	sed 's/STDLANG/TeXinfo/; s/EMODE/texinfo-mode/' < top-template-tex.txt > top.texi
+top.texi: top-template-perc.txt makefile
+	sed 's/STDLANG/TeXinfo/; s/EMODE/texinfo-mode/' < top-template-perc.txt > top.texi
+
+top.m: top-template-perc-slim.txt makefile
+	sed 's/STDLANG/octave matlab_2022b/; s/EMODE/octave/' < top-template-perc-slim.txt > top.m
+
+template.m: body-template-matlab.txt makefile
+	cp body-template-matlab.txt template.m
 
 top.html: top-template-html.txt makefile
 	sed 's/STDLANG/HTML_2 2.0 HTML_3 HTML_3.2 HTML_4 HTML_4.0 HTML_4.01 HTML_5 HTML_5.1 HTML_5.2/'   < top-template-html.txt > top.html
@@ -71,13 +79,13 @@ top.bash: top-template-pound.txt makefile
 	sed 's/INTERP/bash/; s/STDLANG/bash/; s/EMODE/Shell-script/'   < top-template-pound.txt > top.bash
 
 top.R: top-template-pound.txt makefile
-	sed 's/INTERP/Rscript/; s/STDLANG/GNU-R/; s/EMODE/ess-r-mode/'   < top-template-pound.txt > top.R
+	sed 's/INTERP/Rscript/; s/STDLANG/GNU-R/; s/EMODE/ess-r/'   < top-template-pound.txt > top.R
 
 top.zsh: top-template-pound.txt makefile
 	sed 's/INTERP/zsh/; s/STDLANG/zsh/; s/EMODE/Shell-script/'     < top-template-pound.txt > top.zsh
 
 top.rb: top-template-pound.txt makefile
-	sed 's/INTERP/ruby/; s/STDLANG/Ruby 1.8 1.9 2 3/; s/EMODE/ruby-mode/' < top-template-pound.txt > top.rb
+	sed 's/INTERP/ruby/; s/STDLANG/Ruby 1.8 1.9 2 3/; s/EMODE/ruby/' < top-template-pound.txt > top.rb
 
 top.perl: top-template-pound.txt
 	sed 's/INTERP/perl/; s/STDLANG/Perl4 Perl5 Perl6/; s/EMODE/Perl/' 	 < top-template-pound.txt > top.perl
@@ -89,7 +97,7 @@ top.make: top-template-pound.txt makefile
 	sed '/INTERP/d; s/STDLANG/GNUmake BSDmake SYSVmake GenericMake/; s/EMODE/Makefile/' < top-template-pound.txt > top.make
 
 top.cmake: top-template-pound.txt makefile
-	sed '/INTERP/d; s/STDLANG/cmake/; s/EMODE/cmake-mode/' < top-template-pound.txt > top.cmake
+	sed '/INTERP/d; s/STDLANG/cmake/; s/EMODE/cmake/' < top-template-pound.txt > top.cmake
 
 top.cpp: top-template-cpp.txt makefile
 	sed 's/STDLANG/C++20 C++17 C++14 C++11 C++98 ATTC++ GCC++/; s/EMODE/C++/' < top-template-cpp.txt > top.cpp
@@ -144,3 +152,13 @@ top.f08: top-template-fixedF.txt makefile
 
 top.f18: top-template-fixedF.txt makefile
 	sed 's/STDLANG/F18/; s/EMODE/F90/' < top-template-F.txt > top.f18
+
+top.net: top-template-star.txt makefile
+	sed 's/STDLANG/xyce ngspice LTSpice SPICE/; s/EMODE/spice/' < top-template-star.txt > top.net
+
+top.cir: top-template-star.txt makefile
+	sed 's/STDLANG/xyce ngspice LTSpice SPICE/; s/EMODE/spice/' < top-template-star.txt > top.cir
+
+top.sub: top-template-star.txt makefile
+	sed 's/STDLANG/xyce ngspice LTSpice SPICE/; s/EMODE/spice/' < top-template-star.txt > top.sub
+
