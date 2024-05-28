@@ -1,24 +1,22 @@
-PROGRAM progamName
-  IMPLICIT NONE
+program progam_name
+  implicit none
 
-  ! A comment
-  WRITE (*,*) "Hello, World!" ! Another comment
+  ! a comment
+  write (*,*) "hello, world!" ! another comment
 
-CONTAINS
+  !------------------------------------------------------------------------------------------------------------------------------
+  function func_name(a)
+    implicit none
+    real, intent(in) :: a
+    real funcname
+  end function func_name
+  
+  !------------------------------------------------------------------------------------------------------------------------------
+  subroutine sub_name(a, b, c)
+    implicit none
+    real, intent(in)    :: a
+    real, intent(out)   :: b
+    real, intent(inout) :: c
+  end subroutine sub_name
 
-  !---------------------------------------------------------------------------------------------------------------------------------
-  FUNCTION funcName(a)
-    IMPLICIT NONE
-    REAL, INTENT(IN) :: a
-    REAL funcName
-  END FUNCTION funcName
-
-  !---------------------------------------------------------------------------------------------------------------------------------
-  SUBROUTINE subName(a, b, c)
-    IMPLICIT NONE
-    REAL, INTENT(IN)    :: a
-    REAL, INTENT(OUT)   :: b
-    REAL, INTENT(INOUT) :: c
-  END SUBROUTINE subName
-
-END PROGRAM programName
+end program progam_name
