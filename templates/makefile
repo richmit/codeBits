@@ -1,5 +1,5 @@
 
-ALLTARG = template.c template.cpp template.cc template.f77 template.f03 template.f08 template.f18 template.f90 template.f95 template.org top.R top.bash top.c top.cc top.clisp top.cmake top.cpp top.el top.elisp top.f03 top.f08 top.f18 top.f77 top.f90 top.f95 top.f top.h top.hh top.hpp top.html top.java top.js top.lisp top.mac top.make top.md top.org top.pde top.perl top.pl top.pov top.rb top.sh top.tex top.texi top.xhtml top.zsh top.net top.cir top.sub top.m template.m top.ps
+ALLTARG = template.c template.cpp template.cc template.f template.f77 template.f03 template.f08 template.f18 template.f90 template.f95 template.org top.R top.bash top.c top.cc top.clisp top.cmake top.cpp top.el top.elisp top.f03 top.f08 top.f18 top.f77 top.f90 top.f95 top.f top.h top.hh top.hpp top.html top.java top.js top.lisp top.mac top.make top.md top.org top.pde top.perl top.pl top.pov top.rb top.sh top.tex top.texi top.xhtml top.zsh top.net top.cir top.sub top.m template.m top.ps
 
 all: $(ALLTARG)
 
@@ -15,20 +15,26 @@ template.cpp: body-template-CnCPP.txt
 template.cc: body-template-CnCPP.txt 
 	cp body-template-CnCPP.txt template.cc
 
-template.f95: template.f90 
-	cp template.f90 template.f95
+template.f90: body-template-f90.txt 
+	cp body-template-f90.txt template.f90
 
-template.f03: template.f90 
-	cp template.f90 template.f03
+template.f95: body-template-f90.txt 
+	cp body-template-f90.txt template.f95
 
-template.f08: template.f90 
-	cp template.f90 template.f08
+template.f03: body-template-f90.txt 
+	cp body-template-f90.txt template.f03
 
-template.f18: template.f90 
-	cp template.f90 template.f18
+template.f08: body-template-f90.txt 
+	cp body-template-f90.txt template.f08
 
-template.f77: template.f
-	cp template.f template.f77
+template.f18: body-template-f90.txt 
+	cp body-template-f90.txt template.f18
+
+template.f: body-template-f77.txt
+	cp body-template-f77.txt template.f
+
+template.f77: body-template-f77.txt
+	cp body-template-f77.txt template.f77
 
 top.ps: top-template-perc.txt
 	sed 's/STDLANG/PostScript/; s/EMODE/PostScript/; 1i %!PS' < top-template-perc.txt > top.ps
@@ -132,20 +138,26 @@ top.c: top-template-c.txt
 top.mac: top-template-c.txt 
 	sed 's/STDLANG/maxima/; s/EMODE/maxima/' < top-template-c.txt > top.mac
 
-top.f77: top.f 
-	cp top.f top.f77
+top.f77: top-template-f77.txt 
+	cp top-template-f77.txt top.f77
 
-top.f95: top.f90 
-	sed 's/F90 F95 F2003 F2008 F2018/F95/' < top.f90 > top.f95
+top.f: top-template-f77.txt 
+	cp top-template-f77.txt top.f
 
-top.f03: top.f90 
-	sed 's/F90 F95 F2003 F2008 F2018/F03/' < top.f90 > top.f03
+top.f90: top-template-f90.txt
+	cp top-template-f90.txt top.f90
 
-top.f08: top.f90 
-	sed 's/F90 F95 F2003 F2008 F2018/F08/' < top.f90 > top.f08
+top.f95: top-template-f90.txt 
+	sed 's/F90 F95 F2003 F2008 F2018/F95/' < top-template-f90.txt > top.f95
 
-top.f18: top.f90 
-	sed 's/F90 F95 F2003 F2008 F2018/F18/' < top.f90 > top.f18
+top.f03: top-template-f90.txt 
+	sed 's/F90 F95 F2003 F2008 F2018/F2003/' < top-template-f90.txt > top.f03
+
+top.f08: top-template-f90.txt 
+	sed 's/F90 F95 F2003 F2008 F2018/F2008/' < top-template-f90.txt > top.f08
+
+top.f18: top-template-f90.txt 
+	sed 's/F90 F95 F2003 F2008 F2018/F2018/' < top-template-f90.txt > top.f18
 
 top.net: top-template-star.txt 
 	sed 's/STDLANG/xyce ngspice LTSpice SPICE/; s/EMODE/spice/' < top-template-star.txt > top.net

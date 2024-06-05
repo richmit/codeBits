@@ -2,7 +2,9 @@ program progam_name
   implicit none
 
   ! a comment
-  write (*,*) "hello, world!" ! another comment
+  print *, "hello, world!" ! another comment
+
+contains
 
   !------------------------------------------------------------------------------------------------------------------------------
   function func_name(a)
