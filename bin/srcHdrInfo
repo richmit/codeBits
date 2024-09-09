@@ -1,0 +1,193 @@
+#!/usr/bin/env -S ruby
+# -*- Mode:ruby; Coding:us-ascii-unix; fill-column:158 -*-
+#########################################################################################################################################################.H.S.##
+##
+# @file      srcHdrInfo.rb.rb
+# @author    Mitch Richling http://www.mitchr.me/
+# @date      2024-09-05
+# @brief     Extract top header and print requested info.@EOL
+# @std       Ruby 3
+# @copyright 
+#  @parblock
+#  Copyright (c) 2024, Mitchell Jay Richling <http://www.mitchr.me/> All rights reserved.
+#
+#  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+#
+#  1. Redistributions of source code must retain the above copyright notice, this list of conditions, and the following disclaimer.
+#
+#  2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions, and the following disclaimer in the documentation
+#     and/or other materials provided with the distribution.
+#
+#  3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software without
+#     specific prior written permission.
+#
+#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+#  FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+#  SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR
+#  TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+#  @endparblock
+#########################################################################################################################################################.H.E.##
+
+##----------------------------------------------------------------------------------------------------------------------------------
+require 'optparse'
+require 'optparse/time'
+
+##----------------------------------------------------------------------------------------------------------------------------------
+fd_dox_to_org_mode = true
+requested_component = 'details'
+debug = 0
+search_limit  = 100
+opts = OptionParser.new do |opts|
+  opts.banner = "Usage: srcHdrInfo.rb [options] FILE"
+  opts.separator ""
+  opts.separator "Options:"
+  opts.on("-h",        "--help",             "Show this message")                      { puts opts; exit                       }
+  opts.on("-a",        "--as-is",            "No org-mode transforms")                 { fd_dox_to_org_mode=false;             }
+  opts.on("-d DEBUG",  "--debug DEBUG",      "Debug level")                            { |v| debug=v.to_i;                     }
+  opts.on("-L LIMIT",  "--search-limit LIMIT",  "Limit number of lines to search")     { |v| search_limit=v.to_i;              }
+  opts.on("-i INFO",   "--info INFO",        "What to print")                          { |v| requested_component=v;            }
+  opts.separator "        - header  -- Entire header                                 "
+  opts.separator "        - details -- File details paragraph (default)              "
+  opts.separator "        - file    -- File name                                     "
+  opts.separator "        - author  -- Author                                        "
+  opts.separator "        - date    -- Date                                          "
+  opts.separator "        - version -- Version                                       "
+  opts.separator "        - brief   -- One line description                          "
+  opts.separator "        - keywords -- Keywords                                     "
+  opts.separator "        - std      -- Language standard                            "
+  opts.separator "        - see      -- Cross references                             "
+  opts.separator "        - evar     -- Emacs file variable block                    "
+  opts.separator "        - e=var    -- Emacs file variable value (case insensitive) "
+  opts.separator "                      - Mode                                       "
+  opts.separator "                      - Coding                                     "
+  opts.separator "                      - fill-column                                "
+  opts.separator "                      - Mode                                       "
+  opts.separator "                      - Syntax                                     "
+  opts.separator "                                                                   "
+  opts.separator "Read in a text file containing one of my standard header blocks    "
+  opts.separator "and print out the requested data from the header on STDOUT.        "
+end
+opts.parse!(ARGV)
+
+##----------------------------------------------------------------------------------------------------------------------------------
+# Read file and put header data into 'header'
+emacs_var_re  = Regexp.new('-\*-\ ([^ ].*[^ ]) -\*-')
+header_end_re = Regexp.new('(!|#|\*|=|_|-|%|;|C|/).*(!|#|\*|=|_|-|%|;|C|/){60,}\.H\.E\.')
+header_beg_re = Regexp.new('(!|#|\*|=|_|-|%|;|C|/).*(!|#|\*|=|_|-|%|;|C|/){60,}\.H\.S\.')
+emacs_var_str = ''
+header        = Array.new
+inHeader      = false 
+line_num      = 1
+open(ARGV[0], "r") do |file|
+  file.each_line do |line|
+    if (tmp = line.match(emacs_var_re)) then
+      emacs_var_str = tmp[1]
+    end
+    if (inHeader) then
+      if (line.match(header_end_re)) then
+        break 
+      end
+      header.push(line.chomp)
+    else
+      if (line.match(header_beg_re)) then
+        inHeader = true
+      end
+      line_num += 1
+      if ((search_limit > 0) && (line_num > search_limit)) then
+        puts("ERROR(srcHdrInfo): Could not find header in first #{search_limit} lines")
+        exit 1
+      end
+    end
+  end
+end
+
+##----------------------------------------------------------------------------------------------------------------------------------
+emacs_var_map = Hash.new
+if ( !(emacs_var_str.empty?)) then
+  emacs_var_str.split(';') do |vp|
+    if (tmp = vp.match(/([^ ]+?):([^ ]+)/)) then
+      emacs_var_map[tmp[1].downcase] = tmp[2]
+    end
+  end
+end
+
+##----------------------------------------------------------------------------------------------------------------------------------
+# Zap trailing & leding comment delimiters
+if ( !(header.empty?)) then
+  if (Regexp.new('^(#|%|\*|\*/|--|-->|;;)$').match(header[-1])) then
+    header.pop
+  end
+  if (Regexp.new('^(!!|##|%%|---|/\*\*|;;;|<!-- --)$').match(header[0])) then
+    header.shift
+  end
+end
+
+##----------------------------------------------------------------------------------------------------------------------------------
+# Find and remove any common prefix on all lines
+if ( !(header.empty?)) then
+  allPrefixStringIdx = -1
+  minLineLength = header.map(&:length).min
+  1.upto(minLineLength) do |i|
+    if ((header.map { |s| s.slice(0, i) }).uniq().length == 1) then
+      allPrefixStringIdx = i
+    else
+      break
+    end
+  end
+  if (allPrefixStringIdx >= 0) then
+    header.map! { |s| s.slice(allPrefixStringIdx..-1) }
+  end
+end
+
+##----------------------------------------------------------------------------------------------------------------------------------
+# Parse the header
+details     = Array.new
+one_line_fields = Hash.new
+if ( !(header.empty?)) then
+  one_line_tags = ['file', 'author', 'date', 'version', 'brief', 'keywords', 'std', 'see']
+  tag_re        = Regexp.new('@(' + one_line_tags.join('|') + ') +([^ ].+) *$')
+  detail_beg_re = Regexp.new('@filedetails')
+  inDetails     = false
+  header.each do |line|
+    if (inDetails) then
+      details.push(line.chomp)
+    elsif (line.match(detail_beg_re)) then
+      inDetails = true
+    elsif (tmp=line.match(tag_re)) then
+      one_line_fields[tmp[1]] = tmp[2]
+    end
+  end
+end
+
+##----------------------------------------------------------------------------------------------------------------------------------
+# Fix details
+if ( !(details.empty?)) then
+  # Transform Doxygen syntax into org-mode syntax
+  if (fd_dox_to_org_mode)
+    details.each do |line|
+      line.sub!(/^ *\\verbatim/,    '#+BEGIN_EXAMPLE')    # verbatim -> BEGIN_EXAMPLE'   
+      line.sub!(/^ *\\endverbatim/, '#+END_EXAMPLE')      # endverbatim -> END_EXAMPLE'  
+      line.gsub!(/@f\[/,             '\\[')               # Rewrite displaied math start
+      line.gsub!(/@f\]/,             '\\]')               # Rewrite displaied math end
+      line.gsub!(/@f\$(.+?)@f\$/,  "\\(\\1\\)")           # Rewrite inline math
+    end
+  end
+end
+
+##----------------------------------------------------------------------------------------------------------------------------------
+# Print out what we want
+if (requested_component == 'header') then
+  puts(header.join("\n"))
+elsif (requested_component == 'details') then
+  puts(details.join("\n"))
+elsif (requested_component == 'evar') then
+  puts(emacs_var_str)
+elsif (tmp=requested_component.match(/^e=(.+)$/)) then
+  emacs_var = tmp[1].downcase;
+  if (emacs_var_map.member?(emacs_var)) then
+    puts(emacs_var_map[emacs_var])
+  end
+elsif (one_line_fields.member?(requested_component)) then
+  puts(one_line_fields[requested_component])
+end
