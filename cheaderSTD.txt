@@ -1,6 +1,6 @@
 // -*- Mode:C++; Coding:us-ascii-unix; fill-column:158 -*-
 
-
+#include <variant>                                                       /* C++ variant type        C++17    */
 #include <FL/Fl.h>                                                       /* main                    FLTK     */
 #include <FL/Fl_Box.h>                                                   /* box                     FLTK     */
 #include <FL/Fl_Button.h>                                                /* button                  FLTK     */
