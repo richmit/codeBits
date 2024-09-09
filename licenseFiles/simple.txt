@@ -1,0 +1,1 @@
+Copyright (c) YYYY, LEGAL-NAME <GIT-EMAIL> All rights reserved.

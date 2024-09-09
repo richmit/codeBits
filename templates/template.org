@@ -31,11 +31,17 @@ I use this files as a template & cut-n-paste source for org-mode documents.  As 
 
 * Math
 
-Here is some math $5+3^4$.
+Here is some math \( 5+3^4 \).
 
 Reminder: toggle inline preview of an expression with C-c C-x C-l
 
-Here is some display math $$\sum 4$$
+Here is some display math \[ \sum 4 \]
+
+ $$\begin{align*}
+   \frac{dx}{dt} & = a(y-x)   \\
+   \frac{dy}{dt} & = x(b-z)-y \\
+   \frac{dz}{dt} & = xy-cz
+ \end{align*}$$
 
 * Markup
 
