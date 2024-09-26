@@ -171,6 +171,7 @@ if ( !(details.empty?)) then
       line.gsub!(/@f\[/,             '\\[')               # Rewrite displaied math start
       line.gsub!(/@f\]/,             '\\]')               # Rewrite displaied math end
       line.gsub!(/@f\$(.+?)@f\$/,  "\\(\\1\\)")           # Rewrite inline math
+      line.gsub!(/`([^`]+?)`/,     "=\\1=")               # Rewrite inline verbatim  (Might switch this to ~ instead)
     end
   end
 end
