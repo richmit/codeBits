@@ -163,15 +163,32 @@ end
 ##----------------------------------------------------------------------------------------------------------------------------------
 # Fix details
 if ( !(details.empty?)) then
+  # Find and remove any common prefix on all lines
+  detPrefixStringIdx = -1
+  nonEmptyDetailLines = details.reject { |x| x.match(/^\s*$/) }
+  minLineLength = nonEmptyDetailLines.map(&:length).min
+  1.upto(minLineLength) do |i|
+    if ((nonEmptyDetailLines.map { |s| s.slice(0, i) }).uniq().length == 1) then
+      detPrefixStringIdx = i
+    else
+      break
+    end
+  end
+  if (detPrefixStringIdx >= 0) then
+    details.map! { |s| (s.length>detPrefixStringIdx ? s.slice(detPrefixStringIdx..-1) : "") }
+  end
   # Transform Doxygen syntax into org-mode syntax
   if (fd_dox_to_org_mode)
     details.each do |line|
-      line.sub!(/^ *\\verbatim/,    '#+BEGIN_EXAMPLE')    # verbatim -> BEGIN_EXAMPLE'   
-      line.sub!(/^ *\\endverbatim/, '#+END_EXAMPLE')      # endverbatim -> END_EXAMPLE'  
-      line.gsub!(/@f\[/,             '\\[')               # Rewrite displaied math start
-      line.gsub!(/@f\]/,             '\\]')               # Rewrite displaied math end
-      line.gsub!(/@f\$(.+?)@f\$/,  "\\(\\1\\)")           # Rewrite inline math
-      line.gsub!(/`([^`]+?)`/,     "=\\1=")               # Rewrite inline verbatim  (Might switch this to ~ instead)
+      line.sub!(/^ *[@\\]code({\.([^}]+)})?/,     '#+BEGIN_SRC \2')  # code -> BEGIN_SRC'   
+      line.sub!(/^ *[@\\]endcode/,                '#+END_SRC')       # endcode -> END_SRC'  
+      line.sub!(/^ *[@\\]verbatim/,               '#+BEGIN_EXAMPLE') # verbatim -> BEGIN_EXAMPLE'   
+      line.sub!(/^ *[@\\]endverbatim/,            '#+END_EXAMPLE')   # endverbatim -> END_EXAMPLE'  
+      line.gsub!(/[@\\]f\[/,                      '\\[')             # Rewrite displaied math start
+      line.gsub!(/[@\\]f\]/,                      '\\]')             # Rewrite displaied math end
+      line.gsub!(/@f\$(.+?)@f\$/,                 "\\(\\1\\)")       # Rewrite inline math
+      line.gsub!(/\\f\$(.+?)\\f\$/,               "\\(\\1\\)")       # Rewrite inline math
+      line.gsub!(/`([^`]+?)`/,                    "=\\1=")           # Rewrite inline verbatim  (Might switch this to ~ instead)
     end
   end
 end
