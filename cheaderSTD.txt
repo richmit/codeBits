@@ -1,6 +1,5 @@
 // -*- Mode:C++; Coding:us-ascii-unix; fill-column:158 -*-
 
-#include <variant>                                                       /* C++ variant type        C++17    */
 #include <FL/Fl.h>                                                       /* main                    FLTK     */
 #include <FL/Fl_Box.h>                                                   /* box                     FLTK     */
 #include <FL/Fl_Button.h>                                                /* button                  FLTK     */
@@ -60,6 +59,7 @@
 #include <hdf5.h>                                                        /* Low level API           HDF5     */
 #include <hdf5_hl.h>                                                     /* High level API          HDF5     */
 #include <iomanip>                                                       /* C++ stream formatting   C++11    */
+#include <ios>                                                           /* C++ I/O                 C++      */
 #include <iostream.h>                                                    /* C++ iostream            C++98    */
 #include <iostream>                                                      /* C++ iostream            C++11    */
 #include <iterator>                                                      /* STL Iterators           C++11    */
@@ -136,6 +136,7 @@
 #include <unordered_map>                                                 /* STL hash map            C++11    */
 #include <utility>                                                       /* STL Misc Utilities      C++11    */
 #include <utime.h>                                                       /* utime                   POSIX    */
+#include <variant>                                                       /* C++ variant type        C++17    */
 #include <vecLib/cblas.h>                                                /* C BLAS                  APPLE    */
 #include <vecLib/clapack.h>                                              /* C LAPACK                APPLE    */
 #include <vector>                                                        /* STL vector              C++11    */ 
