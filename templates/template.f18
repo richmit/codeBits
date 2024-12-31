@@ -1,4 +1,5 @@
 program progam_name
+  use, intrinsic:: iso_c_binding
   implicit none
 
   ! a comment
