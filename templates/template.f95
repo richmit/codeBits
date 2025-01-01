@@ -1,4 +1,4 @@
-program progam_name
+program FILENAME-EXT
   use, intrinsic:: iso_c_binding
   implicit none
 
@@ -22,4 +22,4 @@ contains
     real, intent(inout) :: c
   end subroutine sub_name
 
-end program progam_name
+end program FILENAME-EXT
