@@ -35,3 +35,150 @@
 #+HTML_LINK_HOME: https://www.mitchr.me/
 #+HTML_LINK_UP: https://www.mitchr.me/FIXME
 # ######################################################################################################################################################.H.E.##
+--
+     - [ ] Step 1
+     - [X] Step 2
+     - [X] Step 3
+
+* Images
+
+** PDFs in LaTeX and Raster Image in HTML
+
+In this Section you will see one image.  A PNG for HTML, and a PDF for LaTeX!
+
+#+BEGIN_EXPORT html
+<div class="figure">
+ <p>
+   <img src="example.png" alt="example.png" />
+ </p>
+</div>
+#+END_EXPORT
+
+# One liners can be included like this:
+# @@html:<b>@@bold text@@html:</b>@@
+
+#+BEGIN_EXPORT latex
+\includegraphics[width=4in]{example.pdf}
+#+END_EXPORT
+
+# One liners can be included like this:
+# #+LATEX: 
+
+** Links to images and converting PDFs to high quality raster images
+
+Reminder: toggle inline preview of images with: C-c C-x C-v
+
+Here we have a pretty graph (in a PNG file):
+
+#+ATTR_HTML: :width 1024 :align center
+[[file:example.png]]
+
+The above file was generated from a high quality PDF file: [[file:example.pdf][example.pdf]]. Note that the link in the previous sentence is a link in both HTML and LaTeX because
+the link has a 'display text' component.
+
+The conversion was done like so:
+
+#+BEGIN_SRC sh :exports code
+convert -density 600 -resize 1024 -background white -flatten example.pdf example.png
+#+END_SRC
+
+#+RESULTS:
+
+* Including external code
+
+** org-mode INCLUDE 
+
+Some Ruby code is the file file:example.rb.  It's contents are listed below:
+
+#+INCLUDE: "example.rb" src ruby
+
+** Entire header
+
+#+begin_src sh :results output verbatum :exports results :wrap "src ruby :eval never :tangle no"
+~/core/codeBits/bin/src2header example.rb
+#+end_src
+
+#+RESULTS:
+#+begin_src ruby :eval never :tangle no
+#!/usr/bin/env -S ruby
+# -*- Mode:ruby; Coding:us-ascii-unix; fill-column:158 -*-
+#########################################################################################################################################################.H.S.##
+##
+# @file      example.rb
+# @author    Mitch Richling http://www.mitchr.me/
+# @date      2024-12-31
+# @brief     The classic hello world program the Ruby way.@EOL
+# @keywords  ruby example hello world
+# @std       Ruby 3
+# @copyright 
+#  @parblock
+#  Copyright (c) 2024, Mitchell Jay Richling <http://www.mitchr.me/> All rights reserved.
+#  
+#  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+#  
+#  1. Redistributions of source code must retain the above copyright notice, this list of conditions, and the following disclaimer.
+#  
+#  2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions, and the following disclaimer in the documentation
+#     and/or other materials provided with the distribution.
+#  
+#  3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software
+#     without specific prior written permission.
+#  
+#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+#  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+#  OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+#  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+#  DAMAGE.
+#  @endparblock
+# @filedetails
+#
+#  The methods puts, print, printf & putc are all in the IO class as well so that they can be used to write to different IO streams.  As used here, they write
+#  to STDOUT.
+#
+#########################################################################################################################################################.H.E.##
+#+end_src
+
+** Header Comment
+
+#+begin_src sh :results output verbatum :exports results :wrap "src ruby :eval never :tangle no"
+~/core/codeBits/bin/src2headerComment example.rb
+#+end_src
+
+#+RESULTS:
+#+begin_src ruby :eval never :tangle no
+#########################################################################################################################################################.H.S.##
+##
+# @file      example.rb
+# @author    Mitch Richling http://www.mitchr.me/
+# @date      2024-12-31
+# @brief     The classic hello world program the Ruby way.@EOL
+# @keywords  ruby example hello world
+# @std       Ruby 3
+# @copyright 
+#  @parblock
+#  Copyright (c) 2024, Mitchell Jay Richling <http://www.mitchr.me/> All rights reserved.
+#  
+#  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+#  
+#  1. Redistributions of source code must retain the above copyright notice, this list of conditions, and the following disclaimer.
+#  
+#  2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions, and the following disclaimer in the documentation
+#     and/or other materials provided with the distribution.
+#  
+#  3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software
+#     without specific prior written permission.
+#  
+#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+#  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+#  OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+#  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+#  DAMAGE.
+#  @endparblock
+# @filedetails
+#
+#  The methods puts, print, printf & putc are all in the IO class as well so that they can be used to write to different IO streams.  As used here, they write
+#  to STDOUT.
+#
+#########################################################################################################################################################.H.E.##

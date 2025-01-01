@@ -19,7 +19,6 @@ Copyright \copy {{{time(%Y)}}} Mitch Richling. All rights reserved.
 # To get org to evaluate all code blocks on export, add the following to the Emacs header on the first line of this file:
 #     org-export-babel-evaluate:t; org-confirm-babel-evaluate:nil
 #
-# C-c C-x C-v (org-toggle-inline-images)
 #
 
 * Introduction
@@ -33,7 +32,9 @@ I use this files as a template & cut-n-paste source for org-mode documents.  As 
 
 Here is some math \( 5+3^4 \).
 
-Reminder: toggle inline preview of an expression with C-c C-x C-l
+Display inline preview of an expression at/near point with C-c C-x C-l
+ - With C-u, clear images for fragments in current section.
+ - With C-u C-y, clear images for fragments in buffer
 
 Here is some display math \[ \sum 4 \]
 
@@ -220,6 +221,8 @@ In this Section you will see one image.  A PNG for HTML, and a PDF for LaTeX!
 
 ** Links to images and converting PDFs to high quality raster images
 
+Reminder: toggle inline preview of images with: C-c C-x C-v
+
 Here we have a pretty graph (in a PNG file):
 
 #+ATTR_HTML: :width 1024 :align center
@@ -238,23 +241,186 @@ convert -density 600 -resize 1024 -background white -flatten example.pdf example
 
 * Including external code
 
+** org-mode INCLUDE 
+
 Some Ruby code is the file file:example.rb.  It's contents are listed below:
 
 #+INCLUDE: "example.rb" src ruby
 
-We can include just the stuff after the top comment like this:
+** Entire header
 
 #+begin_src sh :results output verbatum :exports results :wrap "src ruby :eval never :tangle no"
-sed -En '/(!|#|\*|=|_|-|%|;|C|\/){70,}\.H\.E\./,$p' example.rb | grep -vE '.(!|#|\*|=|_|-|%|;|C|/){70,}'
+~/core/codeBits/bin/src2header example.rb
 #+end_src
 
+#+RESULTS:
+#+begin_src ruby :eval never :tangle no
+#!/usr/bin/env -S ruby
+# -*- Mode:ruby; Coding:us-ascii-unix; fill-column:158 -*-
+#########################################################################################################################################################.H.S.##
+##
+# @file      example.rb
+# @author    Mitch Richling http://www.mitchr.me/
+# @date      2024-12-31
+# @brief     The classic hello world program the Ruby way.@EOL
+# @keywords  ruby example hello world
+# @std       Ruby 3
+# @copyright 
+#  @parblock
+#  Copyright (c) 2024, Mitchell Jay Richling <http://www.mitchr.me/> All rights reserved.
+#  
+#  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+#  
+#  1. Redistributions of source code must retain the above copyright notice, this list of conditions, and the following disclaimer.
+#  
+#  2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions, and the following disclaimer in the documentation
+#     and/or other materials provided with the distribution.
+#  
+#  3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software
+#     without specific prior written permission.
+#  
+#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+#  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+#  OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+#  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+#  DAMAGE.
+#  @endparblock
+# @filedetails
+#
+#  The methods puts, print, printf & putc are all in the IO class as well so that they can be used to write to different IO streams.  As used here, they write
+#  to STDOUT.
+#
+#########################################################################################################################################################.H.E.##
+#+end_src
+
+** Header Comment
+
 #+begin_src sh :results output verbatum :exports results :wrap "src ruby :eval never :tangle no"
-grep -EA 10000 '(!|#|\*|=|_|-|%|;|C|/){70,}\.H\.E\.' example.rb | grep -vE '(!|#|\*|=|_|-|%|;|C|/){70,}'
+~/core/codeBits/bin/src2headerComment example.rb
+#+end_src
+
+#+RESULTS:
+#+begin_src ruby :eval never :tangle no
+#########################################################################################################################################################.H.S.##
+##
+# @file      example.rb
+# @author    Mitch Richling http://www.mitchr.me/
+# @date      2024-12-31
+# @brief     The classic hello world program the Ruby way.@EOL
+# @keywords  ruby example hello world
+# @std       Ruby 3
+# @copyright 
+#  @parblock
+#  Copyright (c) 2024, Mitchell Jay Richling <http://www.mitchr.me/> All rights reserved.
+#  
+#  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+#  
+#  1. Redistributions of source code must retain the above copyright notice, this list of conditions, and the following disclaimer.
+#  
+#  2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions, and the following disclaimer in the documentation
+#     and/or other materials provided with the distribution.
+#  
+#  3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software
+#     without specific prior written permission.
+#  
+#  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+#  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+#  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+#  OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+#  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+#  DAMAGE.
+#  @endparblock
+# @filedetails
+#
+#  The methods puts, print, printf & putc are all in the IO class as well so that they can be used to write to different IO streams.  As used here, they write
+#  to STDOUT.
+#
+#########################################################################################################################################################.H.E.##
+#+end_src
+
+** Header Comment Contents
+
+#+begin_src sh :results output verbatum :exports results :wrap "src text :eval never :tangle no"
+~/core/codeBits/bin/srcHdrInfo -i header example.rb
+#+end_src
+
+#+RESULTS:
+#+begin_src text :eval never :tangle no
+ @file      example.rb
+ @author    Mitch Richling http://www.mitchr.me/
+ @date      2024-12-31
+ @brief     The classic hello world program the Ruby way.@EOL
+ @keywords  ruby example hello world
+ @std       Ruby 3
+ @copyright 
+  @parblock
+  Copyright (c) 2024, Mitchell Jay Richling <http://www.mitchr.me/> All rights reserved.
+  
+  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+  
+  1. Redistributions of source code must retain the above copyright notice, this list of conditions, and the following disclaimer.
+  
+  2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions, and the following disclaimer in the documentation
+     and/or other materials provided with the distribution.
+  
+  3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software
+     without specific prior written permission.
+  
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+  OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+  DAMAGE.
+  @endparblock
+ @filedetails
+
+  The methods puts, print, printf & putc are all in the IO class as well so that they can be used to write to different IO streams.  As used here, they write
+  to STDOUT.
+#+end_src
+
+** The details section of the header as org-code
+
+#+begin_src sh :results output raw :exports results 
+~/core/codeBits/bin/srcHdrInfo -i details example.rb
+#+end_src
+
+#+RESULTS:
+
+The methods puts, print, printf & putc are all in the IO class as well so that they can be used to write to different IO streams.  As used here, they write
+to STDOUT.
+
+** No header
+
+#+begin_src sh :results output verbatum :exports results :wrap "src ruby :eval never :tangle no"
+~/core/codeBits/bin/src2noHeader example.rb
 #+end_src
 
 #+RESULTS:
 #+begin_src ruby :eval never :tangle no
 
+puts("Hello, World!")
+
+print("Hello, World!\n")
+
+printf("Hello, World!\n")
+
+STDOUT << "Hello, World!\n"
+
+STDOUT.write("Hello, World!\n")
+
+"Hello, World!\n".each_byte {|b| putc(b) }
+#+end_src
+
+** No header with some code cleanup (for org-mode listings)
+
+#+begin_src sh :results output verbatum :exports results :wrap "src ruby :eval never :tangle no"
+~/core/codeBits/bin/src2orgListing example.rb
+#+end_src
+
+#+RESULTS:
+#+begin_src ruby :eval never :tangle no
 puts("Hello, World!")
 
 print("Hello, World!\n")
