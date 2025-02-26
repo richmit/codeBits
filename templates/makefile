@@ -91,7 +91,7 @@ top.zsh: top-template-pound.txt
 	sed 's/INTERP/zsh/; s/STDLANG/zsh/; s/EMODE/Shell-script/'     < top-template-pound.txt > top.zsh
 
 top.rb: top-template-pound.txt 
-	sed 's/INTERP/ruby/; s/STDLANG/Ruby 1.8 1.9 2 3/; s/EMODE/ruby/' < top-template-pound.txt > top.rb
+	sed 's/INTERP/ruby/; s/STDLANG/Ruby 1.8 1.9 2 3/; s/EMODE/ruby/; s/Coding:us-ascii-unix/Coding:us-ascii/;' < top-template-pound.txt > top.rb
 
 top.perl: top-template-pound.txt
 	sed 's/INTERP/perl/; s/STDLANG/Perl4 Perl5 Perl6/; s/EMODE/Perl/' 	 < top-template-pound.txt > top.perl
