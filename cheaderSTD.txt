@@ -31,6 +31,7 @@
 #include <boost/regex.hpp>                                               /* RegEx                   Boost    */
 #include <boost/thread.hpp>                                              /* Threads                 Boost    */
 #include <boost/tokenizer.hpp>                                           /* Tokenizer               Boost    */
+#include <cassert>                                                       /* C assertions            C++11    */
 #include <cblas.h>                                                       /* C BLAS                  BLAS     */
 #include <cfloat>                                                        /* std:: C float.h         C++11    */
 #include <chrono>                                                        /* time                    C++11    */
