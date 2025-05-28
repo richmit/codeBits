@@ -40,10 +40,10 @@ top.ps: top-template-perc.txt
 	sed 's/STDLANG/PostScript/; s/EMODE/PostScript/; 1i %!PS' < top-template-perc.txt > top.ps
 
 top.org: ../../org-mode/genericOrgTemplate.org 
-	grep -B 100 '#.H.E.##' ../../org-mode/genericOrgTemplate.org > top.org
+	grep -m 1 -B 100 '#.H.E.##' ../../org-mode/genericOrgTemplate.org > top.org
 
 template.org: ../../org-mode/genericOrgTemplate.org 
-	grep -A 1000 '#.H.E.##' ../../org-mode/genericOrgTemplate.org | sed '1d' > template.org
+	grep -m 1 -A 1000 '#.H.E.##' ../../org-mode/genericOrgTemplate.org | sed '1d' > template.org
 
 top.tex: top-template-perc.txt 
 	sed 's/STDLANG/LaTeX TeX/; s/EMODE/LaTeX/' < top-template-perc.txt > top.tex
