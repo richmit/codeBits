@@ -1,5 +1,5 @@
 #!/usr/bin/env -S ruby
-# -*- Mode:ruby; Coding:us-ascii-unix; fill-column:158 -*-
+# -*- Mode:ruby; Coding:us-ascii; fill-column:158 -*-
 #########################################################################################################################################################.H.S.##
 ##
 # @file      srcHdrInfo.rb.rb
@@ -190,6 +190,14 @@ if ( !(details.empty?)) then
       line.gsub!(/\\f\$(.+?)\\f\$/,               "\\(\\1\\)")       # Rewrite inline math
       line.gsub!(/`([^`]+?)`/,                    "=\\1=")           # Rewrite inline verbatim  (Might switch this to ~ instead)
     end
+  end
+  # Remove leading blank lines
+  while (details.first.match(/^\s*$/))
+    details.shift
+  end
+  # Remove trailing blank lines
+  while (details.last.match(/^\s*$/))
+    details.pop
   end
 end
 
