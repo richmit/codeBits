@@ -1,4 +1,4 @@
-#!/usr/bin/env -S ruby
+ #!/usr/bin/env -S ruby
 # -*- Mode:ruby; Coding:us-ascii; fill-column:158 -*-
 #########################################################################################################################################################.H.S.##
 ##
@@ -42,11 +42,11 @@ opts = OptionParser.new do |opts|
   opts.banner = "Usage: srcHdrInfo.rb [options] FILE"
   opts.separator ""
   opts.separator "Options:"
-  opts.on("-h",        "--help",             "Show this message")                      { puts opts; exit                       }
-  opts.on("-a",        "--as-is",            "No org-mode transforms")                 { fd_dox_to_org_mode=false;             }
-  opts.on("-d DEBUG",  "--debug DEBUG",      "Debug level")                            { |v| debug=v.to_i;                     }
-  opts.on("-L LIMIT",  "--search-limit LIMIT",  "Limit number of lines to search")     { |v| search_limit=v.to_i;              }
-  opts.on("-i INFO",   "--info INFO",        "What to print")                          { |v| requested_component=v;            }
+  opts.on("-h",        "--help",                "Show this message")                 { puts opts; exit                       }
+  opts.on("-a",        "--as-is",               "No org-mode transforms")            { fd_dox_to_org_mode=false;             }
+  opts.on("-d DEBUG",  "--debug DEBUG",         "Debug level")                       { |v| debug=v.to_i;                     }
+  opts.on("-L LIMIT",  "--search-limit LIMIT",  "Limit number of lines to search")   { |v| search_limit=v.to_i;              }
+  opts.on("-i INFO",   "--info INFO",           "What to print")                     { |v| requested_component=v;            }
   opts.separator "        - header  -- Entire header                                 "
   opts.separator "        - details -- File details paragraph (default)              "
   opts.separator "        - file    -- File name                                     "
