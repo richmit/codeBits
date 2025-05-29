@@ -166,13 +166,19 @@ if ( !(details.empty?)) then
   # Find and remove any common prefix on all lines
   detPrefixStringIdx = -1
   nonEmptyDetailLines = details.reject { |x| x.match(/^\s*$/) }
-  minLineLength = nonEmptyDetailLines.map(&:length).min
-  1.upto(minLineLength) do |i|
-    if ((nonEmptyDetailLines.map { |s| s.slice(0, i) }).uniq().length == 1) then
-      detPrefixStringIdx = i
-    else
-      break
+  if (nonEmptyDetailLines.length > 1) then
+    minLineLength = nonEmptyDetailLines.map(&:length).min
+    1.upto(minLineLength) do |i|
+      if ((nonEmptyDetailLines.map { |s| s.slice(0, i) }).uniq().length == 1) then
+        detPrefixStringIdx = i
+      else
+        break
+      end
     end
+  else
+    if (tmp = nonEmptyDetailLines.first.match(/^\s+/)) then
+      detPrefixStringIdx = tmp[0].length
+    end    
   end
   if (detPrefixStringIdx >= 0) then
     details.map! { |s| (s.length>detPrefixStringIdx ? s.slice(detPrefixStringIdx..-1) : "") }
@@ -192,11 +198,11 @@ if ( !(details.empty?)) then
     end
   end
   # Remove leading blank lines
-  while (details.first.match(/^\s*$/))
+  while (!(details.empty?) && details.first.match(/^\s*$/))
     details.shift
   end
   # Remove trailing blank lines
-  while (details.last.match(/^\s*$/))
+  while (!(details.empty?) && details.last.match(/^\s*$/))
     details.pop
   end
 end
