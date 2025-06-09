@@ -1,0 +1,8 @@
+
+Three place holders are used in file names and file contnets:
+
+  - PROJNAME: The project name in all upper case
+  - ProjName: The project name in mixed case
+  - projname: The project name in all lower case
+
+Replace these strings with the aproprate values!
