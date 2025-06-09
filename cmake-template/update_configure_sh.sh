@@ -9,7 +9,7 @@ for d in ${dirs[*]}; do
     if diff -q $d/configure.sh configure.sh; then
       echo update_configure_sh.sh: Configure script is up to date: $d
     else
-      echo update_configure_sh.sh: Updateing configure script: $d
+      echo update_configure_sh.sh: Updating configure script: $d
       cp configure.sh $d/configure.sh
     fi
   else
