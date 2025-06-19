@@ -78,6 +78,9 @@ top.lisp: top-template-semi.txt
 top.clisp: top-template-semi.txt 
 	sed 's/STDLANG/Common Lisp/; s/EMODE/Lisp/' < top-template-semi.txt > top.clisp
 
+top.mrscpi: top-template-pound.txt 
+	sed 's/INTERP/mrSCPI.rb/; s/STDLANG/mrscpi/; s/EMODE/mrscpi/'   < top-template-pound.txt > top.mrscpi
+
 top.sh: top-template-pound.txt 
 	sed 's/INTERP/sh/; s/STDLANG/POSIX sh/; s/EMODE/Shell-script/' < top-template-pound.txt > top.sh
 
