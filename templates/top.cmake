@@ -8,7 +8,7 @@
 # @brief     @EOL
 # @keywords  
 # @std       cmake
-# @see       
+# @see       GITHUBURL
 # @copyright 
 #  @parblock
 #  LICENSE

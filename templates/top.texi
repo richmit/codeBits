@@ -8,7 +8,7 @@
 % @brief     @EOL
 % @keywords  
 % @std       TeXinfo
-% @see       
+% @see       GITHUBURL
 % @copyright 
 %  @parblock
 %  LICENSE

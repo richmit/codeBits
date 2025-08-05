@@ -9,7 +9,7 @@
 # @brief     @EOL
 # @keywords  
 # @std       zsh
-# @see       
+# @see       GITHUBURL
 # @copyright 
 #  @parblock
 #  LICENSE

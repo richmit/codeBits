@@ -8,7 +8,7 @@
  @brief     @EOL
  @keywords  
  @std       github
- @see       
+ @see       GITHUBURL
  @copyright 
   @parblock
   LICENSE

@@ -7,7 +7,7 @@ C @version   VERSION
 C @brief     @EOL
 C @keywords  
 C @std       F77 MIL-STD-1753 LongNames
-C @see       
+C @see       GITHUBURL
 C @copyright 
 C  @parblock
 C  LICENSE

@@ -1,4 +1,4 @@
-# -*- Mode:makefile; Coding:us-ascii-unix; fill-column:158 -*-
+# -*- Mode:; Coding:us-ascii-unix; fill-column:158 -*-
 #########################################################################################################################################################.H.S.##
 ##
 # @file      FILENAME
@@ -8,7 +8,7 @@
 # @brief     @EOL
 # @keywords  
 # @std       GNUmake BSDmake SYSVmake GenericMake
-# @see       
+# @see       GITHUBURL
 # @copyright 
 #  @parblock
 #  LICENSE

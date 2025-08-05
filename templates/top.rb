@@ -9,7 +9,7 @@
 # @brief     @EOL
 # @keywords  
 # @std       Ruby 1.8 1.9 2 3
-# @see       
+# @see       GITHUBURL
 # @copyright 
 #  @parblock
 #  LICENSE

@@ -8,7 +8,7 @@
  @brief     @EOL
  @keywords  
  @std       C++23 C++20 C++17 C++14 C++11 C++98 ATTC++ GCC++
- @see       
+ @see       GITHUBURL
  @copyright 
   @parblock
   LICENSE

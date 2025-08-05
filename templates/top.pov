@@ -8,7 +8,7 @@
  @brief     @EOL
  @keywords  
  @std       Povray_3.1 Povray_3.5 Povray_3.7
- @see       
+ @see       GITHUBURL
  @copyright 
   @parblock
   LICENSE

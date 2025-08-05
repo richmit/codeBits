@@ -8,7 +8,7 @@
 ;; @brief     @EOL
 ;; @keywords  
 ;; @std       Emacs Lisp
-;; @see       
+;; @see       GITHUBURL
 ;; @copyright 
 ;;  @parblock
 ;;  LICENSE

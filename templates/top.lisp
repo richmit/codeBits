@@ -8,7 +8,7 @@
 ;; @brief     @EOL
 ;; @keywords  
 ;; @std       Common Lisp
-;; @see       
+;; @see       GITHUBURL
 ;; @copyright 
 ;;  @parblock
 ;;  LICENSE
