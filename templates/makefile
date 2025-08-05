@@ -99,6 +99,12 @@ top.rb: top-template-pound.txt
 top.perl: top-template-pound.txt
 	sed 's/INTERP/perl/; s/STDLANG/Perl4 Perl5 Perl6/; s/EMODE/Perl/' 	 < top-template-pound.txt > top.perl
 
+top.sed: top-template-pound.txt
+	sed 's/INTERP/sed/; s/STDLANG/GNU sed/; s/EMODE/text/' 	 < top-template-pound.txt > top.sed
+
+top.gplt: top-template-pound.txt
+	sed 's/INTERP/gnuplot/; s/STDLANG/GNUplot/; s/EMODE/text/' 	 < top-template-pound.txt > top.gplt
+
 top.pl: top-template-pound.txt
 	sed 's/INTERP/perl/; s/STDLANG/Perl4 Perl5 Perl6/; s/EMODE/Perl/' 	 < top-template-pound.txt > top.pl
 
@@ -119,6 +125,9 @@ top.hpp: top-template-cpp.txt
 
 top.js: top-template-cpp.txt 
 	sed 's/STDLANG/ECMAScript_5 Nashorn ECMAScript_5.1 ECMAScript_2015 ECMAScript_2016 ECMAScript_2017 ECMAScript_2018 GraalVM ECMAScript_2019/; s/EMODE/javascript/' < top-template-cpp.txt > top.js 
+
+top.json: top-template-cpp.txt 
+	sed 's/STDLANG/JSON/; s/EMODE/javascript/' < top-template-cpp.txt > top.json 
 
 top.hh: top-template-cpp.txt 
 	sed 's/STDLANG/C++98 C++11 C++14 ATTC++ GCC++/; s/EMODE/C++/' < top-template-cpp.txt > top.hh
