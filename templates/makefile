@@ -109,7 +109,7 @@ top.pl: top-template-pound.txt
 	sed 's/INTERP/perl/; s/STDLANG/Perl4 Perl5 Perl6/; s/EMODE/Perl/' 	 < top-template-pound.txt > top.pl
 
 top.make: top-template-pound.txt 
-	sed '/INTERP/d; s/STDLANG/GNUmake BSDmake SYSVmake GenericMake/; s/EMODE//' < top-template-pound.txt > top.make
+	sed '/INTERP/d; s/STDLANG/GNUmake BSDmake SYSVmake GenericMake/; s/EMODE/make/' < top-template-pound.txt > top.make
 
 top.cmake: top-template-pound.txt 
 	sed '/INTERP/d; s/STDLANG/cmake/; s/EMODE/cmake/' < top-template-pound.txt > top.cmake
