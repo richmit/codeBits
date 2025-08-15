@@ -186,15 +186,23 @@ if ( !(details.empty?)) then
   # Transform Doxygen syntax into org-mode syntax
   if (fd_dox_to_org_mode)
     details.each do |line|
-      line.sub!(/^ *[@\\]code({\.([^}]+)})?/,     '#+BEGIN_SRC \2')  # code -> BEGIN_SRC'   
-      line.sub!(/^ *[@\\]endcode/,                '#+END_SRC')       # endcode -> END_SRC'  
-      line.sub!(/^ *[@\\]verbatim/,               '#+BEGIN_EXAMPLE') # verbatim -> BEGIN_EXAMPLE'   
-      line.sub!(/^ *[@\\]endverbatim/,            '#+END_EXAMPLE')   # endverbatim -> END_EXAMPLE'  
-      line.gsub!(/[@\\]f\[/,                      '\\[')             # Rewrite displaied math start
-      line.gsub!(/[@\\]f\]/,                      '\\]')             # Rewrite displaied math end
-      line.gsub!(/@f\$(.+?)@f\$/,                 "\\(\\1\\)")       # Rewrite inline math
-      line.gsub!(/\\f\$(.+?)\\f\$/,               "\\(\\1\\)")       # Rewrite inline math
-      line.gsub!(/`([^`]+?)`/,                    "=\\1=")           # Rewrite inline verbatim  (Might switch this to ~ instead)
+      line.sub!(/^ *[@\\]code({\.([^}]+)})?/,                  '#+BEGIN_SRC \2')  # code -> BEGIN_SRC
+      line.sub!(/^ *[@\\]endcode/,                             '#+END_SRC')       # endcode -> END_SRC
+      line.sub!(/^ *[@\\]verbatim/,                            '#+BEGIN_EXAMPLE') # verbatim -> BEGIN_EXAMPLE
+      line.sub!(/^ *[@\\]endverbatim/,                         '#+END_EXAMPLE')   # endverbatim -> END_EXAMPLE
+      line.sub!(/^ *[@\\]parblock/,                            '#+BEGIN_QUOTE')   # parblock -> BEGIN_QUOTE
+      line.sub!(/^ *[@\\]endparblock/,                         '#+END_QUOTE')     # endparblock -> END_QUOTE
+      line.sub!(/[@\\]p\s+(\S+)/,                              '~\1~')            # @p -> ~v~  TODO: DO better with puncuation
+      line.sub!(/[@\\]b\s+(\S+)/,                              '*\1*')            # @b -> *v*  TODO: DO better with puncuation
+      line.sub!(/[@\\]param\s+(\S+)/,                          ' - *\1* ')        # @param -> list element markup 
+      line.sub!(/[@\\]tparam\s+(\S+)/,                         ' - *\1* ')        # @tparam -> list element markup 
+      line.gsub!(/[@\\]f\[/,                                   '\[')              # Rewrite dispaly math start
+      line.gsub!(/[@\\]f\]/,                                   '\]')              # Rewrite dispaly math end
+      line.gsub!(/@f\$(.+?)@f\$/,                              '\(\1\)')          # Rewrite inline math
+      line.gsub!(/\\f\$(.+?)\\f\$/,                            '\(\1\)')          # Rewrite inline math
+      line.gsub!(/`([^~`]+?)`/,                                '~\1~')            # Rewrite inline verbatim with ~
+      line.gsub!(/`([^=`]+?)`/,                                '=\1=')            # Rewrite inline verbatim with =
+      line.gsub!(/zotero:\/\/select\/items\/[0-9]+_[A-Z0-9]+/, '')                # Remove zotero links
     end
   end
   # Remove leading blank lines
