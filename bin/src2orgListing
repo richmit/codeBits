@@ -2,7 +2,7 @@
 # -*- Mode:Shell-script; Coding:us-ascii-unix; fill-column:158 -*-
 #########################################################################################################################################################.H.S.##
 ##
-# @file      src2orgListing.sh
+# @file      src2orgListing
 # @author    Mitch Richling http://www.mitchr.me/
 # @date      2024-09-05
 # @brief     Process source code file to produce listing for org-mode documents.@EOL
@@ -35,7 +35,15 @@
 #   - Strip cond/endcond comment lines
 #   - Compress multiple blank lines 
 #   - Remove leading blank line
+#   - Remove SS (Source Snip) delimiters
+#   - Remove zoero links
 #
 #########################################################################################################################################################.H.E.##
 
-grep -EA 10000 '(!|#|\*|=|_|-|%|;|C|/){70,}\.H\.E\.' $1 | grep -vE '(!|#|\*|=|_|-|%|;|C|/){70,}' | grep -vE '@(cond|endcond)' | perl -0 -p -e 's/\n{3,}/\n\n/g' | sed '1{/^$/d}'
+grep -EA 10000 '(!|#|\*|=|_|-|%|;|C|/){70,}\.H\.E\.' $1              | \
+  grep -vE '(!|#|\*|=|_|-|%|;|C|/){70,}'                             | \
+  grep -vE '@(cond|endcond)'                                         | \
+  perl -0 -p -e 's/\n{3,}/\n\n/g'                                    | \
+  sed '1{/^$/d}'                                                     | \
+  sed -E '/(!|#|\/\/|%|;|C) *(SS-BEGIN|SS-END):[a-zA-Z0-9_-]+: *$/d' | \
+  sed 's/; zotero.*$//';
