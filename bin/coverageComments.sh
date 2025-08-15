@@ -6,6 +6,7 @@
 # @author    Mitch Richling http://www.mitchr.me/
 # @brief     Search all files in directory tree for code coverage comments.@EOL
 # @std       POSIX sh
+# @see       https://github.com/richmit/codeBits/
 # @copyright 
 #  @parblock
 #  Copyright (c) 2024, Mitchell Jay Richling <http://www.mitchr.me/> All rights reserved.

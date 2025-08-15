@@ -4,10 +4,9 @@
 ##
 # @file      float_diff.rb
 # @author    Mitch Richling http://www.mitchr.me/
-# @date      2024-08-13
 # @brief     File diff comprehending floating point numbers.@EOL
 # @std       Ruby 3
-# @see       
+# @see       https://github.com/richmit/codeBits/
 # @copyright 
 #  @parblock
 #  Copyright (c) 2024, Mitchell Jay Richling <http://www.mitchr.me/> All rights reserved.

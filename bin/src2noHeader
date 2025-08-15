@@ -4,9 +4,9 @@
 ##
 # @file      src2noHeader.sh
 # @author    Mitch Richling http://www.mitchr.me/
-# @date      2024-09-05
 # @brief     Process source code file to produce remove the entire header.@EOL
 # @std       bash
+# @see       https://github.com/richmit/codeBits/
 # @copyright 
 #  @parblock
 #  Copyright (c) 2024, Mitchell Jay Richling <http://www.mitchr.me/> All rights reserved.
