@@ -202,6 +202,7 @@ if ( !(details.empty?)) then
       line.gsub!(/\\f\$(.+?)\\f\$/,                            '\(\1\)')          # Rewrite inline math
       line.gsub!(/`([^~`]+?)`/,                                '~\1~')            # Rewrite inline verbatim with ~
       line.gsub!(/`([^=`]+?)`/,                                '=\1=')            # Rewrite inline verbatim with =
+      line.sub!(/^ *[@\\]par *(\S.+\S)$/,                      '*\1* \\\\\\\\')   # Bold paragraph titles and add newline
       line.gsub!(/zotero:\/\/select\/items\/[0-9]+_[A-Z0-9]+/, '')                # Remove zotero links
     end
   end
