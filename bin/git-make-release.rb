@@ -335,7 +335,7 @@ end
       srcFiles += Dir.glob("#{dir}/*.#{ext}")
     end
     if ( !(srcFiles.empty?) && !(FileUtils.uptodate?("#{dir}/TAGS", srcFiles))) then 
-      puts("ERRR(git-make-release.rb): TAGS file (#{dir}/TAGS) out of date (#{ext} files)!")
+      puts("ERRR(git-make-release.rb): TAGS file (#{dir}/TAGS) out of date!")
       if !(justChecking) then
         exit 1
       end
