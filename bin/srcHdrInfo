@@ -161,6 +161,14 @@ if ( !(header.empty?)) then
 end
 
 ##----------------------------------------------------------------------------------------------------------------------------------
+# Fix brief
+if ( !(one_line_fields.empty?)) then
+  one_line_fields.each do |k, v|
+    v.sub!(/@EOL *$/, '')   # Zap EOL tags
+  end
+end
+
+##----------------------------------------------------------------------------------------------------------------------------------
 # Fix details
 if ( !(details.empty?)) then
   # Find and remove any common prefix on all lines
