@@ -64,6 +64,7 @@
 #include <iostream.h>                                                    /* C++ iostream            C++98    */
 #include <iostream>                                                      /* C++ iostream            C++11    */
 #include <iterator>                                                      /* STL Iterators           C++11    */
+#include <lapacke.h>                                                     /* LAPACK C Interface      LAPACKE  */
 #include <limits.h>                                                      /* uname                   POSIX    */
 #include <limits>                                                        /* C++ Numeric limits      C++11    */
 #include <list>                                                          /* STL list                C++11    */
