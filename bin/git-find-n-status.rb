@@ -30,14 +30,26 @@
 #  @endparblock
 # @filedetails
 #
-#  Find git repos, and report state:
+#  Find git repos, and report state for each repo: 
 #        
-#   - UNCOMMITED  Repo has uncommited changes
-#   - UNTRACKED   Repo has untracked files
-#   - UNPUSHED    Repo has commited changes that have not been pushed
-#   - CLEAN LOCL  Repo is clean and has no remotes
-#   - CLEAN REMT  Repo is clean and has remotes
-#
+#   - Location
+#     - LOCAL       The main/master branch has no remote
+#     - GITHUB      Repo has a remote main/master branch hosted github
+#     - GITHUB!     Repo is GITHUB, but user email is incorrect.
+#     - REMOTE      Repo has a remote main/master branch (not on github)
+#   - Tracked file Status
+#     - UNTRACKED   Repo has untracked files
+#     - TRACKED     Repo has no untracked files
+#   - Commit Status
+#     - UNCOMMITED  Repo has uncommited changes to tracked files
+#     - COMMITED    Repo has no uncommited changes to tracked files
+#   - Push Status
+#     - UNPUSHED    Repo has commits that have not been pushed
+#     - PUSHED      All commits have been pushed
+#     - LOCAL       Repo is local
+#   Overall Status
+#     - DIRTY       Repo is UNTRACKED or UNCOMMITED or UNPUSHED
+#     - CLEAN       Repo is TRACKED and COMMITED and PUSHED
 #
 #########################################################################################################################################################.H.E.##
 
@@ -72,36 +84,40 @@ repos.each do |path|
       git_out = `git config --local branch.master.remote`
     end
     # local or remote tag
-    lor = 'REMOTE'
-    if git_out.empty? then
-      lor = 'LOCAL'
-    end
-    # How dirty is the repo
-
-    how_dirty = 'CLEAN'
-    git_out = `git status --porcelain --untracked-files=no`
-    if !(git_out.empty?) then
-      how_dirty = 'UNCOMMITED:'
-    else
-      git_out = `git status --porcelain`
-      if !(git_out.empty?) then
-        how_dirty = 'UNTRACKED:'
+    loc = 'LOCAL'
+    gh = false
+    if !(git_out.empty?) then      
+      git_out = `git config --local remote.#{git_out}.url`
+      if (git_out.match(/github/)) then
+        loc = 'REMOTE'
       else
-        if lor == 'LOCAL' then
-          how_dirty = 'CLEAN:'
+        # github email used?
+        git_out = `git config --local user.email`
+        if (git_out.chomp == '11151403+richmit@users.noreply.github.com') then
+          loc = 'GITHUB'
         else
-          git_out = `git rev-list --count origin/#{main_branch}..#{main_branch}`.to_i
-          if git_out > 0 then
-            how_dirty = 'UNPUSHED:'
-          else
-            if print_clean then
-            how_dirty = 'CLEAN:'
-            end
-          end
+          loc = 'GITHUB!'
         end
       end
     end
-  # prit status
-  printf("%7s %12s %s\n", lor, how_dirty, path)
+    # COMMITED / UNCOMMITED
+    git_out = `git status --porcelain --untracked-files=no`
+    cuc = !(git_out.match?(/^ M/m))
+    # TRACKED / UNTRACKED
+    git_out = `git status --porcelain`
+    tut = !(git_out.match?(/^\?\?/m))
+    # PUSHED / UNPUSHED
+    pup = 'LOCAL'
+    if (loc != 'LOCAL') then
+      pup = (`git rev-list --count origin/#{main_branch}..#{main_branch}`.to_i <= 0)
+    end
+    # prit status
+    printf("%-8s %10s %9s %8s %5s  %s\n", 
+           loc, 
+           (cuc               ? 'COMMITED' : 'UNCOMMITED'), 
+           (tut               ? 'TRACKED'  : 'UNTRACKED'), 
+           (pup               ? 'PUSHED'   : 'UNPUSHED'), 
+           (cuc && tut && pup ? 'CLEAN'    : 'DIRTY'), 
+           path)
   end
 end
