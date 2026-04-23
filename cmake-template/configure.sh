@@ -55,11 +55,17 @@ if [[ "${@}" == *'-h'* ]]; then
 
   Use: configure.sh [configure options] [cmake arguments]
 
-    Enviornment Variables
+    Environment Variables:
      - CONFIGURE_DEBUG ... Set to 'Y' to print debugging output
      - CONFIGURE_DOIT .... Set to 'N' to suppress running 'rm' and/or 'cmake'
 
-    Configure Options
+    Explicitly Ignored Environment Variables:
+     - CMAKE_CXX_COMPILER
+     - CMAKE_EXPORT_COMPILE_COMMANDS
+     - CMAKE_GENERATOR
+     - CMAKE_BUILD_TYPE
+
+    Configure Options:
      - -h Print this help message
      - -C Clean the build directory before running cmake (asks for conformation)
           See also: the CMake option --fresh, and the -F option below
@@ -83,6 +89,7 @@ if [[ "${@}" == *'-h'* ]]; then
        - -DCMAKE_CXX_COMPILER=icpx   <-- Intel oneAPI DPC++/C++ Compiler
      - Unless overridden on the command line, the following options are provided to cmake
        - -DCMAKE_EXPORT_COMPILE_COMMANDS=1
+       - -CMAKE_BUILD_TYPE=Release
        - -B build
 EOF
 
@@ -205,6 +212,18 @@ for arg in "$@"; do
 done
 if [ "$FOUND_IT" == 'N' ]; then
   CMAKE_ARGS+=('-DCMAKE_EXPORT_COMPILE_COMMANDS=1')
+fi
+
+#
+# Add -DCMAKE_BUILD_TYPE=Release if required
+FOUND_IT='N'
+for arg in "$@"; do
+  if [[ "$arg" =~ ^-DCMAKE_BUILD_TYPE=.+ ]]; then
+    FOUND_IT='Y'
+  fi
+done
+if [ "$FOUND_IT" == 'N' ]; then
+  CMAKE_ARGS+=('-DCMAKE_BUILD_TYPE=Release')
 fi
 
 #
