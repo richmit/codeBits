@@ -48,10 +48,13 @@ fi
 if [[ "${@}" == *'-h'* ]]; then
   cat <<EOF
 
-  Run this script from the root of the project where the CMakeLists.txt is found.
+  Run this script from the project root directory with the CMakeLists.txt.
 
-  A wrapper to quickly run cmake with my preferred arguments.  This script understands a few things about my development environment and some conventions I
-  follow when using CMake.  For example it knows about the compilers and platforms I normally use, and how I specify optional dependencies in CMakeLists.txt.
+  A wrapper to quickly run cmake with my preferred arguments.  This script
+  understands a few things about my development environment and some conventions
+  I follow when using CMake.  For example it knows about the compilers and
+  platforms I normally use, and how I specify optional dependencies in
+  CMakeLists.txt.
 
   Use: configure.sh [configure options] [cmake arguments]
 
@@ -67,27 +70,29 @@ if [[ "${@}" == *'-h'* ]]; then
 
     Configure Options:
      - -h Print this help message
-     - -C Clean the build directory before running cmake (asks for conformation)
-          See also: the CMake option --fresh, and the -F option below
-     - -F Clean the build directory before running cmake (no conformation)
-          See also: the CMake option --fresh, and the -C option above
+     - -C Delete the build directory before running cmake
+     - -F Delete the build directory before running cmake without conformation  
+          See also: the CMake option --fresh
 
     Common Cmake Arguments:
      - Target -- leave it off to get the default
-       - -G 'MSYS Makefiles'        <-- Default on MSYS2
+       - -G 'MSYS Makefiles'        <-- Default when MSYS2 is detected
        - -G 'Visual Studio 17 2022'
-       - -G 'Unix Makefiles'        <-- Default on Linux ('Linux' means 'Not MSYS2')
+       - -G 'Unix Makefiles'        <-- Default when MSYS2 is not detected
        - -G Ninja
      - Compiler -- leave it off to get the default
        - -DCMAKE_CXX_COMPILER=clang++
-       - -DCMAKE_CXX_COMPILER=g++    <-- Default for 'MSYS Makefiles'
-       - -DCMAKE_CXX_COMPILER=g++-## <-- Default for 'Unix Makefiles' if /usr/bin/g++-[0-9][0-9] exists
-                                         in which case the highest numbered version is selected.
-       - -DCMAKE_CXX_COMPILER=g++    <-- Default for 'Unix Makefiles' if /usr/bin/g++-[0-9][0-9] missing
+       - -DCMAKE_CXX_COMPILER=g++    <-- 'MSYS Makefiles' default
+       - -DCMAKE_CXX_COMPILER=g++-## <-- 'Unix Makefiles' default if versioned
+                                         g++-[0-9][0-9] file is in /usr/bin/.
+                                         The ## is replaced with highest numbered 
+                                         version found.
+       - -DCMAKE_CXX_COMPILER=g++    <-- 'Unix Makefiles' default when a
+                                         versioned g++ is not found.
        - -DCMAKE_CXX_COMPILER=cl.exe <-- Default for 'Visual Studio 17 2022'
        - -DCMAKE_CXX_COMPILER=nvc++  <-- NVIDIA HPC C++ Compiler
        - -DCMAKE_CXX_COMPILER=icpx   <-- Intel oneAPI DPC++/C++ Compiler
-     - Unless overridden on the command line, the following options are provided to cmake
+     - Unless overridden on the command line, the following options are set:
        - -DCMAKE_EXPORT_COMPILE_COMMANDS=1
        - -CMAKE_BUILD_TYPE=Release
        - -B build
