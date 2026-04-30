@@ -83,7 +83,7 @@ set(TARGETS_REQ_TREE "")
 # CODE GEN: echo 'set(TARGETS_REQ_MRASTER '$(basename -s.cpp $(grep -El '#include "(ramCanvas.hpp|MRcolor.hpp)"' */*.cpp || echo '""'))')'
 set(TARGETS_REQ_MRASTER "")
 
-# CODE GEN: echo 'set(TARGETS_REQ_MRASTER '$(basename -s.cpp $(grep -El '#include <gtest/gtest.h>' */*.cpp || echo '""'))')'
+# CODE GEN: echo 'set(TARGETS_REQ_GTEST '$(basename -s.cpp $(grep -El '#include <gtest/gtest.h>' */*.cpp || echo '""'))')'
 set(TARGETS_REQ_GTEST "")
 
 # Construct list of targets we can build
