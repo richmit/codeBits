@@ -40,13 +40,13 @@ else()
   set(PROJNAME_OPT_DOXYGEN "0")
 endif()
 
-# CODE GEN: ~/MJR/core/codeBits/bin/src2orgListing ~/core/codeBits/cmake-template/include_gtest.cmake
+# SHELLO: ~/MJR/core/codeBits/bin/src2orgListing ~/core/codeBits/cmake-template/include_gtest.cmake
 
-# CODE GEN: ~/MJR/core/codeBits/bin/src2orgListing ../MRMathCPP/IncludeMRMathCPPLib.cmake 
+# SHELLO: ~/MJR/core/codeBits/bin/src2orgListing ../MRMathCPP/IncludeMRMathCPPLib.cmake 
 
-# CODE GEN: ~/MJR/core/codeBits/bin/src2orgListing ../MRMathCPP/IncludeMRPTreeLib.cmake 
+# SHELLO: ~/MJR/core/codeBits/bin/src2orgListing ../MRMathCPP/IncludeMRPTreeLib.cmake 
 
-# CODE GEN: ~/MJR/core/codeBits/bin/src2orgListing ../mraster/IncludeMRasterLib.cmake | sed 's/FATAL_ERROR/WARNING/'
+# SHELLO: ~/MJR/core/codeBits/bin/src2orgListing ../mraster/IncludeMRasterLib.cmake | sed 's/FATAL_ERROR/WARNING/'
 
 ######################################################################################################################################################
 # Create interface target for the entire project
@@ -68,22 +68,22 @@ message(STATUS "Combined Project Includes: ${ProjName_INCLUDE}")
 ######################################################################################################################################################
 # Create list of targets for examples, functional tests, & unit tests
 
-# CODE GEN: echo 'set(TARGETS_REQ_MRMATHCPP '$(basename -s.cpp $(grep -El '#include "(MRMath[A-Z]+\.hpp)"' */*.cpp || echo '""'))')'
+# SHELLO: echo 'set(TARGETS_REQ_MRMATHCPP '$(basename -s.cpp $(grep -El '#include "(MRMath[A-Z]+\.hpp)"' */*.cpp || echo '""'))')'
 set(TARGETS_REQ_MRMATHCPP "")
 
-# CODE GEN: echo 'set(TARGETS_REQ_CELL '$(basename -s.cpp $(grep -El '#include "(MR_cell_cplx.hpp|MR_rt_to_cc.hpp)"' */*.cpp || echo '""'))')'
+# SHELLO: echo 'set(TARGETS_REQ_CELL '$(basename -s.cpp $(grep -El '#include "(MR_cell_cplx.hpp|MR_rt_to_cc.hpp)"' */*.cpp || echo '""'))')'
 set(TARGETS_REQ_CELL "")
 
-# CODE GEN: echo 'set(TARGETS_REQ_BRIDGE '$(basename -s.cpp $(grep -El '#include "(ramCanvas.hpp|MRcolor.hpp)"' */*.cpp || echo '""'))')'
+# SHELLO: echo 'set(TARGETS_REQ_BRIDGE '$(basename -s.cpp $(grep -El '#include "(ramCanvas.hpp|MRcolor.hpp)"' */*.cpp || echo '""'))')'
 set(TARGETS_REQ_BRIDGE "")
 
-# CODE GEN: echo 'set(TARGETS_REQ_TREE '$(basename -s.cpp $(grep -El '#include "(MR_rect_tree.hpp)"' */*.cpp || echo '""'))')'
+# SHELLO: echo 'set(TARGETS_REQ_TREE '$(basename -s.cpp $(grep -El '#include "(MR_rect_tree.hpp)"' */*.cpp || echo '""'))')'
 set(TARGETS_REQ_TREE "")
 
-# CODE GEN: echo 'set(TARGETS_REQ_MRASTER '$(basename -s.cpp $(grep -El '#include "(ramCanvas.hpp|MRcolor.hpp)"' */*.cpp || echo '""'))')'
+# SHELLO: echo 'set(TARGETS_REQ_MRASTER '$(basename -s.cpp $(grep -El '#include "(ramCanvas.hpp|MRcolor.hpp)"' */*.cpp || echo '""'))')'
 set(TARGETS_REQ_MRASTER "")
 
-# CODE GEN: echo 'set(TARGETS_REQ_GTEST '$(basename -s.cpp $(grep -El '#include <gtest/gtest.h>' */*.cpp || echo '""'))')'
+# SHELLO: echo 'set(TARGETS_REQ_GTEST '$(basename -s.cpp $(grep -El '#include <gtest/gtest.h>' */*.cpp || echo '""'))')'
 set(TARGETS_REQ_GTEST "")
 
 # Construct list of targets we can build
@@ -215,7 +215,7 @@ endif()
 
 ######################################################################################################################################################
 
-# CODE GEN: ~/MJR/core/codeBits/bin/src2orgListing ~/core/codeBits/cmake-template/include_doxygen-targets.cmake | sed 's/PROJECT_NAME/ProjName/g; s/SRCP/"lib" "examples"/'
+# SHELLO: ~/MJR/core/codeBits/bin/src2orgListing ~/core/codeBits/cmake-template/include_doxygen-targets.cmake | sed 's/PROJECT_NAME/ProjName/g; s/SRCP/"lib" "examples"/'
 if(Doxygen_FOUND)
   foreach(DOXINPUT IN ITEMS "lib" "examples")
     message(STATUS "Generateing doxygen generation target for ${DOXINPUT}")
