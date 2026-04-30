@@ -1,10 +1,10 @@
 # -*- Mode:cmake; Coding:us-ascii-unix; fill-column:158 -*-
 #########################################################################################################################################################.H.S.##
 ##
-# @file      stm32CubeMXcflags.cmake
+# @file      stm32STprogram.cmake
 # @author    Mitch Richling http://www.mitchr.me/
-# @brief     Override CMAKE_BUILD_TYPE specific CMAKE_C & CMAKE_CXX flags from the toolchain file.@EOL
-# @keywords  stm32 cortex-m microcontroller embedded
+# @brief     Program a typical Nuculeo board with an ST-Link probe.@EOL
+# @keywords  stm32 cortex-m microcontroller embedded STM32_Programmer_CLI
 # @std       cmake
 # @see       https://github.com/richmit/codeBits/
 # @copyright 
@@ -28,16 +28,43 @@
 #  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
 #  DAMAGE.
 #  @endparblock
+# @todo If we didn't set STM32_PROG_BIN above from the PATH, then try it with the cube bundle manager.@EOL@EOL
 # @filedetails
 #
-#  This makes assumptions about what is in the toolchain file provided by CubeMX.  In particular we assume only -O & -g flags were set in these variables.
-#  This was true at the time this comment was written for both gcc & clang.
+#  We expect STM32_Programmer_CLI to be on the PATH.  This is known to be true in two important cases:
+#   - Inside of /STM32CubeIDE/ and /STM32Cube for Visual Studio Code Extension/.
+#   - When using the /STM32Cube Bundles Manager/ with a "Cube Bundle Project".
 #
 #########################################################################################################################################################.H.E.##
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Override CMAKE_BUILD_TYPE specific CMAKE_C & CMAKE_CXX flags from the toolchain file.
-set(CMAKE_C_FLAGS_DEBUG     "-Og    -g3")
-set(CMAKE_C_FLAGS_RELEASE   "-Ofast -g0")
-set(CMAKE_CXX_FLAGS_DEBUG   "-Og    -g3")
-set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -g0")
+# Program board
+
+# Search for programmer on the PATH for windows platforms
+find_program(STM32_PROG_BIN 
+  "STM32_Programmer_CLI.exe"
+  PATHS "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/")
+# Search for programmer on the PATH for MacOS & linux platforms
+find_program(STM32_PROG_BIN 
+  "STM32_Programmer_CLI"
+  PATHS "/opt/ST/STM32Cube/STM32CubeProgrammer"
+        "/opt/ST/STM32CubeProgrammer"
+        "~/ST/STM32Cube/STM32CubeProgrammer"
+        "~/ST/STM32CubeProgrammer"
+        "/Applications/STMicroelectronics/STM32Cube/STM32CubeProgrammer/STM32CubeProgrammer.app/Contents/MacOs/bin")
+
+# Report Results & Create program targte if we can.
+if(EXISTS "${STM32_PROG_BIN}")
+  # Program Target Board
+  message("-- Found STM32 Programmer binary is ${STM32_PROG_BIN}")
+  add_custom_target(program
+    COMMAND ${STM32_PROG_BIN} -c port=SWD -w ${PROJECT_NAME}.elf -v -rst
+    DEPENDS ${PROJECT_NAME}.elf
+    COMMENT "Programming device."
+  )
+  message("-- 'program' target created.")
+else()
+  message("-- Unable to find STM32 Programmer binary!")
+  message("-- WARNING: No 'program' target will be created.")
+  continue()
+endif()
