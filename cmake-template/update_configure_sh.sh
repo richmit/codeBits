@@ -2,7 +2,7 @@
 
 # This is just a quick and dirty way to update the configure.sh script across several projects
 
-dirs=(~/world/my_prog/mraster/ ~/world/my_prog/MRMathCPP/ ~/world/my_prog/MRPTree/ ~/world/my_prog/FuncViz/)
+dirs=(~/world/my_prog/mraster/ ~/world/my_prog/MRMathCPP/ ~/world/my_prog/MRPTree/)
 
 for d in ${dirs[*]}; do
   if [ -d $d ]; then
