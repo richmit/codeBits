@@ -1,7 +1,7 @@
 # -*- Mode:cmake; Coding:us-ascii-unix; fill-column:158 -*-
 #########################################################################################################################################################.H.S.##
 ##
-# @file      stm32CubeMXcflags.cmake
+# @file      cuveMXcflagFix.cmake
 # @author    Mitch Richling http://www.mitchr.me/
 # @brief     Override CMAKE_BUILD_TYPE specific CMAKE_C & CMAKE_CXX flags from the toolchain file.@EOL
 # @keywords  stm32 cortex-m microcontroller embedded

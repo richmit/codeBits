@@ -1,12 +1,10 @@
 # -*- Mode:cmake; Coding:us-ascii-unix; fill-column:158 -*-
 #########################################################################################################################################################.H.S.##
 ##
-# @file      stm32programJLink.cmake
+# @file      programViaJLink.cmake
 # @author    Mitch Richling http://www.mitchr.me/
-# @date      2026-05-01
-# @version   VERSION
-# @brief     @EOL
-# @keywords  
+# @brief     Target for programming with J-Link.@EOL
+# @keywords  stm32 segger
 # @std       cmake
 # @see       https://github.com/richmit/codeBits/
 # @copyright 
@@ -30,12 +28,11 @@
 #  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
 #  DAMAGE.
 #  @endparblock
-# @todo      @EOL@EOL
-# @warning   @EOL@EOL
-# @bug       @EOL@EOL
+# @todo      Make it work on Linux.@EOL@EOL
+# @todo      Make it more robust on Windows.@EOL@EOL
 # @filedetails
 #
-#  File details go here.  Multiple paragraphs are fine....
+#  Only works with default install path on Windows.
 #
 #########################################################################################################################################################.H.E.##
 

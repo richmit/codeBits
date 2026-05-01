@@ -1,7 +1,7 @@
 # -*- Mode:cmake; Coding:us-ascii-unix; fill-column:158 -*-
 #########################################################################################################################################################.H.S.##
 ##
-# @file      stm32STprogram.cmake
+# @file      programViaSTLink.cmake
 # @author    Mitch Richling http://www.mitchr.me/
 # @brief     Program a typical Nuculeo board with an ST-Link probe.@EOL
 # @keywords  stm32 cortex-m microcontroller embedded STM32_Programmer_CLI
