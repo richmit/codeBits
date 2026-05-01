@@ -28,12 +28,12 @@
 #  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
 #  DAMAGE.
 #  @endparblock
-# @todo If we didn't set STM32_PROG_BIN above from the PATH, then try it with the cube bundle manager.@EOL@EOL
 # @filedetails
 #
 #  We expect STM32_Programmer_CLI to be on the PATH.  This is known to be true in two important cases:
 #   - Inside of /STM32CubeIDE/ and /STM32Cube for Visual Studio Code Extension/.
 #   - When using the /STM32Cube Bundles Manager/ with a "Cube Bundle Project".
+# If we can't find it on the PATH, then we look for it via the cube wrapper.
 #
 #########################################################################################################################################################.H.E.##
 
@@ -44,6 +44,7 @@
 find_program(STM32_PROG_BIN 
   "STM32_Programmer_CLI.exe"
   PATHS "C:/Program Files/STMicroelectronics/STM32Cube/STM32CubeProgrammer/bin/")
+
 # Search for programmer on the PATH for MacOS & linux platforms
 find_program(STM32_PROG_BIN 
   "STM32_Programmer_CLI"
@@ -53,18 +54,31 @@ find_program(STM32_PROG_BIN
         "~/ST/STM32CubeProgrammer"
         "/Applications/STMicroelectronics/STM32Cube/STM32CubeProgrammer/STM32CubeProgrammer.app/Contents/MacOs/bin")
 
+# Search for the programmer via the cube wrapper
+if(NOT (EXISTS "${STM32_PROG_BIN}"))
+  message(STATUS "STM32 Programmer binary was not found on PATH.  Searching for cube bundle manager!")
+  execute_process(
+    COMMAND cube "--resolve" "programmer"
+    OUTPUT_VARIABLE TMP_STRING
+    OUTPUT_STRIP_TRAILING_WHITESPACE
+  )
+  string(REGEX REPLACE "^Command: '" "" TMP_STRING "${TMP_STRING}")
+  string(REGEX REPLACE "'.*$" "" TMP_STRING "${TMP_STRING}")
+  set(STM32_PROG_BIN "${TMP_STRING}")
+endif()
+
 # Report Results & Create program targte if we can.
 if(EXISTS "${STM32_PROG_BIN}")
   # Program Target Board
-  message("-- Found STM32 Programmer binary is ${STM32_PROG_BIN}")
+  message(STATUS "Found STM32 Programmer binary is ${STM32_PROG_BIN}")
   add_custom_target(program
     COMMAND ${STM32_PROG_BIN} -c port=SWD -w ${PROJECT_NAME}.elf -v -rst
     DEPENDS ${PROJECT_NAME}.elf
     COMMENT "Programming device."
   )
-  message("-- 'program' target created.")
+  message(STATUS "'program' target created.")
 else()
-  message("-- Unable to find STM32 Programmer binary!")
-  message("-- WARNING: No 'program' target will be created.")
-  continue()
+  message(STATUS "Unable to find STM32 Programmer binary!")
+  message(WARNING "No 'program' target will be created.")
 endif()
+
