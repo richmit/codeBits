@@ -1,10 +1,16 @@
 
-ALLTARG = template.c template.cpp template.cc template.f template.f77 template.f03 template.f08 template.f18 template.f90 template.f95 template.org top.R top.bash top.c top.cc top.clisp top.cmake top.cpp top.el top.elisp top.f03 top.f08 top.f18 top.f77 top.f90 top.f95 top.f top.h top.hh top.hpp top.html top.java top.js top.lisp top.mac top.make top.md top.org top.pde top.perl top.pl top.pov top.rb top.sh top.tex top.texi top.xhtml top.zsh top.net top.cir top.sub top.m template.m top.ps
+ALLTARG = template.hh template.hpp template.c template.cpp template.cc template.f template.f77 template.f03 template.f08 template.f18 template.f90 template.f95 template.org top.R top.bash top.c top.cc top.clisp top.cmake top.cpp top.el top.elisp top.f03 top.f08 top.f18 top.f77 top.f90 top.f95 top.f top.h top.hh top.hpp top.html top.java top.js top.lisp top.mac top.make top.md top.org top.pde top.perl top.pl top.pov top.rb top.sh top.tex top.texi top.xhtml top.zsh top.net top.cir top.sub top.m template.m top.ps
 
 all: $(ALLTARG)
 
 clean: 
 	rm -f $(ALLTARG)
+
+template.hpp: body-template-CPP-header.txt 
+	cp body-template-CPP-header.txt template.hpp
+
+template.hh: body-template-CPP-header.txt 
+	cp body-template-CPP-header.txt template.hh
 
 template.c: body-template-CnCPP.txt 
 	cp body-template-CnCPP.txt template.c

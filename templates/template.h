@@ -1,0 +1,4 @@
+#ifndef MJR_INCLUDE_FILENAME-EXT-UC
+
+#define MJR_INCLUDE_FILENAME-EXT-UC
+#endif
