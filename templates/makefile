@@ -123,23 +123,23 @@ top.cmake: top-template-pound.txt
 top.cpp: top-template-cpp.txt 
 	sed 's/STDLANG/C++23 C++20 C++17 C++14 C++11 C++98 ATTC++ GCC++/; s/EMODE/C++/' < top-template-cpp.txt > top.cpp
 
-top.pov: top-template-cpp.txt 
-	sed 's/STDLANG/Povray_3.1 Povray_3.5 Povray_3.7/; s/EMODE/pov/' < top-template-cpp.txt > top.pov
+top.cc: top-template-cpp.txt 
+	sed 's/STDLANG/C++23 C++20 C++17 C++14 C++11 C++98 ATTC++ GCC++/; s/EMODE/C++/' < top-template-cpp.txt > top.cc
 
 top.hpp: top-template-cpp.txt 
-	sed 's/STDLANG/C++98 C++11 C++14 ATTC++ GCC++/; s/EMODE/C++/' < top-template-cpp.txt > top.hpp
+	sed 's/STDLANG/C++23 C++20 C++17 C++14 C++11 C++98 ATTC++ GCC++/; s/EMODE/C++/' < top-template-cpp.txt > top.hpp
+
+top.hh: top-template-cpp.txt 
+	sed 's/STDLANG/C++23 C++20 C++17 C++14 C++11 C++98 ATTC++ GCC++/; s/EMODE/C++/' < top-template-cpp.txt > top.hh
+
+top.pov: top-template-cpp.txt 
+	sed 's/STDLANG/Povray_3.1 Povray_3.5 Povray_3.7/; s/EMODE/pov/' < top-template-cpp.txt > top.pov
 
 top.js: top-template-cpp.txt 
 	sed 's/STDLANG/ECMAScript_5 Nashorn ECMAScript_5.1 ECMAScript_2015 ECMAScript_2016 ECMAScript_2017 ECMAScript_2018 GraalVM ECMAScript_2019/; s/EMODE/javascript/' < top-template-cpp.txt > top.js 
 
 top.json: top-template-cpp.txt 
 	sed 's/STDLANG/JSON/; s/EMODE/javascript/' < top-template-cpp.txt > top.json 
-
-top.hh: top-template-cpp.txt 
-	sed 's/STDLANG/C++98 C++11 C++14 ATTC++ GCC++/; s/EMODE/C++/' < top-template-cpp.txt > top.hh
-
-top.cc: top-template-cpp.txt 
-	sed 's/STDLANG/C++98 C++11 C++14 ATTC++ GCC++/; s/EMODE/C++/' < top-template-cpp.txt > top.cc
 
 top.java: top-template-cpp.txt 
 	sed 's/STDLANG/Java 1 2 3 4 5 6 7 8/; s/EMODE/Java/' < top-template-cpp.txt > top.java
@@ -148,10 +148,10 @@ top.pde: top-template-cpp.txt
 	sed 's/STDLANG/Processing/; s/EMODE/Java/' < top-template-cpp.txt > top.pde
 
 top.h: top-template-c.txt 
-	sed 's/STDLANG/C89 C99 C11 ISOC GCC K\&RC/; s/EMODE/C/' < top-template-c.txt > top.h
+	sed 's/STDLANG/C23 C17 C11 C99 ISOC98 GCC K\&RC/; s/EMODE/C/' < top-template-c.txt > top.h
 
 top.c: top-template-c.txt 
-	sed 's/STDLANG/C89 C99 C11 ISOC GCC K\&RC/; s/EMODE/C/' < top-template-c.txt > top.c
+	sed 's/STDLANG/C23 C17 C11 C99 ISOC98 GCC K\&RC/; s/EMODE/C/' < top-template-c.txt > top.c
 
 top.mac: top-template-c.txt 
 	sed 's/STDLANG/maxima/; s/EMODE/maxima/' < top-template-c.txt > top.mac

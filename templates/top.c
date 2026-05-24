@@ -7,7 +7,7 @@
  @version   VERSION
  @brief     @EOL
  @keywords  
- @std       C89 C99 C11 ISOC GCC K&RC
+ @std       C23 C17 C11 C99 ISOC98 GCC K&RC
  @see       GITHUBURL
  @copyright 
   @parblock
