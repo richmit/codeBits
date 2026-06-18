@@ -128,7 +128,7 @@ top.cc: top-template-cpp.txt
 
 # Mode 'javascript' also works.  
 top.json: top-template-cpp.txt 
-	sed 's/STDLANG/ECMA-404 ISO\/IEC-21778:2017 RFC-8259/; s/EMODE/js-json/' < top-template-cpp.txt > top.json
+	sed 's/STDLANG/ECMA-404 ISO\/IEC-21778:2017 RFC-8259 RFC-7159/; s/EMODE/js-json/' < top-template-cpp.txt > top.json
 
 top.hpp: top-template-cpp.txt 
 	sed 's/STDLANG/C++23 C++20 C++17 C++14 C++11 C++98 ATTC++ GCC++/; s/EMODE/C++/' < top-template-cpp.txt > top.hpp

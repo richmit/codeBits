@@ -7,7 +7,7 @@
  @version   VERSION
  @brief     @EOL
  @keywords  
- @std       ECMA-404 ISO/IEC-21778:2017 RFC-8259
+ @std       ECMA-404 ISO/IEC-21778:2017 RFC-8259 RFC-7159
  @see       GITHUBURL
  @copyright 
   @parblock
