@@ -1,0 +1,1 @@
+cube bundle init --project cmake ninja gnu-tools-for-stm32 programmer stlink-gdbserver

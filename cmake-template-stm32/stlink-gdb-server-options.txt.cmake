@@ -1,0 +1,11 @@
+--swd
+--apid
+0
+--verbose
+--cpu-clock
+@CPU_SPEED_HZ@
+--swo-clock-div 
+@SERIAL_WIRE_OUTPUT_PRESCALER@
+--verify
+--initialize-reset
+--attach

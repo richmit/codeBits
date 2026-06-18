@@ -1,6 +1,6 @@
-Device @STM32_DEVICE@
+Device @SEGGER_DEVICE@
 SelectInterface SWD
-Speed 4000
+Speed @SERIAL_WIRE_DEBUG_SPEED_KHZ@
 connect
 loadFile @PROJECT_NAME@.elf
 Reset
