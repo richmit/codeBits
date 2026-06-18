@@ -41,6 +41,7 @@
 #include <complex>                                                       /* Complex Numbers         C++11    */
 #include <concepts>                                                      /* Concepts library        C++20    */
 #include <cstdarg>                                                       /* std:: C stdarg.h        C++11    */
+#include <cstddef>                                                       /* Pointer typedefs        C++11    */
 #include <cstdint>                                                       /* std:: C stdint.h        C++11    */
 #include <cstdio>                                                        /* std:: C stdio.h         C++11    */
 #include <cstdlib>                                                       /* std:: C stdlib.h        C++11    */
