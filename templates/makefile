@@ -1,5 +1,5 @@
 
-ALLTARG = template.hh template.hpp template.c template.cpp template.cc template.f template.f77 template.f03 template.f08 template.f18 template.f90 template.f95 template.org top.R top.bash top.c top.cc top.clisp top.cmake top.cpp top.el top.elisp top.f03 top.f08 top.f18 top.f77 top.f90 top.f95 top.f top.h top.hh top.hpp top.html top.java top.js top.lisp top.mac top.make top.md top.org top.pde top.perl top.pl top.pov top.rb top.sh top.tex top.texi top.xhtml top.zsh top.net top.cir top.sub top.m template.m top.ps
+ALLTARG = top.json template.hh template.hpp template.c template.cpp template.cc template.f template.f77 template.f03 template.f08 template.f18 template.f90 template.f95 template.org top.R top.bash top.c top.cc top.clisp top.cmake top.cpp top.el top.elisp top.f03 top.f08 top.f18 top.f77 top.f90 top.f95 top.f top.h top.hh top.hpp top.html top.java top.js top.lisp top.mac top.make top.md top.org top.pde top.perl top.pl top.pov top.rb top.sh top.tex top.texi top.xhtml top.zsh top.net top.cir top.sub top.m template.m top.ps
 
 all: $(ALLTARG)
 
@@ -126,6 +126,10 @@ top.cpp: top-template-cpp.txt
 top.cc: top-template-cpp.txt 
 	sed 's/STDLANG/C++23 C++20 C++17 C++14 C++11 C++98 ATTC++ GCC++/; s/EMODE/C++/' < top-template-cpp.txt > top.cc
 
+# Mode 'javascript' also works.  
+top.json: top-template-cpp.txt 
+	sed 's/STDLANG/ECMA-404 ISO\/IEC-21778:2017 RFC-8259/; s/EMODE/js-json/' < top-template-cpp.txt > top.json
+
 top.hpp: top-template-cpp.txt 
 	sed 's/STDLANG/C++23 C++20 C++17 C++14 C++11 C++98 ATTC++ GCC++/; s/EMODE/C++/' < top-template-cpp.txt > top.hpp
 
@@ -137,9 +141,6 @@ top.pov: top-template-cpp.txt
 
 top.js: top-template-cpp.txt 
 	sed 's/STDLANG/ECMAScript_5 Nashorn ECMAScript_5.1 ECMAScript_2015 ECMAScript_2016 ECMAScript_2017 ECMAScript_2018 GraalVM ECMAScript_2019/; s/EMODE/javascript/' < top-template-cpp.txt > top.js 
-
-top.json: top-template-cpp.txt 
-	sed 's/STDLANG/JSON/; s/EMODE/javascript/' < top-template-cpp.txt > top.json 
 
 top.java: top-template-cpp.txt 
 	sed 's/STDLANG/Java 1 2 3 4 5 6 7 8/; s/EMODE/Java/' < top-template-cpp.txt > top.java

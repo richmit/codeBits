@@ -1,4 +1,4 @@
-// -*- Mode:javascript; Coding:us-ascii-unix; fill-column:158 -*-
+// -*- Mode:js-json; Coding:us-ascii-unix; fill-column:158 -*-
 /*******************************************************************************************************************************************************.H.S.**/
 /**
  @file      FILENAME
@@ -7,8 +7,8 @@
  @version   VERSION
  @brief     @EOL
  @keywords  
- @std       JSON
- @see       
+ @std       ECMA-404 ISO/IEC-21778:2017 RFC-8259
+ @see       GITHUBURL
  @copyright 
   @parblock
   LICENSE
