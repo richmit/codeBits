@@ -36,29 +36,29 @@
 
 * Embedded Development Template
 
-This directory contains a template for embedded development projects.  
+This directory contains a template for STM32 projects.  
 
 ** About My Embedded Development
 
  - Primary development platform is MSYS2 inside of Windows 11 on x86
- - Secondary development platform is Debian -- on both x86 and Arm64
+ - Secondary development platform is Debian on both x86 and Arm64
  - I spend most of my time inside Emacs (Edit, build, program, debug)
- - STM32 for MCU needs (F4, G4, L4, & F7) using CMSIS & HAL
+ - STM32 cores: F4, G4, L4, & F7.
+ - Projects are initially generateed & later updateed with STM32CubeMX.  They use both CMSIS & HAL.
  - MCUs are used via Nucleo & Discovery boards -- both for development and as project components
- - CMake for build generation
- - Ninja for builds
- - Projects are initially generateed & later updateed with STM32CubeMX
- - Debug probes include stand alone J-Link & ST-Link probes as well as  onboard ST-Link probes
- - The STM32 Cube Bundle Manager is used to manage STM32 command line tools
- - Debug output is via UART (usually one tied to an onboard ST-Link VCP), SWO, and RTT
- - Primary debugger is GDB using the ST-link or J-link GDB server
- - Secondary debugger is Segger's Ozone debugger
+ - CMake for build generation & Ninja for builds
+ - Debug probes include (listed by prefrence):
+   - Standalone J-Link via standard 10-pin header
+   - Standalone ST-Link V3 via standard 10-pin header
+   - Various onboard ST-Link probes
+ - Command line tools are managed via verGo or the STM32 Cube Bundle Manager. CMake builds always use CBM.
+ - Debug output is via UART (usually one tied to an onboard ST-Link VCP), SWO, RTT, and semihosting.
+ - Primary debugger is GDB using the [[https://openocd.org/][OpenOCD]], ST-link, J-link GDB server via GUD inside Emacs.
+ - I ocassionally use Segger's Ozone debugger as well.
  - Well equipped electronics workbench with extensive tool automation capablities
 
 Things I don't do now, but may:
- - OpenOCD (https://openocd.org/)
  - orbuculum (https://orbcode.org/orbuculum/)
- - semihosting 
 
 * Project Orginization
 
@@ -76,19 +76,13 @@ The project orginization scheme I use is a simple extention of what STM32CubeMX 
 | ~PROJECT_NAME/build/Debug/~                        | Build directory for debug builds (O_DEBUG=1).               |
 | ~PROJECT_NAME/build/Release/~                      | Build directory for production builds (O_DEBUG=0).          |
 | ~PROJECT_NAME/Mainly/Inc/mainly.h~                 | Header file with ~mainly()~ declarition.                    |
-| ~PROJECT_NAME/Mainly/Src/Mainly.c[pp]~             | Source file with ~mainly()~ function.                       |
+| ~PROJECT_NAME/Mainly/Src/Mainly.cpp~               | Source file with ~mainly()~ function.                       |
 | ~PROJECT_NAME/PROJECT_NAME.jdebug~                 | Segger Ozone configuration.  Usually saved by Ozone.        |
 | ~PROJECT_NAME/PROJECT_NAME.jdebug.user~            | Segger Ozone configuration.  Usually saved by Ozone.        |
-| ~PROJECT_NAME/jlink-gdb-server-options.txt.cmake~  | CLI arguments for Segger's GDB server.                      |
-| ~PROJECT_NAME/stlink-gdb-server-options.txt.cmake~ | CLI arguments for STM's GDB server.                         |
 | ~PROJECT_NAME/.settings/~                          | Cube Bundle Mangier Project configuration.                  |
 | ~PROJECT_NAME/tool_config.cmake~                   | Various tool configuration options.                         |
 | ~PROJECT_NAME/update_from_template.sh~~            | Update project files from template.                         |
 | ~PROJECT_NAME/update_main.sh~~                     | Update main.c to call ~mainly()~                            |
-| ~PROJECT_NAME/program.jlink.cmake~                 | Template J-Link script used to program device.              |
-| ~PROJECT_NAME/run-jlink-swv.sh.cmake~              | Template bash script to run Segger's SWV.                   |
-| ~PROJECT_NAME/swo-go-stlink-gdb-server.gdb.cmake~  | Template GDB script to start SWO using ST-Link GDB Server.  |
-| ~PROJECT_NAME/swo-go-jlink-gdb-server.gdb.cmake~   | Template GDB script to start SWO using J-Link GDB Server.   |
 
 ** File Management
 

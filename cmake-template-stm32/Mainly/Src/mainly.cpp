@@ -1,46 +1,47 @@
+// -*- Mode:C++; Coding:us-ascii-unix; fill-column:158 -*-
+/*******************************************************************************************************************************************************.H.S.**/
+/**
+ @file      mainly.cpp
+ @author    Mitch Richling http://www.mitchr.me/
+ @date      2026-06-23
+ @version   VERSION
+ @brief     C++ main() replacement for stm32 projects.@EOL
+ @std       C++23
+ @see       https://github.com/richmit/codeBits/
+ @copyright 
+  @parblock
+  Copyright (c) 2026, Mitchell Jay Richling <http://www.mitchr.me/> All rights reserved.
+  
+  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:
+  
+  1. Redistributions of source code must retain the above copyright notice, this list of conditions, and the following disclaimer.
+  
+  2. Redistributions in binary form must reproduce the above copyright notice, this list of conditions, and the following disclaimer in the documentation
+     and/or other materials provided with the distribution.
+  
+  3. Neither the name of the copyright holder nor the names of its contributors may be used to endorse or promote products derived from this software
+     without specific prior written permission.
+  
+  THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+  IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+  LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS
+  OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
+  DAMAGE.
+  @endparblock
+*/
+/*******************************************************************************************************************************************************.H.E.**/
 
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
 #include "mainly.h"
-#include "usart.h"
+//#include "gpio.h"
+//#include "usart.h"
 #include "main.h"
 
-void swoInit (uint32_t portMask, uint32_t prescaler) { 
-	CoreDebug->DEMCR = CoreDebug_DEMCR_TRCENA_Msk; // CoreDebug Debug Exception and Monitor Control Register .. Enables access to registers
-    DBGMCU->CR       = 0x00000027u;                // Debug MCU: Configuration Register
-	TPI->SPPR        = 0x00000002u;                // TPI Selected PIN Protocol Register .. 2 = NRZ/USART
-	TPI->ACPR        = prescaler;   			   // TPI Async Clock Prescaler Register
-	ITM->LAR         = 0xC5ACCE55u;                // ITM Lock Access Register
-	ITM->TCR         = 0x0001000Du;                // ITM Trace Control Register
-	ITM->TPR         = ITM_TPR_PRIVMASK_Msk;	   // ITM Trace Privilege Register
-	ITM->TER         = portMask;				   // ITM Trace Enable Register
-	DWT->CTRL        = 0x400003FEu;                // DWT Control Register
-	TPI->FFCR        = 0x00000100u;                // TPI Formatter and Flush Control Register .. 0x200 = ETM framing enabled, 0x100 = Just DWT/ITM
-}
-
+//--------------------------------------------------------------------------------------------------------------------------------------------------------------
 int mainly(void) {
 
-  const int mlen = 20;
-  char msg_swo[mlen] = "SWO: Hello, World!\n";
-  char msg_nrz[mlen] = "NRZ: Hello, World!\n";
-//  char msg_rtt[mlen] = "RTT: Hello, World!\n";
-//  char msg_hst[mlen] = "HST: Hello, World!\n";
-
-  // if constexpr (O_DEBUG)
-  //   swoInit(0x1, 170000000, 170);
-
   while(1) {
-
-    if constexpr (O_DEBUG)
-      for(int i=0; i<mlen-1; i++) 
-        ITM_SendChar(msg_swo[i]);
-
-    if constexpr (O_DEBUG)
-      HAL_UART_Transmit(&UART_VCP, (const uint8_t*)msg_nrz, mlen-1, 1000);
-
-    if constexpr (O_DEBUG)
-      HAL_GPIO_TogglePin (LED_GPIO_Port, LED_Pin);
-
-    HAL_Delay (500);
-
   }
 
   return 0;

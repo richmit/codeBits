@@ -1,11 +1,12 @@
-# -*- Mode:cmake; Coding:us-ascii-unix; fill-column:158 -*-
+#!/usr/bin/env -S sh
+# -*- Mode:Shell-script; Coding:us-ascii-unix; fill-column:158 -*-
 #########################################################################################################################################################.H.S.##
 ##
-# @file      tool_config.cmake
+# @file      swo-go-stlink-gdb-server.gdb.cmake
 # @author    Mitch Richling http://www.mitchr.me/
-# @brief     Project sepcific CMake variable settings.@EOL
+# @brief     CMake template: GDB script to start SWV with ST-Link GDB Server.@EOL
 # @keywords  stm32
-# @std       cmake
+# @std       cmake GDB ST-Link STM32 Cortex-M
 # @see       https://github.com/richmit/codeBits/
 # @copyright 
 #  @parblock
@@ -31,65 +32,85 @@
 #########################################################################################################################################################.H.E.##
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------
-# The board.  Not used for anything yet.
-set(EVM_BOARD "")
+# Startup
+
+# Set GDB language to C for this code
+set language c
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Full STM part number. All uppercase.  
-# Used by: 
-#  - GDB to activate SWO via ST-Link GDB server (MCU_ADDR_DBGMCU_BASE)
-#  - CMake for variable: MCU_ADDR_DBGMCU_BASE
-# Potentially Used by:
-#  - CMake for variable: SEGGER_DEVICE & OPENOCD_DEVICE
-set(STM_DEVICE "")  
+# Project Specific Parameters
+
+# Baud rate (freq in Hz) 
+set $cpuFreq     = @CPU_SPEED_HZ@
+
+# SWO prescalar
+set $swoDiv      = @SERIAL_WIRE_OUTPUT_PRESCALER@
+
+# The ITM ports to enable
+set $swoPortMask = 0x1
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Part number used for Segger software.  Usually represents a family of devices.
-# If set to AUTO, this will the first 11 characters of STM_DEVICE transformed to uppercase.
-# Used by: 
-#  - J-Link Serial Wire Output Viewer
-#  - J-Link RTT Viewer
-# Potentially Used by:
-#  - J-Link programmer  
-set(SEGGER_DEVICE "AUTO")  
+# Chip specific Parameters
+
+# From CMSIS/Include/core_cm4.h.
+# Identical in core_armv81mml,                core_armv8mml,            core_cm3, core_cm33, core_cm35p, core_cm7, & core_sc300
+set $ITM_BASE       = 0xE0000000
+
+# From CMSIS/Include/core_cm4.h.
+# Identical in core_armv81mml, core_armv8mbl, core_armv8mml, core_cm23, core_cm3, core_cm33, core_cm35p, core_cm7, & core_sc300
+set $DWT_BASE       = 0xE0001000
+
+# From CMSIS/Include/core_cm4.h.
+# Identical in core_armv81mml, core_armv8mbl, core_armv8mml, core_cm23, core_cm3, core_cm33, core_cm35p, core_cm7, & core_sc300
+set $TPI_BASE       = 0xE0040000
+
+# From CMSIS/Include/core_cm4.h.
+# Identical in core_armv81mml, core_armv8mbl, core_armv8mml, core_cm23, core_cm3, core_cm33, core_cm35p, core_cm7, & core_sc300
+set $CoreDebug_BASE = 0xE000EDF0
+
+# From CMSIS/Device/ST/STM32G4xx/Include/stm32f407xx.h : 0xE0042000
+# From CMSIS/Device/ST/STM32G4xx/Include/stm32f429xx.h : 0xE0042000
+# From CMSIS/Device/ST/STM32G4xx/Include/stm32g431xx.h : 0xE0042000
+# From CMSIS/Device/ST/STM32G4xx/Include/stm32g491xx.h : 0xE0042000
+# From CMSIS/Device/ST/STM32G4xx/Include/stm32l432xx.h : 0xE0042000
+# From CMSIS/Device/ST/STM32G4xx/Include/stm32h753xx.h : 0x5C001000  <- Not like the others. ;)
+set $DBGMCU_BASE    = @MCU_ADDR_DBGMCU_BASE@
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Part number used for OpenOCD.  Usually represents a family of devices.
-# If set to AUTO, this will the first 11 characters of STM_DEVICE transformed to uppercase.
-# Used by: 
-#  - OpenOCD connect configuration (target configuration file name)
-#  - OpenOCD SWO configuration (device specific tpiu command)
-set(OPENOCD_DEVICE "AUTO")
+# Configure the core
+
+# CoreDebug->DEMCR
+set *(CoreDebug_BASE + 0x00C) = 0x01000000 
+
+# DBGMCU->CR
+set *($DBGMCU_BASE + 0x04)    = 0x00000027
+
+# TPI->SPPR
+set *($TPI_BASE + 0x000F0)    = 0x00000002
+
+# TPI->ACPR
+set *($TPI_BASE + 0x00010)    = $swoDiv
+
+# ITM->LAR
+set *($ITM_BASE + 0x00FB0)    = 0xC5ACCE55
+
+# ITM->TCR
+set *($ITM_BASE + 0x00E80)    = 0x1000D
+
+# ITM->TPR
+set *($ITM_BASE + 0x00E40)    = 0xF
+
+# ITM->TER
+set *($ITM_BASE + 0x00E00)    = $swoPortMask
+
+# DWT_CTRL
+set *($DWT_BASE)              = 0x400003FE
+
+# TPI->FFCR
+set *($TPI_BASE + 0x00304)    = 0x00000100
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Used by:
-#  - J-Link programmer.  If set to zero or not set at all, then 4MHz will be used.
-#  - CMake for variable: SERIAL_WIRE_DEBUG_SPEED_KHZ
-#  - J-Link RTT Viewer (SERIAL_WIRE_DEBUG_SPEED_KHZ)
-# Potentially Used by:
-#  - J-Link GDB Server (SERIAL_WIRE_DEBUG_SPEED_KHZ)
-set(SERIAL_WIRE_DEBUG_SPEED_HZ "4000000")
+# Finished 
 
-#---------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Used by: 
-#  - J-Link Serial Wire Output Viewer
-#  - J-Link GDB Server SWO configuration.  Set to 0 and probe will measure CPU speed.
-#  - ST-Link GDB Server SWO configuration. 
-#  - OpenOCD SWO configuration.
-#  - CMake for variables: SERIAL_WIRE_OUTPUT_SPEED_HZ, CPU_SPEED_KHZ, CPU_SPEED_MHZ
-# Potentially Used by:
-#  - J-Link GDB Server SWO configuration (SERIAL_WIRE_OUTPUT_SPEED_HZ)
-#  - J-Link programmer (CPU_SPEED_KHZ)
-#  - Ozone debugger configuration file for SWO & TIF (CPU_SPEED_MHZ)
-#  - STM Cube Programmer for the freq= component of --connect option. (CPU_SPEED_KHZ)
-set(CPU_SPEED_HZ "0")
-
-#---------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Used by: 
-#  - ST-Link GDB Server SWO configuration.  Must never be zero.
-#  - CMake for variable: SERIAL_WIRE_OUTPUT_SPEED_HZ
-#  - OpenOCD SWO configuration (SERIAL_WIRE_OUTPUT_SPEED_HZ)
-# Potentially Used by:
-#  - J-Link GDB Server SWO configuration (SERIAL_WIRE_OUTPUT_SPEED_HZ)
-set(SERIAL_WIRE_OUTPUT_PRESCALER "1")
-
+# Set GDB language back to auto
+set language auto

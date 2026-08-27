@@ -98,43 +98,35 @@ add_subdirectory(cmake/stm32cubemx)
 set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD 20)
 set_property(TARGET ${CMAKE_PROJECT_NAME} PROPERTY CXX_STANDARD_REQUIRED ON)
 
-# Add HOLIBS
-foreach(HOL_INC_DIR IN ITEMS "MJR_NbB/Inc" "MJR_SWO/Inc")
-  if(EXISTS "${HOL_INC_DIR}")
-    message(STATUS "Found include directory ${HOL_INC_DIR}.  Adding it to the project.")
-    target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE "${HOL_INC_DIR}")
-  endif()
-endforeach()
-
-# Add RTT code
-foreach(RTT_SRC_FILE IN ITEMS "RTT/RTT/SEGGER_RTT.c" "RTT/RTT/SEGGER_RTT_printf.c")
-  if(EXISTS "${RTT_SRC_FILE}")
-    message(STATUS "Found source file ${RTT_SRC_FILE}.  Adding it to the project.")
-    target_sources(${CMAKE_PROJECT_NAME} PRIVATE "${RTT_SRC_FILE}")
-  endif()
-endforeach()
-
-# Add RTT headers
-foreach(RTT_INC_DIR IN ITEMS "RTT/RTT/" "RTT/Config/")
-  if(EXISTS "${RTT_INC_DIR}")
-    message(STATUS "Found include directory ${RTT_INC_DIR}.  Adding it to the project.")
-    target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE "${RTT_INC_DIR}")
-  endif()
-endforeach()
-
 # Add my code
-foreach(MJR_SRC_FILE IN ITEMS "Mainly/Src/mainly.c" "Mainly/Src/mainly.cpp")
-  if(EXISTS "${MJR_SRC_FILE}")
-    message(STATUS "Found source file ${MJR_SRC_FILE}.  Adding it to the project.")
-    target_sources(${CMAKE_PROJECT_NAME} PRIVATE "${MJR_SRC_FILE}")
+foreach(SRC_DIR IN ITEMS "Mainly" "mjr_rtt" "mjr_mem_serializer" "mjr_nibbles_bits" "mjr_swo" "mjr_cmihosting")
+  if(EXISTS "${SRC_DIR}/Inc")
+    file(GLOB SRC_FILES "${SRC_DIR}/Inc/*.h*")
+    if(SRC_FILES)
+      message(STATUS "Adding include directory ${SRC_DIR}.")
+      target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE "${SRC_DIR}/Inc")
+    endif()
+  endif()
+  if(EXISTS "${SRC_DIR}/Src")
+    file(GLOB SRC_FILES "${SRC_DIR}/Src/*.c*")
+    if(SRC_FILES)
+      message(STATUS "Adding source from ${SRC_DIR}: ${SRC_FILES}.")    
+      target_sources(${CMAKE_PROJECT_NAME} PRIVATE "${SRC_FILES}")
+    endif()
   endif()
 endforeach()
 
-# Add my header(s)
-foreach(MJR_INC_DIR IN ITEMS "Mainly/Inc/")
-  if(EXISTS "${MJR_INC_DIR}")
-    message(STATUS "Found include directory ${MJR_INC_DIR}.  Adding it to the project.")
-    target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE "${MJR_INC_DIR}")
+# Add RTT
+foreach(SRC_DIR IN ITEMS "RTT/RTT" "RTT/Config")
+  file(GLOB SRC_FILES "${SRC_DIR}/*.h")
+  if(SRC_FILES)
+    message(STATUS "Adding include directory ${SRC_DIR}.")
+    target_include_directories(${CMAKE_PROJECT_NAME} PRIVATE "${SRC_DIR}")
+  endif()
+  file(GLOB SRC_FILES "${SRC_DIR}/*.c")
+  if(SRC_FILES)
+    message(STATUS "Adding source from ${SRC_DIR}: ${SRC_FILES}.")    
+    target_sources(${CMAKE_PROJECT_NAME} PRIVATE "${SRC_FILES}")
   endif()
 endforeach()
 
@@ -156,30 +148,29 @@ target_link_libraries(${CMAKE_PROJECT_NAME} stm32cubemx)
 
 include(tool_config.cmake)
 
-# Potentially Used by:
-#  - J-Link GDB Server SWO configuration.  
 math(EXPR SERIAL_WIRE_OUTPUT_SPEED_HZ "${CPU_SPEED_HZ}/${SERIAL_WIRE_OUTPUT_PRESCALER}")
-
-# Potentially Used by:
-#  - J-Link programmer.  
-#  - STM Cube Programmer (freq= component of --connect option)
 math(EXPR CPU_SPEED_KHZ "${CPU_SPEED_HZ}/1000")
-
-# Potentially Used by:
-#  - STM Cube Programmer (freq= component of -swv option)
-#  - Ozone debugger configuration file (SWO, TIF)
 math(EXPR CPU_SPEED_MHZ "${CPU_SPEED_HZ}/1000000")
-
-# Used by:
-#  - J-Link RTT Viewer
-# Potentially Used by:
-#  - J-Link GDB Server 
 math(EXPR SERIAL_WIRE_DEBUG_SPEED_KHZ "${SERIAL_WIRE_DEBUG_SPEED_HZ}/1000")
+
+if (OPENOCD_DEVICE STREQUAL "AUTO")
+  string(SUBSTRING "${STM_DEVICE}" 0 7 TMP)
+  string(TOLOWER "${TMP}" OPENOCD_DEVICE)
+  string(APPEND OPENOCD_DEVICE "x")
+  message(STATUS "OPENOCD_DEVICE computed from STM_DEVICE")
+endif()
+
+if (SEGGER_DEVICE STREQUAL "AUTO")
+  string(SUBSTRING "${STM_DEVICE}" 0 11 TMP)
+  string(TOUPPER "${TMP}" SEGGER_DEVICE)
+  message(STATUS "SEGGER_DEVICE computed from STM_DEVICE")
+endif()
 
 message(STATUS "Tool Configuration Options:")
 message(STATUS "EVM_BOARD ........................ ${EVM_BOARD}")
 message(STATUS "STM_DEVICE ....................... ${STM_DEVICE}")
 message(STATUS "SEGGER_DEVICE .................... ${SEGGER_DEVICE}")
+message(STATUS "OPENOCD_DEVICE ................... ${OPENOCD_DEVICE}")
 message(STATUS "SERIAL_WIRE_DEBUG_SPEED_HZ ....... ${SERIAL_WIRE_DEBUG_SPEED_HZ}")
 message(STATUS "SERIAL_WIRE_DEBUG_SPEED_KHZ (*) .. ${SERIAL_WIRE_DEBUG_SPEED_KHZ}")
 message(STATUS "CPU_SPEED_HZ ..................... ${CPU_SPEED_HZ}")
@@ -190,7 +181,7 @@ message(STATUS "SERIAL_WIRE_OUTPUT_SPEED_HZ (*) .. ${SERIAL_WIRE_OUTPUT_SPEED_HZ
 message(STATUS "Note: An (*) above indicates the value is Computed From Other Tool Configuration Options.")
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------
-# Setup GDB file for j-link swo
+# Setup various GDB scripts, GDB server config files, and shell scripts in the build directory
 
 # Figure out address of DBGMCU_BASE.  This test is not very robust!!  I only use a few devices: stm32f407, stm32f429, stm32g431, stm32g491, stm32l432, &
 # stm32h753.  All of these devices use 0xE0042000 except for the H7 which uses 0x5C001000.  So all I have to do is look for h7, and things work out for me and
@@ -203,20 +194,22 @@ else()
 endif()
 message(STATUS "Setting MCU_ADDR_DBGMCU_BASE to ${MCU_ADDR_DBGMCU_BASE}")
 
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/swo-go-jlink-gdb-server.gdb.cmake ${CMAKE_BINARY_DIR}/swo-go-jlink-gdb-server.gdb)
+foreach(TPL_DIR IN ITEMS "cmake_build_templates")
+  file(GLOB TPL_FILES "${CMAKE_SOURCE_DIR}/${TPL_DIR}/*.cmake")
+  if(TPL_FILES)
+    foreach(TPL_FILE ${TPL_FILES})
+      cmake_path(GET TPL_FILE FILENAME DST_FILE)
+      cmake_path(GET DST_FILE STEM LAST_ONLY DST_FILE)
+      message(STATUS "Generateing build file from ${DST_FILE}")
+      CONFIGURE_FILE(${TPL_FILE} ${CMAKE_BINARY_DIR}/${DST_FILE} NEWLINE_STYLE UNIX)
+    endforeach()
+  endif()
+endforeach()
 
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/swo-go-stlink-gdb-server.gdb.cmake ${CMAKE_BINARY_DIR}/swo-go-stlink-gdb-server.gdb)
-
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/run-jlink-swv.sh.cmake ${CMAKE_BINARY_DIR}/run-jlink-swv.sh)
-
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/run-jlink-rttv.sh.cmake ${CMAKE_BINARY_DIR}/run-jlink-rttv.sh)
-
-CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/stlink-gdb-server-options.txt.cmake ${CMAKE_BINARY_DIR}/stlink-gdb-server-options.txt)
-
-if(EXISTS "${CMAKE_SOURCE_DIR}/jlink-gdb-server-options.txt.cmake")
-  CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/jlink-gdb-server-options.txt.cmake ${CMAKE_BINARY_DIR}/jlink-gdb-server-options.txt)
+if(EXISTS "${CMAKE_SOURCE_DIR}/gdbso-jlink-gdb-server-via-jlink.txt.cmake")
+  CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/gdbso-jlink-gdb-server-via-jlink.txt.cmake ${CMAKE_BINARY_DIR}/gdbso-jlink-gdb-server-via-jlink.txt  NEWLINE_STYLE UNIX)
 else()
-  message(WARNING "No J-Link GDB Server support without jlink-gdb-server-options.txt.cmake!")
+  message(WARNING "No J-Link GDB Server support without gdbso-jlink-gdb-server-via-jlink.txt.cmake!")
 endif()
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -282,7 +275,7 @@ find_program(STM32_JLINK_PROG_BIN
         "$ENV{HOME}/opt/SEGGER/JLink"
         "$ENV{HOME}/JLink"
         "$ENV{HOME}/local/SEGGER/JLink")
-# Look for versioned J-Link on Windows
+# Look for versioned J-Link on Windows (on linux a link points to the desired version)
 if( NOT(STM32_JLINK_PROG_BIN))
   message(STATUS "J-Link binary was not found on PATH.  Searching for versioned installs!")
   file(GLOB JLINK_ALL_VER 
@@ -290,7 +283,6 @@ if( NOT(STM32_JLINK_PROG_BIN))
     "C:/Program Files(x86)/SEGGER/JLink_V*"
     "$ENV{ProgramFiles}/SEGGER/JLink_V*"
     "$ENV{UserProfile}/SEGGER/JLink_V*")
-  #
   # Find the newest version of J-Link installed
   if(JLINK_ALL_VER)
     list(SORT JLINK_ALL_VER)
@@ -300,25 +292,51 @@ if( NOT(STM32_JLINK_PROG_BIN))
     message(STATUS "No SEGGER J-Link Install Found!")
   endif()
 endif()
-# Figure out SERIAL_WIRE_DEBUG_SPEED_KHZ for program.jlink.cmake
-if(SERIAL_WIRE_DEBUG_SPEED_HZ)
-  math(EXPR SERIAL_WIRE_DEBUG_SPEED_KHZ "${SERIAL_WIRE_DEBUG_SPEED_HZ}/1000")
-else()
-  math(EXPR SERIAL_WIRE_DEBUG_SPEED_KHZ "4000")
-endif()
 #
 # Report Results & Create program target if we can.
 if(EXISTS "${STM32_JLINK_PROG_BIN}")
   message(STATUS "Found J-Link binary: ${STM32_JLINK_PROG_BIN}")
-  CONFIGURE_FILE(${CMAKE_SOURCE_DIR}/program.jlink.cmake ${CMAKE_BINARY_DIR}/program.jlink)
   add_custom_target(program-jlink
     COMMAND ${STM32_JLINK_PROG_BIN} -NoGui 1 -CommandFile program.jlink 
     DEPENDS ${PROJECT_NAME}.elf
     COMMENT "Programming device with J-Link."
   )
   message(STATUS "'program-jlink' target created.")
+  add_custom_target(reset-jlink
+    COMMAND ${STM32_JLINK_PROG_BIN} -NoGui 1 -CommandFile reset.jlink 
+    DEPENDS ${PROJECT_NAME}.elf
+    COMMENT "Reset device with J-Link."
+  )
+  message(STATUS "'reset-jlink' target created.")
 else()
   message(STATUS "Unable to find J-Link binary!")
+  message(WARNING "No 'program-jlink' or 'reset-jlink' target will be created.")
+endif()
+
+#---------------------------------------------------------------------------------------------------------------------------------------------------------------
+# Create program target for OpenOCD
+#
+# Search for programmer on the PATH for windows platforms
+find_program(STM32_OPENOCD_BIN "openocd.exe")
+#
+# Report Results & Create program target if we can.
+if(EXISTS "${STM32_OPENOCD_BIN}")
+  message(STATUS "Found OpenOCD binary: ${STM32_OPENOCD_BIN}")
+  add_custom_target(program-openocd-jlink
+    COMMAND ${STM32_OPENOCD_BIN} -f ${CMAKE_BINARY_DIR}/openocd-init-jlink.cfg -f ${CMAKE_BINARY_DIR}/openocd-program.cfg
+    DEPENDS ${PROJECT_NAME}.elf
+    COMMENT "Programming device with OpenOCD via J-Link."
+  )
+  message(STATUS "'program-openocd-jlink' target created.")
+  add_custom_target(program-openocd-stlink
+    COMMAND ${STM32_OPENOCD_BIN} -f ${CMAKE_BINARY_DIR}/openocd-init-stlink.cfg -f ${CMAKE_BINARY_DIR}/openocd-program.cfg
+    DEPENDS ${PROJECT_NAME}.elf
+    COMMENT "Programming device with OpenOCD via J-Link."
+  )
+  message(STATUS "'program-openocd-stlink' target created.")
+else()
+  message(STATUS "Unable to find OpenOCD binary!")
   message(WARNING "No 'program' target will be created.")
 endif()
+
 

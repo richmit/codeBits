@@ -1,13 +1,15 @@
 
 These are boards I frequently use along with CMAKE variables for them.
 
-| STM32_BOARD        | STM32_DEVICE_STM | STM32_DEVICE_SEGGER | BOARD_ABRV  |
-|--------------------+------------------+---------------------+-------------|
-| STM32F407G-DISC1   |                  | STM32F407VG         |             |
-| NUCLEO-F429ZI      |                  | STM32F429ZI         | N144-F429ZI |
-| NUCLEO-L432KC      |                  | STM32L432KC         | N32-L432KC  |
-| NUCLEO-G431KB      |                  | STM32G431KB         | N32-G431KB  |
-| NUCLEO-G491RE      | STM32G491RETx    | STM32G491RE         | N64-G491RE  |
-| NUCLEO-H753ZI      | STM32H753ZITx    | STM32H753ZI         | N144-H753ZI |
-| BlackPillSTM32F411 |                  | STM32F4X1CXU6       |             |
+| EVM_BOARD          | STM_DEVICE    | SEGGER_DEVICE   | OPENOCD_DEVICE | BOARD_ABRV  |
+|--------------------+---------------+-----------------+----------------+-------------|
+| STM32F407G-DISC1   | ?             | STM32F407VG     | ?              | dc1         |
+| NUCLEO-F429ZI      | ?             | STM32F429ZI     | ?              | N144-F429ZI |
+| NUCLEO-L432KC      | ?             | STM32L432KC     | ?              | N32-L432KC  |
+| NUCLEO-G431KB      | ?             | STM32G431KB     | ?              | N32-G431KB  |
+| NUCLEO-G491RE      | STM32G491RETx | STM32G491RE (A) | STM32G4 (A)    | N64-G491RE  |
+| NUCLEO-H753ZI      | STM32H753ZITx | STM32H753ZI     | ?              | N144-H753ZI |
+| BlackPillSTM32F411 | ?             | STM32F4X1CXU6   | ?              | bp411       |
 
+
+ (A) -- "AUTO" works!

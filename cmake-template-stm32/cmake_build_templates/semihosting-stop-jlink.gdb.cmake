@@ -1,11 +1,13 @@
 # -*- Mode:cmake; Coding:us-ascii-unix; fill-column:158 -*-
 #########################################################################################################################################################.H.S.##
 ##
-# @file      cuveMXcflagFix.cmake
+# @file      semihosting-stop-jlink.gdb.cmake
 # @author    Mitch Richling http://www.mitchr.me/
-# @brief     Override CMAKE_BUILD_TYPE specific CMAKE_C & CMAKE_CXX flags from the toolchain file.@EOL
-# @keywords  stm32 cortex-m microcontroller embedded
-# @std       cmake
+# @date      2026-07-02
+# @version   VERSION
+# @brief     CMake template: GDB script to disable semihosting with J-Link GDB server.@EOL
+# @keywords  
+# @std       cmake GDB J-Link
 # @see       https://github.com/richmit/codeBits/
 # @copyright 
 #  @parblock
@@ -28,17 +30,7 @@
 #  LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH
 #  DAMAGE.
 #  @endparblock
-# @filedetails
-#
-#  This makes assumptions about what is in the toolchain file provided by CubeMX.  In particular we assume only -O & -g flags were set in these variables.
-#  This was true at the time this comment was written for both gcc & clang.
-#
 #########################################################################################################################################################.H.E.##
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------
-#
-# Override CMAKE_BUILD_TYPE specific CMAKE_C & CMAKE_CXX flags from the toolchain file.
-set(CMAKE_C_FLAGS_DEBUG     "-Og    -g3")
-set(CMAKE_C_FLAGS_RELEASE   "-Ofast -g0")
-set(CMAKE_CXX_FLAGS_DEBUG   "-Og    -g3")
-set(CMAKE_CXX_FLAGS_RELEASE "-Ofast -g0")
+monitor semihosting disable

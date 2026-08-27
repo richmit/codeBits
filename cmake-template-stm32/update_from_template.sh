@@ -2,18 +2,18 @@
 
 #---------------------------------------------------------------------------------------------------------------------------------------------------------------
 # File lists
-
+ 
 # These are generated externally, and are something we want to wholesale replace.  To be safe, we want to keep a backup.
 BO_FILES='CMakeLists.txt'
 
 # These are files that are static -- they should match what is in the template precisely.
-RO_FILES='Mainly/Inc/mainly.h stlink-gdb-server-options.txt.cmake run-jlink-swv.sh.cmake program.jlink.cmake swo-go-jlink-gdb-server.gdb.cmake swo-go-stlink-gdb-server.gdb.cmake update_main.sh update_from_template.sh CMakeLists.txt run-jlink-rttv.sh.cmake'
+RO_FILES='Mainly/Inc/mainly.h update_main.sh update_from_template.sh CMakeLists.txt cmake_build_templates/run-jlink-swv.sh.cmake cmake_build_templates/program.jlink.cmake cmake_build_templates/swo-go-jlink.gdb.cmake cmake_build_templates/swo-go-stlink.gdb.cmake cmake_build_templates/run-jlink-rttv.sh.cmake cmake_build_templates/rtt-go-openocd.gdb.cmake cmake_build_templates/swo-go-openocd.gdb.cmake cmake_build_templates/openocd-init-stlink.cfg.cmake cmake_build_templates/openocd-init-jlink.cfg.cmake cmake_build_templates/openocd-program.cfg.cmake cmake_build_templates/gdbso-openocd-via-jlink.txt.cmake cmake_build_templates/gdbso-openocd-via-stlink.txt.cmake cmake_build_templates/gdbso-stlink-gdb-server-via-stlink.txt.cmake cmake_build_templates/semihosting-go-openocd.gdb.cmake cmake_build_templates/semihosting-stop-openocd.gdb.cmake cmake_build_templates/semihosting-go-jlink.gdb.cmake cmake_build_templates/swo-stop-jlink.gdb.cmake cmake_build_templates/semihosting-stop-jlink.gdb.cmake cmake_build_templates/semihosting-go-jlink.gdb.cmake cmake_build_templates/reset.jlink.cmake cmake_build_templates/connect.jlink.cmake'
 
 # These are files that are copied to the project on the first run, but never again.  We expect these files will change on a project by project basis.
 RW_FILES='tool_config.cmake  Mainly/Src/mainly.cpp'
 
 # These are directories that must exist in the project.
-DIRS='Mainly/ Mainly/Src/ Mainly/Inc/'
+DIRS='Mainly/ Mainly/Src/ Mainly/Inc/ cmake_build_templates/'
 
 # These are git repos we might want synced into each project.
 GIT_REPOS='https://github.com/SEGGERMicro/RTT.git'
