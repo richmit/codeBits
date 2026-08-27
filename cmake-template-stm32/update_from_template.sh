@@ -10,7 +10,7 @@ BO_FILES='CMakeLists.txt'
 RO_FILES='Mainly/Inc/mainly.h update_main.sh update_from_template.sh CMakeLists.txt cmake_build_templates/run-jlink-swv.sh.cmake cmake_build_templates/program.jlink.cmake cmake_build_templates/swo-go-jlink.gdb.cmake cmake_build_templates/swo-go-stlink.gdb.cmake cmake_build_templates/run-jlink-rttv.sh.cmake cmake_build_templates/rtt-go-openocd.gdb.cmake cmake_build_templates/swo-go-openocd.gdb.cmake cmake_build_templates/openocd-init-stlink.cfg.cmake cmake_build_templates/openocd-init-jlink.cfg.cmake cmake_build_templates/openocd-program.cfg.cmake cmake_build_templates/gdbso-openocd-via-jlink.txt.cmake cmake_build_templates/gdbso-openocd-via-stlink.txt.cmake cmake_build_templates/gdbso-stlink-gdb-server-via-stlink.txt.cmake cmake_build_templates/semihosting-go-openocd.gdb.cmake cmake_build_templates/semihosting-stop-openocd.gdb.cmake cmake_build_templates/semihosting-go-jlink.gdb.cmake cmake_build_templates/swo-stop-jlink.gdb.cmake cmake_build_templates/semihosting-stop-jlink.gdb.cmake cmake_build_templates/semihosting-go-jlink.gdb.cmake cmake_build_templates/reset.jlink.cmake cmake_build_templates/connect.jlink.cmake'
 
 # These are files that are copied to the project on the first run, but never again.  We expect these files will change on a project by project basis.
-RW_FILES='tool_config.cmake  Mainly/Src/mainly.cpp'
+RW_FILES='proj_config.cmake  Mainly/Src/mainly.cpp'
 
 # These are directories that must exist in the project.
 DIRS='Mainly/ Mainly/Src/ Mainly/Inc/ cmake_build_templates/'

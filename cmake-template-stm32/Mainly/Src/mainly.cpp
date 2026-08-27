@@ -3,8 +3,6 @@
 /**
  @file      mainly.cpp
  @author    Mitch Richling http://www.mitchr.me/
- @date      2026-06-23
- @version   VERSION
  @brief     C++ main() replacement for stm32 projects.@EOL
  @std       C++23
  @see       https://github.com/richmit/codeBits/

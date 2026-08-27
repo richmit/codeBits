@@ -4,7 +4,7 @@
 ##
 # @file      openocd-init-stlink.cfg.cmake
 # @author    Mitch Richling http://www.mitchr.me/
-# @brief     CMake template: OpenOCD config file to connect via a ST-Link probe. @EOL
+# @brief     CMake template: OpenOCD config file to connect via an ST-Link probe. @EOL
 # @keywords  stm32
 # @std       cmake OpenOCD
 # @see       https://github.com/richmit/codeBits/

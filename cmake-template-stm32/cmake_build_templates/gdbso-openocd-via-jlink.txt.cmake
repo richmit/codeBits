@@ -3,7 +3,7 @@
 ##
 # @file      gdb-server-options-jlink-openocd.txt.cmake
 # @author    Mitch Richling http://www.mitchr.me/
-# @brief     CMake template: Command line options file for OpenOCD connected to an J-Link debug probe.@EOL
+# @brief     CMake template: Command line options file for OpenOCD connected to a J-Link debug probe.@EOL
 # @std       cmake OpenOCD
 # @see       https://github.com/richmit/codeBits/
 # @copyright 

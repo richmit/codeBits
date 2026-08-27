@@ -1,7 +1,7 @@
 # -*- Mode:cmake; Coding:us-ascii-unix; fill-column:158 -*-
 #########################################################################################################################################################.H.S.##
 ##
-# @file      tool_config.cmake
+# @file      proj_config.cmake
 # @author    Mitch Richling http://www.mitchr.me/
 # @brief     Project sepcific CMake variable settings.@EOL
 # @keywords  stm32

@@ -3,10 +3,7 @@
 ##
 # @file      reset.jlink.cmake
 # @author    Mitch Richling http://www.mitchr.me/
-# @date      2026-07-02
-# @version   VERSION
 # @brief     CMake template: J-Link script to reset target.@EOL
-# @keywords  
 # @std       cmake J-Link
 # @see       https://github.com/richmit/codeBits/
 # @copyright 

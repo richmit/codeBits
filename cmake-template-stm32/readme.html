@@ -3,13 +3,10 @@
 "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en">
 <head>
-<!-- 2026-06-06 Sat 13:02 -->
+<!-- 2026-08-27 Thu 16:04 -->
 <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 <meta name="viewport" content="width=1024, initial-scale=1" />
-<title>Embedded Development Project Template</title>
-<meta name="author" content="Mitch Richling" />
-<meta name="description" content="DESCRIPTION FIXME" />
-<meta name="keywords" content="KEYWORDS FIXME" />
+<title>&lrm;</title>
 <meta name="generator" content="Org Mode" />
 <style type="text/css">
   #content { max-width: 60em; margin: auto; }
@@ -195,74 +192,82 @@
     { background-color: #ffff00; color: #000000; font-weight: bold; }
   .org-svg { }
 </style>
-<style>body { width: 95%; margin: 2% auto; font-size: 18px; line-height: 1.4em; font-family: Georgia, serif; color: black; background-color: white; }</style>
-<style>body { min-width: 500px; max-width: 1024px; }</style>
-<style>h1,h2,h3,h4,h5,h6 { color: #A5573E; line-height: 1em; font-family: Helvetica, sans-serif; }</style>
-<style>h1,h2,h3 { line-height: 1.4em; }</style>
-<style>h1.title { font-size: 3em; }</style>
-<style>.subtitle { font-size: 0.6em; }</style>
-<style>h4,h5,h6 { font-size: 1em; }</style>
-<style>.org-src-container { border: 1px solid #ccc; box-shadow: 3px 3px 3px #eee; font-family: Lucida Console, monospace; font-size: 80%; margin: 0px; padding: 0px 0px; position: relative; }</style>
-<style>.org-src-container>pre { line-height: 1.2em; padding-top: 1.5em; margin: 0.5em; background-color: #404040; color: white; overflow: auto; }</style>
-<style>.org-src-container>pre:before { display: block; position: absolute; background-color: #b3b3b3; top: 0; right: 0; padding: 0 0.2em 0 0.4em; border-bottom-left-radius: 8px; border: 0; color: white; font-size: 100%; font-family: Helvetica, sans-serif;}</style>
-<style>pre.example { white-space: pre-wrap; white-space: -moz-pre-wrap; white-space: -o-pre-wrap; font-family: Lucida Console, monospace; font-size: 80%; background: #404040; color: white; display: block; padding: 0em; border: 2px solid black; }</style>
-<style>blockquote { margin-bottom: 0.5em; padding: 0.5em; background-color: #FFF8DC; border-left: 2px solid #A5573E; border-left-color: rgb(255, 228, 102); display: block; margin-block-start: 1em; margin-block-end: 1em; margin-inline-start: 5em; margin-inline-end: 5em; } </style>
-<style>#content { max-width: 60em; }</style>
 </head>
 <body>
-<div id="org-div-home-and-up">
- <a accesskey="h" href="https://www.mitchr.me/FIXME"> UP </a>
- |
- <a accesskey="H" href="https://www.mitchr.me/"> HOME </a>
-</div><div id="content" class="content">
-<h1 class="title">Embedded Development Project Template</h1>
-<div id="outline-container-org1bf725b" class="outline-2">
-<h2 id="org1bf725b"><span class="section-number-2">1.</span> Embedded Development Template</h2>
+<div id="content" class="content">
+<div id="table-of-contents" role="doc-toc">
+<h2>Table of Contents</h2>
+<div id="text-table-of-contents" role="doc-toc">
+<ul>
+<li><a href="#org59d9d88">1. STM32 Project Template</a>
+<ul>
+<li><a href="#org68c8ae5">1.1. About My Embedded Development</a></li>
+</ul>
+</li>
+<li><a href="#org35a8c9d">2. Project Organization</a>
+<ul>
+<li><a href="#org53815ba">2.1. Some Top Level Components</a></li>
+<li><a href="#orgf79f55a">2.2. Build Templates</a></li>
+</ul>
+</li>
+<li><a href="#org07e40f7">3. STM32 Cube Bundle Manager</a></li>
+</ul>
+</div>
+</div>
+<div id="outline-container-org59d9d88" class="outline-2">
+<h2 id="org59d9d88"><span class="section-number-2">1.</span> STM32 Project Template</h2>
 <div class="outline-text-2" id="text-1">
 <p>
-This directory contains a template for embedded development projects.  
+This directory contains a template for STM32 projects.  
+</p>
+
+<p>
+<b>WARNING &#x2013; WARNING &#x2013; WARNING &#x2013; WARNING &#x2013; WARNING &#x2013; WARNING &#x2013; WARNING &#x2013; WARNING &#x2013; WARNING</b>
+</p>
+
+<p>
+I'm actively working to transition the CMake configuration I have been using for some time into something more suitable for public consumption.  As such I expect it to change in the future.
+</p>
+
+<p>
+<b>WARNING &#x2013; WARNING &#x2013; WARNING &#x2013; WARNING &#x2013; WARNING &#x2013; WARNING &#x2013; WARNING &#x2013; WARNING &#x2013; WARNING</b>
 </p>
 </div>
-<div id="outline-container-org56ebe94" class="outline-3">
-<h3 id="org56ebe94"><span class="section-number-3">1.1.</span> About My Embedded Development</h3>
+<div id="outline-container-org68c8ae5" class="outline-3">
+<h3 id="org68c8ae5"><span class="section-number-3">1.1.</span> About My Embedded Development</h3>
 <div class="outline-text-3" id="text-1-1">
 <ul class="org-ul">
 <li>Primary development platform is MSYS2 inside of Windows 11 on x86</li>
-<li>Secondary development platform is Debian &#x2013; on both x86 and Arm64</li>
-<li>I spend most of my time inside Emacs (Edit, build, program, debug)</li>
-<li>STM32 for MCU needs (F4, G4, L4, &amp; F7) using CMSIS &amp; HAL</li>
+<li>Secondary development platform is Debian on both x86 and Arm64</li>
+<li>Most development work is done inside of Emacs (Edit, build, program, debug, eshell)</li>
+<li>STM32 cores: F4, G4, L4, &amp; F7.</li>
+<li>Projects are initially generated &amp; later updated with STM32CubeMX.  They use both CMSIS &amp; HAL.</li>
 <li>MCUs are used via Nucleo &amp; Discovery boards &#x2013; both for development and as project components</li>
-<li>CMake for build generation</li>
-<li>Ninja for builds</li>
-<li>Projects are initially generateed &amp; later updateed with STM32CubeMX</li>
-<li>Debug probes include stand alone J-Link &amp; ST-Link probes as well as  onboard ST-Link probes</li>
-<li>The STM32 Cube Bundle Manager is used to manage STM32 command line tools</li>
-<li>Debug output is via UART (usually one tied to an onboard ST-Link VCP), SWO, and RTT</li>
-<li>Primary debugger is GDB using the ST-link or J-link GDB server</li>
-<li>Secondary debugger is Segger's Ozone debugger</li>
-<li>Well equipped electronics workbench with extensive tool automation capablities</li>
-</ul>
-
-<p>
-Things I don't do now, but may:
-</p>
+<li>CMake for build generation &amp; Ninja for builds</li>
+<li>Debug probes include (listed by preference):
 <ul class="org-ul">
-<li>OpenOCD (<a href="https://openocd.org/">https://openocd.org/</a>)</li>
-<li>orbuculum (<a href="https://orbcode.org/orbuculum/">https://orbcode.org/orbuculum/</a>)</li>
-<li>semihosting</li>
+<li>Standalone J-Link via standard 10-pin header</li>
+<li>Standalone ST-Link V3 via standard 10-pin header</li>
+<li>Various onboard ST-Link probes</li>
+</ul></li>
+<li>Command line tools are managed via <a href="https://github.com/richmit/verGo">verGo</a> or the <a href="#org07e40f7">STM32 Cube Bundle Manager</a>. CMake builds always use CBM.</li>
+<li>Debug output is via UART (usually one tied to an onboard ST-Link VCP), SWO, RTT, and semihosting.</li>
+<li>Primary debugger is GDB using the <a href="https://openocd.org/">OpenOCD</a>, ST-link, J-link GDB server via GUD inside Emacs.</li>
+<li>Occasionally use Segger's Ozone debugger as well.</li>
+<li>Well equipped electronics workbench with extensive tool automation capabilities</li>
 </ul>
 </div>
 </div>
 </div>
-<div id="outline-container-org0981978" class="outline-2">
-<h2 id="org0981978"><span class="section-number-2">2.</span> Project Orginization</h2>
+<div id="outline-container-org35a8c9d" class="outline-2">
+<h2 id="org35a8c9d"><span class="section-number-2">2.</span> Project Organization</h2>
 <div class="outline-text-2" id="text-2">
 <p>
-The project orginization scheme I use is a simple extention of what STM32CubeMX provides.  
+The project organization scheme I use is a simple extension of what STM32CubeMX provides.  
 </p>
 </div>
-<div id="outline-container-orgd21cc6b" class="outline-3">
-<h3 id="orgd21cc6b"><span class="section-number-3">2.1.</span> Some components of the project structure</h3>
+<div id="outline-container-org53815ba" class="outline-3">
+<h3 id="org53815ba"><span class="section-number-3">2.1.</span> Some Top Level Components</h3>
 <div class="outline-text-3" id="text-2-1">
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
@@ -305,6 +310,11 @@ The project orginization scheme I use is a simple extention of what STM32CubeMX 
 </tr>
 
 <tr>
+<td class="org-left"><code>PROJECT_NAME/Core/Src/main.c.YYYYMMDDhhmmss</code></td>
+<td class="org-left">Backup of main.c</td>
+</tr>
+
+<tr>
 <td class="org-left"><code>PROJECT_NAME/build/Debug/</code></td>
 <td class="org-left">Build directory for debug builds (O_DEBUG=1).</td>
 </tr>
@@ -316,11 +326,11 @@ The project orginization scheme I use is a simple extention of what STM32CubeMX 
 
 <tr>
 <td class="org-left"><code>PROJECT_NAME/Mainly/Inc/mainly.h</code></td>
-<td class="org-left">Header file with <code>mainly()</code> declarition.</td>
+<td class="org-left">Header file with <code>mainly()</code> declaration.</td>
 </tr>
 
 <tr>
-<td class="org-left"><code>PROJECT_NAME/Mainly/Src/Mainly.c[pp]</code></td>
+<td class="org-left"><code>PROJECT_NAME/Mainly/Src/Mainly.cpp</code></td>
 <td class="org-left">Source file with <code>mainly()</code> function.</td>
 </tr>
 
@@ -335,316 +345,98 @@ The project orginization scheme I use is a simple extention of what STM32CubeMX 
 </tr>
 
 <tr>
-<td class="org-left"><code>PROJECT_NAME/jlink-gdb-server-options.txt.cmake</code></td>
-<td class="org-left">CLI arguments for Segger's GDB server.</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/stlink-gdb-server-options.txt.cmake</code></td>
-<td class="org-left">CLI arguments for STM's GDB server.</td>
-</tr>
-
-<tr>
 <td class="org-left"><code>PROJECT_NAME/.settings/</code></td>
 <td class="org-left">Cube Bundle Mangier Project configuration.</td>
 </tr>
 
 <tr>
-<td class="org-left"><code>PROJECT_NAME/tool_config.cmake</code></td>
-<td class="org-left">Various tool configuration options.</td>
+<td class="org-left"><code>PROJECT_NAME/proj_config.cmake</code></td>
+<td class="org-left">Various project configuration options.</td>
 </tr>
 
 <tr>
-<td class="org-left"><code>PROJECT_NAME/update_from_template.sh~</code></td>
+<td class="org-left"><code>PROJECT_NAME/update_from_template.sh</code></td>
 <td class="org-left">Update project files from template.</td>
 </tr>
 
 <tr>
-<td class="org-left"><code>PROJECT_NAME/update_main.sh~</code></td>
+<td class="org-left"><code>PROJECT_NAME/update_main.sh</code></td>
 <td class="org-left">Update main.c to call <code>mainly()</code></td>
 </tr>
 
 <tr>
-<td class="org-left"><code>PROJECT_NAME/program.jlink.cmake</code></td>
-<td class="org-left">Template J-Link script used to program device.</td>
+<td class="org-left"><code>PROJECT_NAME/cmake_build_templates</code></td>
+<td class="org-left">Templates that get expanded into the build directory</td>
 </tr>
 
 <tr>
-<td class="org-left"><code>PROJECT_NAME/run-jlink-swv.sh.cmake</code></td>
-<td class="org-left">Template bash script to run Segger's SWV.</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/swo-go-stlink-gdb-server.gdb.cmake</code></td>
-<td class="org-left">Template GDB script to start SWO using ST-Link GDB Server.</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/swo-go-jlink-gdb-server.gdb.cmake</code></td>
-<td class="org-left">Template GDB script to start SWO using J-Link GDB Server.</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-left">&#xa0;</td>
 </tr>
 </tbody>
 </table>
 </div>
 </div>
-<div id="outline-container-org0ab7431" class="outline-3">
-<h3 id="org0ab7431"><span class="section-number-3">2.2.</span> File Management</h3>
+<div id="outline-container-orgf79f55a" class="outline-3">
+<h3 id="orgf79f55a"><span class="section-number-3">2.2.</span> Build Templates</h3>
 <div class="outline-text-3" id="text-2-2">
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">file</th>
-<th scope="col" class="org-left">Created</th>
-<th scope="col" class="org-left">Updated</th>
-<th scope="col" class="org-left">Used By</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left"><code>PROJECT_NAME/</code></td>
-<td class="org-left"><code>CMX</code></td>
-<td class="org-left">N/A</td>
-<td class="org-left">Everything</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/PROJECT_NAME.ioc</code></td>
-<td class="org-left">Manual</td>
-<td class="org-left">Manual</td>
-<td class="org-left"><code>GDB</code> <code>CC</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/CMakeLists.txt</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>UTFSH</code></td>
-<td class="org-left"><code>GDB</code> <code>CC</code> <code>CMake</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/CMakeLists.txt.orig</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left">N/A</td>
-<td class="org-left">N/A</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/CMakePresets.json</code></td>
-<td class="org-left"><code>CMX</code></td>
-<td class="org-left"><code>CMX</code></td>
-<td class="org-left"><code>GDB</code> <code>CC</code> <code>CMake</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/Core/Src/main.c</code></td>
-<td class="org-left"><code>CMX</code></td>
-<td class="org-left"><code>UMSH</code></td>
-<td class="org-left"><code>CMake</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/build/Debug</code></td>
-<td class="org-left"><code>CMake</code></td>
-<td class="org-left"><code>CMake</code></td>
-<td class="org-left"><code>CMake</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/build/Release</code></td>
-<td class="org-left"><code>CMake</code></td>
-<td class="org-left"><code>CMake</code></td>
-<td class="org-left"><code>CMake</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/Mainly/Inc/mainly.h</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>CMake</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/Mainly/Src/main.cpp</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>CMake</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/PROJECT_NAME.jdebug</code></td>
-<td class="org-left">Manual</td>
-<td class="org-left">Manual</td>
-<td class="org-left"><code>GDB</code> <code>ozone</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/PROJECT_NAME.jdebug.user</code></td>
-<td class="org-left">Manual</td>
-<td class="org-left">Manual</td>
-<td class="org-left"><code>GDB</code> <code>ozone</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/jlink-gdb-server-options.txt.cmak</code></td>
-<td class="org-left">Manual</td>
-<td class="org-left">Manual</td>
-<td class="org-left"><code>GDB</code> <code>JLGDBS</code> <code>CMake</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/stlink-gdb-server-options.txt.cmak</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>GDB</code> <code>STLGDBS</code> <code>CMake</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/program.jlink.cmake</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>JLPGM</code> <code>CMake</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/run-jlink-swv.sh.cmake</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>CMake</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/.settings/</code></td>
-<td class="org-left"><code>CBM</code></td>
-<td class="org-left"><code>CBM</code></td>
-<td class="org-left"><code>GDB</code> <code>CC</code> <code>CMake</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/tool_config.cmake</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left">Manual</td>
-<td class="org-left"><code>CMake</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/~update_from_template.sh~</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left">Manual</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/~update_main.sh~</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left">Manual</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/swo-go-stlink-gdb-server.gdb.cmake</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>CMake</code></td>
-</tr>
-
-<tr>
-<td class="org-left"><code>PROJECT_NAME/swo-go-jlink-gdb-server.gdb.cmake</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>CMake</code></td>
-</tr>
-</tbody>
-</table>
+<ul class="org-ul">
+<li>GDB Server Command Line Options
+<ul class="org-ul">
+<li><code>gdbso-openocd-via-jlink.txt.cmake</code></li>
+<li><code>gdbso-openocd-via-stlink.txt.cmake</code></li>
+<li><code>gdbso-stlink-gdb-server-via-stlink.txt.cmake</code></li>
+</ul></li>
+<li>OpenOCD configuration files
+<ul class="org-ul">
+<li><code>openocd-init-jlink.cfg.cmake</code></li>
+<li><code>openocd-init-stlink.cfg.cmake</code></li>
+<li><code>openocd-program.cfg.cmake</code></li>
+</ul></li>
+<li>JLink scripts
+<ul class="org-ul">
+<li><code>connect.jlink.cmake</code></li>
+<li><code>program.jlink.cmake</code></li>
+<li><code>reset.jlink.cmake</code></li>
+</ul></li>
+<li>Shell scripts
+<ul class="org-ul">
+<li><code>run-jlink-rttv.sh.cmake</code></li>
+<li><code>run-jlink-swv.sh.cmake</code></li>
+</ul></li>
+<li>GDB scripts
+<ul class="org-ul">
+<li><code>rtt-go-openocd.gdb.cmake</code></li>
+<li><code>semihosting-go-jlink.gdb.cmake</code></li>
+<li><code>semihosting-stop-jlink.gdb.cmake</code></li>
+<li><code>semihosting-go-openocd.gdb.cmake</code></li>
+<li><code>semihosting-stop-openocd.gdb.cmake</code></li>
+<li><code>swo-go-jlink.gdb.cmake</code></li>
+<li><code>swo-stop-jlink.gdb.cmake</code></li>
+<li><code>swo-go-openocd.gdb.cmake</code></li>
+<li><code>swo-go-stlink.gdb.cmake</code></li>
+</ul></li>
+</ul>
 </div>
 </div>
-<div id="outline-container-org3e5c7ca" class="outline-3">
-<h3 id="org3e5c7ca"><span class="section-number-3">2.3.</span> Tool Abreviations</h3>
-<div class="outline-text-3" id="text-2-3">
-<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
-
-
-<colgroup>
-<col  class="org-left" />
-
-<col  class="org-left" />
-
-<col  class="org-left" />
-</colgroup>
-<thead>
-<tr>
-<th scope="col" class="org-left">Abreviation</th>
-<th scope="col" class="org-left">Tool</th>
-<th scope="col" class="org-left">Notes</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td class="org-left"><code>CMX</code></td>
-<td class="org-left">STM32CubeMX</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>GDB</code></td>
-<td class="org-left"><code>MJR-gdb-stm32</code> Emacs function</td>
-<td class="org-left">One stop to debug with GDB</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>CC</code></td>
-<td class="org-left"><code>MJR-compile</code> Emacs function</td>
-<td class="org-left">Configure CMake, Build, Program</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>CMake</code></td>
-<td class="org-left">CMake build generator</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>UFTSH</code></td>
-<td class="org-left"><code>update_from_template.sh</code></td>
-<td class="org-left">Update files from template</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>ozone</code></td>
-<td class="org-left">Segger's Ozone Debugger</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>JLGDBS</code></td>
-<td class="org-left">J-Link GDB Server</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>STLGDBS</code></td>
-<td class="org-left">ST-Link GDB Server</td>
-<td class="org-left">&#xa0;</td>
-</tr>
-
-<tr>
-<td class="org-left"><code>UMSH</code></td>
-<td class="org-left"><code>update_main.sh</code></td>
-<td class="org-left">Update <code>main.c</code> to call <code>mainly()</code></td>
-</tr>
-</tbody>
-</table>
 </div>
+<div id="outline-container-org07e40f7" class="outline-2">
+<h2 id="org07e40f7"><span class="section-number-2">3.</span> STM32 Cube Bundle Manager</h2>
+<div class="outline-text-2" id="text-3">
+<p>
+The bundle manager is part of the STM's VS Code extension.  You can find the binary in the extension's install directory.
+As of 2026-08-27 on my Windows machine, that is here:
+</p>
+
+<div class="org-src-container">
+<pre class="src src-example">%USERPROFILE%\.vscode\extensions\stmicroelectronics.stm32cube-ide-core-1.2.1-win32-x64\resources\binaries\win32\x86_64\cube.exe
+</pre>
+</div>
+
+<p>
+This tool can be used outside of VS Code.  For example, we can build an STM32 VS Code CMake project from the command line by
+running <code>cube cmake</code> in the root of the project directory.
+</p>
 </div>
 </div>
 </div>

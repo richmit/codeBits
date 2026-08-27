@@ -4,7 +4,6 @@
 # @file      swo-stop-jlink.gdb.cmake
 # @author    Mitch Richling http://www.mitchr.me/
 # @brief     CMake template: GDB script stop SWO when using the J-Link GDB server.@EOL
-# @keywords  
 # @std       cmake GDB J-Link
 # @see       https://github.com/richmit/codeBits/
 # @copyright 

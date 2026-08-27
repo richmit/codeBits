@@ -3,8 +3,6 @@
 ##
 # @file      semihosting-stop-jlink.gdb.cmake
 # @author    Mitch Richling http://www.mitchr.me/
-# @date      2026-07-02
-# @version   VERSION
 # @brief     CMake template: GDB script to disable semihosting with J-Link GDB server.@EOL
 # @keywords  
 # @std       cmake GDB J-Link
